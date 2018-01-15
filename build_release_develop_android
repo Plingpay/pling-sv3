@@ -9,9 +9,9 @@ ionic cordova platform add android &&
 echo "ANDROID PLATFORM ADDED" &&
 ionic cordova build android --release --prod --aot --minifyjs --minifycss --optimizejs --no-interactive &&
 echo "ANDROID APK BUILT" &&
-jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore plingpay.keystore -storepass "1qaz2ws3e4" -keypass "1qaz2ws3e4" platforms/android/build/outputs/apk/android-release-unsigned.apk "plingpay" &&
+jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore plingpay.keystore -storepass "1qaz2ws3e4" -keypass "1qaz2ws3e4" platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk "plingpay" &&
 echo "APK SIGNED" &&
 # now=$(date +"%s")
 # filename="platforms/android/build/outputs/apk/release_$now.apk"
-zipalign -v 4 platforms/android/build/outputs/apk/android-release-unsigned.apk platforms/android/build/outputs/apk/release-signed.apk &&
+zipalign -v 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk platforms/android/app/build/outputs/apk/release/release-signed.apk &&
 echo "APK ZIPALIGNED"
