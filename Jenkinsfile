@@ -21,7 +21,7 @@ node {
     stage "build Android"
     deleteDir()
     checkout scm
-    sh 'git checkout ' + branch
+    sh 'git checkout ' + env.BRANCH_NAME
     sh 'npm install'
     sh 'sh ' + commandAndroid
 
