@@ -10,7 +10,7 @@ platform :android do
   desc "Deploy a new version to the Google Play"
   lane :deploy do
     supply(
-      apk: "platforms/android/build/outputs/apk/release-signed.apk",
+      apk: "platforms/android/app/build/outputs/apk/release/release-signed.apk",
       track: "alpha",
       skip_upload_images: true,
       skip_upload_screenshots: true
