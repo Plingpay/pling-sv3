@@ -1,0 +1,17 @@
+#!/bin/bash -l
+export NODE_ENV=dev &&
+echo "SET NODE_ENV TO dev" &&
+export ANDROID_HOME=/var/lib/jenkins/android-sdk-macosx &&
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/25.0.0 &&
+node parse_config.js &&
+echo "CONFIG.XML PARSED" &&
+ionic cordova platform add android &&
+echo "ANDROID PLATFORM ADDED" &&
+ionic cordova build android --release --prod --aot --minifyjs --minifycss --optimizejs --no-interactive &&
+echo "ANDROID APK BUILT" &&
+jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore plingpay.keystore -storepass "1qaz2ws3e4" -keypass "1qaz2ws3e4" platforms/android/build/outputs/apk/android-release-unsigned.apk "plingpay" &&
+echo "APK SIGNED" &&
+# now=$(date +"%s")
+# filename="platforms/android/build/outputs/apk/release_$now.apk"
+zipalign -v 4 platforms/android/build/outputs/apk/android-release-unsigned.apk platforms/android/build/outputs/apk/release-signed.apk &&
+echo "APK ZIPALIGNED"

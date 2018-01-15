@@ -1,0 +1,36 @@
+fastlane_version "2.54.4"
+
+default_platform :android
+
+platform :android do
+  before_all do
+    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    supply(
+      apk: "platforms/android/build/outputs/apk/release-signed.apk",
+      track: "alpha",
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  # You can define as many lanes as you want
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+
+    # slack(
+    #   message: "Successfully deployed new App Update."
+    # )
+  end
+
+  error do |lane, exception|
+    # slack(
+    #   message: exception.message,
+    #   success: false
+    # )
+  end
+end
