@@ -4,18 +4,19 @@ var jsonEnvVariables = require('./.env.json');
 var envVariables;
 switch (process.env.NODE_ENV) {
   case 'dev':
-    envVariables = jsonEnvVariables.devVariables;
+    envVariables = jsonEnvVariables.dev;
     break;
   case 'prod':
-    envVariables = jsonEnvVariables.prodVariables;
+    envVariables = jsonEnvVariables.prod;
     break;
   case 'staging':
-    envVariables = jsonEnvVariables.stagingVariables;
+    envVariables = jsonEnvVariables.staging;
     break;
   default:
     console.log('\x1b[31m', 'ERROR: NODE_ENV should be in [dev, prod, staging]');
     process.exit(1);
 }
+
 var fs = require('fs'),
   parseString = require('xml2js').parseString,
   xml2js = require('xml2js');
