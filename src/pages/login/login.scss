@@ -1,0 +1,34 @@
+page-login {
+  .toolbar-title {
+    img {
+      text-align: center;
+    }
+  }
+  #logo {
+    margin-bottom: 20%;
+  }
+  .hollow-item {
+    border-bottom: 0;
+    .forgot-pass {
+      float: right;
+      color: $blue;
+      font-size: 80%;
+    }
+    .item-inner {
+      border-bottom: 0 !important;
+    }
+
+  }
+
+  .terms {
+    font-size: 90%;
+    text-align: center;
+    a {
+      text-decoration: none;
+    }
+  }
+  .stats-button-container {
+    padding-top: 20px !important;
+    padding-right: 0;
+  }
+}

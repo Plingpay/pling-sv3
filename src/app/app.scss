@@ -14,3 +14,34 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+$white: #fff;
+$blue: rgb(63, 127, 255);
+$orange: rgb(255, 174, 0);
+
+.error {
+  color: red !important;
+}
+.orange {
+  background-color: $orange;
+}
+.clear-toolbar {
+  .toolbar {
+    .toolbar-background {
+      border-width: 0 !important;
+      background-color: $white !important;
+    }
+  }
+}
+.footer-md::before {
+  background-image: none;
+}
+.clear-toolbar::after {
+  background-image: none !important;
+}
+.footer-button {
+  height: 60px;
+  border-radius: 4px;
+  text-transform: none;
+  font-size: 120%;
+}
