@@ -7,7 +7,7 @@ node parse_config.js &&
 echo "CONFIG.XML PARSED" &&
 ionic cordova platform add android &&
 echo "ANDROID PLATFORM ADDED" &&
-ionic cordova build android --minifyjs --minifycss --optimizejs --no-interactive &&
+ionic cordova build android --release --minifyjs --minifycss --optimizejs --no-interactive &&
 echo "ANDROID APK BUILT" &&
 jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore plingpay.keystore -storepass "1qaz2ws3e4" -keypass "1qaz2ws3e4" platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk "plingpay" &&
 echo "APK SIGNED" &&
