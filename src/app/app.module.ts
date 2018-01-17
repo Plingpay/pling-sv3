@@ -8,6 +8,8 @@ import { MyApp } from './app.component';
 import {LoginPageModule} from "../pages/login/login.module";
 import {UserProvider} from "../providers/user";
 import {HttpModule} from "@angular/http";
+import {RegisterPhonePageModule} from "../pages/register-phone/register-phone.module";
+import {RegisterCodePageModule} from "../pages/register-code/register-code.module";
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import {HttpModule} from "@angular/http";
   imports: [
     BrowserModule,
     LoginPageModule,
+    RegisterPhonePageModule,
+    RegisterCodePageModule,
     HttpModule,
     IonicModule.forRoot(MyApp)
   ],

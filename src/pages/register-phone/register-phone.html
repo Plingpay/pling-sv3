@@ -1,0 +1,47 @@
+<!--
+  Generated template for the RegisterPhonePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Phone number</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form id="registerPhone" [formGroup]="registerPhoneForm" (ngSubmit)="submitForm(registerPhoneForm.value)" novalidate>
+    <ion-item>
+      <ion-label floating>Phone</ion-label>
+      <ion-input formControlName="phone_number" type="phone" autocorrect="off" autocapitalize="off" spellcheck="false"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!registerPhoneForm.get('phone_number').valid && registerPhoneForm.get('phone_number').touched" no-lines>
+      <p class="error">Correct phone is required</p>
+    </ion-item>
+
+  </form>
+</ion-content>
+
+
+<ion-footer class="clear-toolbar">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <button
+            ion-button
+            [disabled]="!registerPhoneForm.valid"
+            type="submit"
+            form="registerPhone"
+            class="orange footer-button"
+            full
+          >Confirm</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

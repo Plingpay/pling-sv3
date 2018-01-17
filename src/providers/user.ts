@@ -18,4 +18,10 @@ export class UserProvider extends BaseProvider {
       .catch((error: any) => Observable.throw(error))
   }
 
+  registerPhone(data) {
+    return this._http.post(this.API + "signup_phone", data, this.generateRequestOptions())
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error))
+  }
+
 }
