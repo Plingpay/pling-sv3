@@ -10,6 +10,8 @@ import {UserProvider} from "../providers/user";
 import {HttpModule} from "@angular/http";
 import {RegisterPhonePageModule} from "../pages/register-phone/register-phone.module";
 import {RegisterCodePageModule} from "../pages/register-code/register-code.module";
+import {TermsAndConditionsPageModule} from "../pages/terms-and-conditions/terms-and-conditions.module";
+import {ExchangeRatesPageModule} from "../pages/exchange-rates/exchange-rates.module";
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import {RegisterCodePageModule} from "../pages/register-code/register-code.modul
     LoginPageModule,
     RegisterPhonePageModule,
     RegisterCodePageModule,
+    TermsAndConditionsPageModule,
+    ExchangeRatesPageModule,
     HttpModule,
     IonicModule.forRoot(MyApp)
   ],

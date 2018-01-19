@@ -11,7 +11,8 @@
     <ion-row>
       <ion-col col-3></ion-col>
       <ion-col col-6><img src="assets/imgs/plingpay-logo.png"/></ion-col>
-      <ion-col col-3 class="stats-button-container"><button ion-button icon-only color="primary" clear float-right>
+      <ion-col col-3 class="stats-button-container">
+        <button ion-button icon-only color="primary" clear float-right (click)="goToRates()">
         <ion-icon name="stats"></ion-icon>
       </button></ion-col>
     </ion-row>
@@ -19,20 +20,31 @@
   <div id="logo">
 
   </div>
-  <form id="login" [formGroup]="logForm" (ngSubmit)="submitForm(logForm.value)" novalidate>
-    <ion-item>
+  <form id="login" (ngSubmit)="submitForm()" novalidate>
+    <ion-item id="phoneInput">
       <ion-label floating>Phone</ion-label>
-      <ion-input formControlName="phone_number" type="phone" autocorrect="off" autocapitalize="off" spellcheck="false"></ion-input>
+      <ion-input
+        type="tel"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        [(ngModel)]="phone_number"
+        [ngModelOptions]="{standalone: true}"
+      ></ion-input>
     </ion-item>
-    <ion-item *ngIf="!logForm.get('phone_number').valid && logForm.get('phone_number').touched" no-lines>
+    <ion-item *ngIf="elRef.nativeElement.querySelector('#phoneInput').classList.contains('ng-touched') && !phone_number" no-lines>
       <p class="error">Correct phone is required</p>
     </ion-item>
-    <ion-item>
+    <ion-item id="passwordInput">
       <ion-label floating>Password</ion-label>
-      <ion-input formControlName="password" type="password"></ion-input>
+      <ion-input
+        [(ngModel)]="password"
+        type="password"
+        [ngModelOptions]="{standalone: true}"
+      ></ion-input>
     </ion-item>
-    <ion-item *ngIf="!logForm.get('password').valid && logForm.get('password').touched" no-lines>
-      <p class="error">Password should contain 8-20 symbols</p>
+    <ion-item *ngIf="elRef.nativeElement.querySelector('#passwordInput').classList.contains('ng-touched') && (password.length < 6)" no-lines>
+      <p class="error">Password should contain min 6 symbols</p>
     </ion-item>
     <ion-item class="hollow-item">
       <span class="forgot-pass" (click)="goToForgotPassword()">Forgot password?</span>
@@ -52,7 +64,7 @@
           block>Sign up</button></ion-col>
         <ion-col col-6><button
           ion-button
-          [disabled]="!logForm.valid"
+          [disabled]="!phone_number || (password.length < 6)"
           type="submit"
           form="login"
           block
@@ -61,7 +73,7 @@
       </ion-row>
       <ion-row>
         <ion-col col-12 class="terms">
-          <span>By signing up, you agree to our <a href>Terms and Privacy Policy</a></span>
+          <span>By signing up, you agree to our <a href="#" (click)="openTerms()">Terms and Privacy Policy</a></span>
         </ion-col>
       </ion-row>
     </ion-grid>

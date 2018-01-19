@@ -24,4 +24,22 @@ export class UserProvider extends BaseProvider {
       .catch((error: any) => Observable.throw(error))
   }
 
+  termsAndConditions() {
+    return this._http.get(this.API + "policy", this.generateRequestOptions())
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error))
+  }
+
+  currencyList() {
+    return this._http.get(this.API + "currency", this.generateRequestOptions())
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error))
+  }
+
+  currencyRate(currency) {
+    return this._http.post(this.API + "currency", {currency: currency}, this.generateRequestOptions())
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error))
+  }
+
 }

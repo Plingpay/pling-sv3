@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef} from '@angular/core';
 import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
-import {FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder} from "@angular/forms";
 import {UserProvider} from "../../providers/user";
 import {Cookie} from "ng2-cookies";
 import {RegisterPhonePage} from "../register-phone/register-phone";
+import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditions";
+import {ExchangeRatesPage} from "../exchange-rates/exchange-rates";
 
 /**
  * Generated class for the LoginPage page.
@@ -19,28 +21,29 @@ import {RegisterPhonePage} from "../register-phone/register-phone";
 })
 export class LoginPage {
 
-  logForm: any;
+  private phone_number: String = '';
+  private password: String = '';
 
   constructor(public navCtrl: NavController,
               public formBuilder: FormBuilder,
               private loadingCtrl: LoadingController,
               public user: UserProvider,
               public alertCtrl: AlertController,
+              public elRef: ElementRef,
               public navParams: NavParams) {
-    this.logForm = this.formBuilder.group({
-      phone_number: ['', Validators.compose([Validators.required])],
-      password: ['', Validators.compose([Validators.required, Validators.pattern('^[A-Za-z0-9!@#$%^&*()_-]{6,20}$')])],
-    })
   }
 
+  ionViewDidLoad(): any {
 
-  submitForm(value) {
+  }
+
+  submitForm() {
     let loading = this.loadingCtrl.create({
         content: 'Please wait...'
       }
     );
     loading.present();
-    this.user.userAuth(value)
+    this.user.userAuth({phone_number: this.phone_number, password: this.password})
       .subscribe((data) => {
           Cookie.set('is_authenticated', 'yes', 365);
           loading.dismiss();
@@ -69,7 +72,15 @@ export class LoginPage {
     alert.present();
   }
 
+  openTerms() {
+    this.navCtrl.push(TermsAndConditionsPage);
+  }
+
   signUp() {
     this.navCtrl.push(RegisterPhonePage);
+  }
+
+  goToRates() {
+    this.navCtrl.push(ExchangeRatesPage);
   }
 }
