@@ -22,15 +22,17 @@
   </div>
   <form id="login" (ngSubmit)="submitForm()" novalidate>
     <ion-item id="phoneInput">
-      <ion-label floating>Phone</ion-label>
-      <ion-input
-        type="tel"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="false"
-        [(ngModel)]="phone_number"
-        [ngModelOptions]="{standalone: true}"
-      ></ion-input>
+      <div id="phone-country" (click)="openCodesSelector()" item-start>
+        {{countryFlag}}
+      </div>
+        <ion-label floating>Phone</ion-label>
+        <ion-input
+          type="tel"
+          pattern="\d*"
+          mask="+** (***) ***-****"
+          [(ngModel)]="phone_number"
+          name="phone_number"
+        ></ion-input>
     </ion-item>
     <ion-item *ngIf="elRef.nativeElement.querySelector('#phoneInput').classList.contains('ng-touched') && !phone_number" no-lines>
       <p class="error">Correct phone is required</p>

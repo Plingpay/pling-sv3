@@ -12,10 +12,12 @@ import {RegisterPhonePageModule} from "../pages/register-phone/register-phone.mo
 import {RegisterCodePageModule} from "../pages/register-code/register-code.module";
 import {TermsAndConditionsPageModule} from "../pages/terms-and-conditions/terms-and-conditions.module";
 import {ExchangeRatesPageModule} from "../pages/exchange-rates/exchange-rates.module";
+import {BaseSingleton} from "../services/base";
+import {CountryPhoneSelectorPageModule} from "../pages/country-phone-selector/country-phone-selector.module";
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
   ],
   imports: [
     BrowserModule,
@@ -24,6 +26,7 @@ import {ExchangeRatesPageModule} from "../pages/exchange-rates/exchange-rates.mo
     RegisterCodePageModule,
     TermsAndConditionsPageModule,
     ExchangeRatesPageModule,
+    CountryPhoneSelectorPageModule,
     HttpModule,
     IonicModule.forRoot(MyApp)
   ],
@@ -35,6 +38,7 @@ import {ExchangeRatesPageModule} from "../pages/exchange-rates/exchange-rates.mo
     StatusBar,
     SplashScreen,
     UserProvider,
+    BaseSingleton,
 
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

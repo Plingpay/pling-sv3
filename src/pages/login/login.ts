@@ -1,11 +1,12 @@
 import {Component, ElementRef} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
-import {FormBuilder} from "@angular/forms";
+import {AlertController, IonicPage, LoadingController, ModalController, NavController} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {Cookie} from "ng2-cookies";
 import {RegisterPhonePage} from "../register-phone/register-phone";
 import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditions";
 import {ExchangeRatesPage} from "../exchange-rates/exchange-rates";
+import * as countryData from "country-data";
+import {CountryPhoneSelectorPage} from "../country-phone-selector/country-phone-selector";
 
 /**
  * Generated class for the LoginPage page.
@@ -23,18 +24,37 @@ export class LoginPage {
 
   private phone_number: String = '';
   private password: String = '';
+  private countryFlag: String;
+  private selectedCountry = 'US';
 
   constructor(public navCtrl: NavController,
-              public formBuilder: FormBuilder,
               private loadingCtrl: LoadingController,
               public user: UserProvider,
               public alertCtrl: AlertController,
-              public elRef: ElementRef,
-              public navParams: NavParams) {
+              private modalCtrl: ModalController,
+              public elRef: ElementRef) {
+    console.log(countryData);
+    this.updateCodes();
   }
 
   ionViewDidLoad(): any {
 
+  }
+
+  updateCodes() {
+    this.countryFlag = countryData.countries[this.selectedCountry].emoji;
+    this.phone_number = countryData.countries[this.selectedCountry].countryCallingCodes[0];
+  }
+
+  openCodesSelector() {
+    let countryModal = this.modalCtrl.create(CountryPhoneSelectorPage);
+    countryModal.onDidDismiss(data => {
+      if (data) {
+        this.selectedCountry = data.countryCode;
+        this.updateCodes();
+      }
+    });
+    countryModal.present();
   }
 
   submitForm() {

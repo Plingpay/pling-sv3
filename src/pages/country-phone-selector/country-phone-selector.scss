@@ -1,0 +1,26 @@
+page-country-phone-selector {
+  .scroll-content {
+    background-color: $light-gray;
+  }
+  .country-flag {
+    font-size: 30px;
+    position: absolute;
+    top: 6px;
+  }
+  .country-code {
+    margin-left: 40px;
+  }
+  ion-note {
+    color: $black !important;
+  }
+  ion-item:nth-child(odd) {
+    background-color: $light-gray;
+  }
+
+  .bar-buttons-md {
+    order: 1;
+  }
+
+
+
+}

@@ -1,4 +1,7 @@
 page-login {
+  .input-cover{
+    display: none;
+  }
   .toolbar-title {
     img {
       text-align: center;
@@ -30,5 +33,18 @@ page-login {
   .stats-button-container {
     padding-top: 20px !important;
     padding-right: 0;
+  }
+
+  #phone-country {
+    border-bottom: 0.55px solid #c8c7cc;
+    padding-top: 20px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    font-size: 30px;
+  }
+
+  .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+    border-bottom-color: #c8c7cc !important;
+    box-shadow: none !important;
   }
 }
