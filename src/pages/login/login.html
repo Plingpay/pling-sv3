@@ -32,6 +32,7 @@
           mask="+** (***) ***-****"
           [(ngModel)]="phone_number"
           name="phone_number"
+          id="phoneNativeInput"
         ></ion-input>
     </ion-item>
     <ion-item *ngIf="elRef.nativeElement.querySelector('#phoneInput').classList.contains('ng-touched') && !phone_number" no-lines>

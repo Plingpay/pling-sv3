@@ -1,4 +1,4 @@
-import {Component, ElementRef} from '@angular/core';
+import {Component, ElementRef, Renderer, ViewChild} from '@angular/core';
 import {AlertController, IonicPage, LoadingController, ModalController, NavController} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {Cookie} from "ng2-cookies";
@@ -27,13 +27,16 @@ export class LoginPage {
   private countryFlag: String;
   private selectedCountry = 'US';
 
+  @ViewChild('phoneInput') phoneInput ;
+
   constructor(public navCtrl: NavController,
               private loadingCtrl: LoadingController,
               public user: UserProvider,
               public alertCtrl: AlertController,
               private modalCtrl: ModalController,
+              private renderer: Renderer,
+              private elementRef: ElementRef,
               public elRef: ElementRef) {
-    console.log(countryData);
     this.updateCodes();
   }
 
@@ -52,6 +55,10 @@ export class LoginPage {
       if (data) {
         this.selectedCountry = data.countryCode;
         this.updateCodes();
+        let phoneNativeInput = this.elementRef.nativeElement.querySelector('#phoneNativeInput>input');
+        setTimeout(() => {
+          this.renderer.invokeElementMethod(phoneNativeInput, 'focus', []);
+        }, 0);
       }
     });
     countryModal.present();
