@@ -1,14 +1,13 @@
-import {Component, ElementRef, Renderer,} from '@angular/core';
+import {Component, ElementRef, Renderer} from '@angular/core';
 import {AlertController, IonicPage, LoadingController, ModalController, NavController, NavParams} from 'ionic-angular';
-import {FormBuilder} from "@angular/forms";
-import {UserProvider} from "../../providers/user";
+import {CountryPhoneSelectorPage} from "../country-phone-selector/country-phone-selector";
 import {RegisterCodePage} from "../register-code/register-code";
 import * as countryData from "country-data";
-import {CountryPhoneSelectorPage} from "../country-phone-selector/country-phone-selector";
+import {UserProvider} from "../../providers/user";
 
 
 /**
- * Generated class for the RegisterPhonePage page.
+ * Generated class for the ForgotPasswordPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -16,26 +15,26 @@ import {CountryPhoneSelectorPage} from "../country-phone-selector/country-phone-
 
 @IonicPage()
 @Component({
-  selector: 'page-register-phone',
-  templateUrl: 'register-phone.html',
+  selector: 'page-forgot-password',
+  templateUrl: 'forgot-password.html',
 })
-export class RegisterPhonePage {
-
+export class ForgotPasswordPage {
   private phone_number: String = '';
   private countryFlag: String;
   private selectedCountry = 'US';
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public formBuilder: FormBuilder,
-              private loadingCtrl: LoadingController,
-              public user: UserProvider,
-              public alertCtrl: AlertController,
               public modalCtrl: ModalController,
               private renderer: Renderer,
               private elementRef: ElementRef,
-  ) {
+              private alertCtrl: AlertController,
+              private user: UserProvider,
+              private loadingCtrl: LoadingController,
+              public navParams: NavParams) {
     this.updateCodes();
+  }
+
+  ionViewDidLoad() {
   }
 
   openCodesSelector() {
@@ -65,20 +64,16 @@ export class RegisterPhonePage {
     );
     loading.present();
     let phone_striped = this.phone_number.replace(/\D/g,'');
-    this.user.registerPhone({phone_number: '+' + phone_striped})
+    this.user.resetPassword({phone_number: '+' + phone_striped})
       .subscribe((data) => {
           loading.dismiss();
-          this.navCtrl.push(RegisterCodePage, {phone: this.phone_number, user: data.user_id, source: 'signup'})
+          this.navCtrl.push(RegisterCodePage, {phone: this.phone_number, user: data.user_id, source: 'reset'})
         },
         (err) => {
           loading.dismiss();
           this.presentAlert(('phone_number' in err.json())?err.json().phone_number[0]:'');
         })
   }
-
-  /*submitForm() {
-    this.navCtrl.push(RegisterCodePage, {phone: this.phone_number})
-  }*/
 
   presentAlert(text = '') {
     let alert = this.alertCtrl.create({

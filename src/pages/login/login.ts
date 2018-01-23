@@ -7,6 +7,8 @@ import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditio
 import {ExchangeRatesPage} from "../exchange-rates/exchange-rates";
 import * as countryData from "country-data";
 import {CountryPhoneSelectorPage} from "../country-phone-selector/country-phone-selector";
+import {RegisterCodePage} from "../register-code/register-code";
+import {ForgotPasswordPage} from "../forgot-password/forgot-password";
 
 /**
  * Generated class for the LoginPage page.
@@ -74,14 +76,7 @@ export class LoginPage {
       .subscribe((data) => {
           Cookie.set('is_authenticated', 'yes', 365);
           loading.dismiss();
-          let alert = this.alertCtrl.create({
-            title: 'Success',
-            subTitle: 'Successful login',
-            buttons: ['OK']
-          });
-          alert.present();
-          //this.navCtrl.setRoot(HomePage);
-          //this.navCtrl.popToRoot();
+          this.navCtrl.push(RegisterCodePage, {phone: this.phone_number, user: data.user_id, source: 'signin'})
         },
         (err) => {
           loading.dismiss();
@@ -109,5 +104,9 @@ export class LoginPage {
 
   goToRates() {
     this.navCtrl.push(ExchangeRatesPage);
+  }
+
+  goToForgotPassword() {
+    this.navCtrl.push(ForgotPasswordPage);
   }
 }

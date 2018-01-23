@@ -9,7 +9,6 @@ export class BaseProvider {
   API: string = ENV.API + '/api/';
 
   constructor(public _http:Http) {
-    console.log(this.API);
   }
 
   protected generateRequestOptions() {

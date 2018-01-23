@@ -6,13 +6,81 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>{{registerPhone}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="retry()">
+        Retry
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list no-lines>
+    <ion-item>
+      <ion-note>Verification code</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="phone-portrait" item-start color="primary"></ion-icon><
+      <ion-input
+        type="tel"
+        pattern="\d"
+        id="codeNum1"
+        name="codeNum1"
+        (keydown)="codeInputFirst($event)"
+        (click)="selectFirst()"
+        [(ngModel)]="codeNum1"
+      ></ion-input>
+      <ion-input
+        type="tel"
+        (keydown)="codeInputSecond($event)"
+        (click)="selectSecond()"
+        pattern="\d"
+        id="codeNum2"
+        name="codeNum2"
+        [(ngModel)]="codeNum2"
+      ></ion-input>
+      <ion-input
+        type="tel"
+        (keydown)="codeInputThird($event)"
+        (click)="selectThird()"
+        pattern="\d"
+        id="codeNum3"
+        name="codeNum3"
+        [(ngModel)]="codeNum3"
+      ></ion-input>
+      <ion-input
+        type="tel"
+        (keydown)="codeInputFourth($event)"
+        (click)="selectFourth()"
+        pattern="\d"
+        id="codeNum4"
+        name="codeNum4"
+        [(ngModel)]="codeNum4"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+<ion-footer class="clear-toolbar">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <button
+            ion-button
+            [disabled]="!codeNum1 || !codeNum2 || !codeNum3 || !codeNum4"
+            type="submit"
+            class="orange footer-button"
+            id="submitButton"
+            (click)="registerCode()"
+            full
+          >Confirm</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

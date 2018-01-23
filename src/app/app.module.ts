@@ -5,34 +5,49 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import {LoginPageModule} from "../pages/login/login.module";
 import {UserProvider} from "../providers/user";
 import {HttpModule} from "@angular/http";
-import {RegisterPhonePageModule} from "../pages/register-phone/register-phone.module";
-import {RegisterCodePageModule} from "../pages/register-code/register-code.module";
-import {TermsAndConditionsPageModule} from "../pages/terms-and-conditions/terms-and-conditions.module";
-import {ExchangeRatesPageModule} from "../pages/exchange-rates/exchange-rates.module";
 import {BaseSingleton} from "../services/base";
-import {CountryPhoneSelectorPageModule} from "../pages/country-phone-selector/country-phone-selector.module";
+import {LoginPage} from "../pages/login/login";
+import {RegisterPhonePage} from "../pages/register-phone/register-phone";
+import {InputMask} from "../directives/input-mask";
+import {RegisterCodePage} from "../pages/register-code/register-code";
+import {TermsAndConditionsPage} from "../pages/terms-and-conditions/terms-and-conditions";
+import {ExchangeRatesPage} from "../pages/exchange-rates/exchange-rates";
+import {CountryPhoneSelectorPage} from "../pages/country-phone-selector/country-phone-selector";
+import {CreatePasswordPage} from "../pages/create-password/create-password";
+import {ForgotPasswordPage} from "../pages/forgot-password/forgot-password";
 
 @NgModule({
   declarations: [
     MyApp,
+    InputMask,
+    LoginPage,
+    RegisterPhonePage,
+    RegisterCodePage,
+    TermsAndConditionsPage,
+    ExchangeRatesPage,
+    CountryPhoneSelectorPage,
+    CreatePasswordPage,
+    ForgotPasswordPage
+
   ],
   imports: [
     BrowserModule,
-    LoginPageModule,
-    RegisterPhonePageModule,
-    RegisterCodePageModule,
-    TermsAndConditionsPageModule,
-    ExchangeRatesPageModule,
-    CountryPhoneSelectorPageModule,
     HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    LoginPage,
+    RegisterPhonePage,
+    RegisterCodePage,
+    TermsAndConditionsPage,
+    ExchangeRatesPage,
+    CountryPhoneSelectorPage,
+    CreatePasswordPage,
+    ForgotPasswordPage
   ],
   providers: [
     StatusBar,

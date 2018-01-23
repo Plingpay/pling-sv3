@@ -1,3 +1,41 @@
 page-register-code {
+  .list-md .item-input:last-child {
+    border-bottom:  none;
+  }
+  ion-input {
+    .text-input {
+      border-bottom: 1px solid $light-black;
+      padding-bottom: 10px;
+      color: $light-black !important;
+    }
+  }
 
+  .list-md .item-input.item-input-has-focus:last-child, .list-md .item-input.input-has-focus:last-child {
+    border-bottom-color: $light-gray !important;
+    box-shadow: none !important;
+  }
+
+  .list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus):last-child {
+    border-bottom-color: $light-gray !important;
+    box-shadow: none !important;
+  }
+
+  .input-cover{
+    display: none;
+  }
+
+  input {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  ion-note {
+    color: $blue !important;
+    padding-left: 60px;
+    font-size: 14px;
+  }
+
+  .scroll-content {
+    padding-top: 30px;
+  }
 }

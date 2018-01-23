@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { LoginPage } from './login';
-import {InputMask} from "../../directives/input-mask";
 
 @NgModule({
   declarations: [
-    LoginPage,
-    InputMask
+    LoginPage
   ],
   imports: [
     IonicPageModule.forChild(LoginPage),
