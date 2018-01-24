@@ -85,4 +85,10 @@ export class UserProvider extends BaseProvider {
       .catch((error: any) => Observable.throw(error))
   }
 
+  countries() {
+    return this._http.get(this.API + "countries", this.generateRequestOptions())
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error))
+  }
+
 }

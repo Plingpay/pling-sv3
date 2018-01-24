@@ -17,6 +17,7 @@ import {ExchangeRatesPage} from "../pages/exchange-rates/exchange-rates";
 import {CountryPhoneSelectorPage} from "../pages/country-phone-selector/country-phone-selector";
 import {CreatePasswordPage} from "../pages/create-password/create-password";
 import {ForgotPasswordPage} from "../pages/forgot-password/forgot-password";
+import {CountrySelectorComponent} from "../components/country-selector/country-selector";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {ForgotPasswordPage} from "../pages/forgot-password/forgot-password";
     ExchangeRatesPage,
     CountryPhoneSelectorPage,
     CreatePasswordPage,
-    ForgotPasswordPage
+    ForgotPasswordPage,
+    CountrySelectorComponent
 
   ],
   imports: [

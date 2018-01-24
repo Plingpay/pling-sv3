@@ -1,0 +1,19 @@
+country-selector {
+  .input-cover{
+    display: none;
+  }
+  #phone-country {
+    border-bottom: 0.55px solid #c8c7cc;
+    position: absolute;
+    top: 34px;
+    img {
+      height: 20px;
+    }
+  }
+
+  #phoneInput {
+    .item-inner {
+      margin-left: 40px !important;
+    }
+  }
+}

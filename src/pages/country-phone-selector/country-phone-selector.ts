@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import * as countryData from "country-data";
+import {UserProvider} from "../../providers/user";
 
 
 /**
@@ -20,7 +21,9 @@ export class CountryPhoneSelectorPage {
 
   constructor(public navCtrl: NavController,
               public viewCtrl: ViewController,
+              public userProvider: UserProvider,
               public navParams: NavParams) {
+    this.countriesData = this.navParams.get('countries');
   }
 
   ionViewDidLoad() {
@@ -32,7 +35,7 @@ export class CountryPhoneSelectorPage {
   }
 
   selectCountry(code) {
-    this.viewCtrl.dismiss({countryCode : code});
+    this.viewCtrl.dismiss(code);
   }
 
 }

@@ -21,23 +21,7 @@
 
   </div>
   <form id="login" (ngSubmit)="submitForm()" novalidate>
-    <ion-item id="phoneInput">
-      <div id="phone-country" (click)="openCodesSelector()" item-start>
-        {{countryFlag}}
-      </div>
-        <ion-label floating>Phone</ion-label>
-        <ion-input
-          type="tel"
-          pattern="\d*"
-          mask="+** (***) ***-****"
-          [(ngModel)]="phone_number"
-          name="phone_number"
-          id="phoneNativeInput"
-        ></ion-input>
-    </ion-item>
-    <ion-item *ngIf="elRef.nativeElement.querySelector('#phoneInput').classList.contains('ng-touched') && !phone_number" no-lines>
-      <p class="error">Correct phone is required</p>
-    </ion-item>
+    <country-selector (onSelect)="phone_number = $event.data"></country-selector>
     <ion-item id="passwordInput">
       <ion-label floating>Password</ion-label>
       <ion-input

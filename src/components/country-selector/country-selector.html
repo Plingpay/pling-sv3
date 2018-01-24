@@ -1,0 +1,19 @@
+<!-- Generated template for the CountrySelectorComponent component -->
+<ion-item id="phoneInput">
+  <div id="phone-country" (click)="openCodesSelector()" item-start>
+    <img src="{{imagePath}}"/>
+  </div>
+  <ion-label floating>Phone</ion-label>
+  <ion-input
+    type="tel"
+    pattern="\d*"
+    mask="+** (***) ***-****"
+    [(ngModel)]="inputModel"
+    name="inputModel"
+    id="phoneNativeInput"
+    (ionChange)="triggerInputEvent()"
+  ></ion-input>
+</ion-item>
+<ion-item *ngIf="elementRef.nativeElement.querySelector('#phoneInput').classList.contains('ng-touched') && !inputModel" no-lines>
+  <p class="error">Correct phone is required</p>
+</ion-item>

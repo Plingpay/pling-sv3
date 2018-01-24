@@ -6,7 +6,8 @@ import {ENV} from "@environment";
 @Injectable()
 
 export class BaseProvider {
-  API: string = ENV.API + '/api/';
+  public envVars = ENV;
+  public API: string = ENV.API + '/api/';
 
   constructor(public _http:Http) {
   }

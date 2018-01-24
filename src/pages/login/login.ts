@@ -1,12 +1,10 @@
-import {Component, ElementRef, Renderer, ViewChild} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, ModalController, NavController} from 'ionic-angular';
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import {AlertController, IonicPage, LoadingController, NavController} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {Cookie} from "ng2-cookies";
 import {RegisterPhonePage} from "../register-phone/register-phone";
 import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditions";
 import {ExchangeRatesPage} from "../exchange-rates/exchange-rates";
-import * as countryData from "country-data";
-import {CountryPhoneSelectorPage} from "../country-phone-selector/country-phone-selector";
 import {RegisterCodePage} from "../register-code/register-code";
 import {ForgotPasswordPage} from "../forgot-password/forgot-password";
 
@@ -24,10 +22,8 @@ import {ForgotPasswordPage} from "../forgot-password/forgot-password";
 })
 export class LoginPage {
 
-  private phone_number: String = '';
+  public phone_number: String = '';
   private password: String = '';
-  private countryFlag: String;
-  private selectedCountry = 'US';
 
   @ViewChild('phoneInput') phoneInput ;
 
@@ -35,35 +31,11 @@ export class LoginPage {
               private loadingCtrl: LoadingController,
               public user: UserProvider,
               public alertCtrl: AlertController,
-              private modalCtrl: ModalController,
-              private renderer: Renderer,
-              private elementRef: ElementRef,
               public elRef: ElementRef) {
-    this.updateCodes();
   }
 
   ionViewDidLoad(): any {
 
-  }
-
-  updateCodes() {
-    this.countryFlag = countryData.countries[this.selectedCountry].emoji;
-    this.phone_number = countryData.countries[this.selectedCountry].countryCallingCodes[0];
-  }
-
-  openCodesSelector() {
-    let countryModal = this.modalCtrl.create(CountryPhoneSelectorPage);
-    countryModal.onDidDismiss(data => {
-      if (data) {
-        this.selectedCountry = data.countryCode;
-        this.updateCodes();
-        let phoneNativeInput = this.elementRef.nativeElement.querySelector('#phoneNativeInput>input');
-        setTimeout(() => {
-          this.renderer.invokeElementMethod(phoneNativeInput, 'focus', []);
-        }, 0);
-      }
-    });
-    countryModal.present();
   }
 
   submitForm() {
@@ -88,7 +60,7 @@ export class LoginPage {
   presentAlert(text = '') {
     let alert = this.alertCtrl.create({
       title: 'Error',
-      subTitle: text||'Email or password is incorrect',
+      subTitle: text||'Phone or password is incorrect',
       buttons: ['OK']
     });
     alert.present();
