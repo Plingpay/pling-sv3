@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {LoginPage} from "../login/login";
+import {HomePage} from "../home/home";
 
 /**
  * Generated class for the CreatePasswordPage page.
@@ -54,7 +55,8 @@ export class CreatePasswordPage {
           loading.dismiss();
           switch (this.source) {
             case 'signup':
-              alert('Goto Homepage');
+              this.navCtrl.setRoot(HomePage);
+              this.navCtrl.popToRoot();
               break;
             case 'reset':
               let alertPopup = this.alertCtrl.create({

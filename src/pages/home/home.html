@@ -1,0 +1,52 @@
+<!--
+  Generated template for the HomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only>
+        <ion-icon name="person"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="goToRates()">
+        <ion-icon name="stats"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<div class="hello" *ngIf="userStatus === STATUS_NOT_COMPLETED">
+  <img src="assets/imgs/hello_user.png"/>
+  <h3>Hello, new user</h3>
+  <p>
+    Your account has been successfully created.<br/>Please add your name and photos of your ID to complete
+    the registration.
+  </p>
+</div>
+
+</ion-content>
+
+<ion-footer class="clear-toolbar" *ngIf="userStatus === STATUS_NOT_COMPLETED">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <button
+            ion-button
+            class="orange footer-button"
+            full
+            (click)="verifyProfile()"
+          >Verify your profile</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

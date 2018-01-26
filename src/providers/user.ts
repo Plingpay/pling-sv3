@@ -91,4 +91,10 @@ export class UserProvider extends BaseProvider {
       .catch((error: any) => Observable.throw(error))
   }
 
+  status() {
+    return this._http.get(this.API + "login_status", this.generateRequestOptions())
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error))
+  }
+
 }

@@ -2,6 +2,7 @@ import {Component, ElementRef, Renderer} from '@angular/core';
 import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {CreatePasswordPage} from "../create-password/create-password";
+import {HomePage} from "../home/home";
 
 /**
  * Generated class for the RegisterCodePage page.
@@ -123,18 +124,13 @@ export class RegisterCodePage {
     }
     action.subscribe((data) => {
           loading.dismiss();
-          let alert;
           switch (this.source) {
             case 'signup':
               this.navCtrl.push(CreatePasswordPage, {userID: this.registerUserID, source: 'signup'});
               break;
             case 'signin':
-              alert = this.alertCtrl.create({
-                title: 'Success',
-                subTitle: 'Successful login',
-                buttons: ['OK']
-              });
-              alert.present();
+              this.navCtrl.setRoot(HomePage);
+              this.navCtrl.popToRoot();
               break;
             case 'reset':
               this.navCtrl.push(CreatePasswordPage, {userID: this.registerUserID, url: data.url, source: 'reset'});

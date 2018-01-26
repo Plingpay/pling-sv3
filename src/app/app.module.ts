@@ -18,6 +18,8 @@ import {CountryPhoneSelectorPage} from "../pages/country-phone-selector/country-
 import {CreatePasswordPage} from "../pages/create-password/create-password";
 import {ForgotPasswordPage} from "../pages/forgot-password/forgot-password";
 import {CountrySelectorComponent} from "../components/country-selector/country-selector";
+import {HomePage} from "../pages/home/home";
+import {VerifyAccountPage} from "../pages/verify-account/verify-account";
 
 @NgModule({
   declarations: [
@@ -31,8 +33,9 @@ import {CountrySelectorComponent} from "../components/country-selector/country-s
     CountryPhoneSelectorPage,
     CreatePasswordPage,
     ForgotPasswordPage,
-    CountrySelectorComponent
-
+    CountrySelectorComponent,
+    HomePage,
+    VerifyAccountPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,9 @@ import {CountrySelectorComponent} from "../components/country-selector/country-s
     ExchangeRatesPage,
     CountryPhoneSelectorPage,
     CreatePasswordPage,
-    ForgotPasswordPage
+    ForgotPasswordPage,
+    HomePage,
+    VerifyAccountPage
   ],
   providers: [
     StatusBar,

@@ -1,0 +1,16 @@
+page-home {
+  .hello {
+    text-align: center;
+    margin-top: 20%;
+    h3 {
+      margin-top: 30px;
+    }
+    p {
+      color: $light-black;
+      margin-top: 20px;
+    }
+  }
+  .bar-buttons-md {
+    order: 1;
+  }
+}
