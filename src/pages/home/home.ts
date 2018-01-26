@@ -22,6 +22,7 @@ export class HomePage {
   public STATUS_NOT_COMPLETED = 'Not comlite';
 
   public userStatus: String;
+  private userID: number;
 
   constructor(public navCtrl: NavController,
               public userProvider: UserProvider,
@@ -35,6 +36,7 @@ export class HomePage {
   ionViewWillEnter() {
     this.userProvider.status().subscribe(data => {
       this.userStatus = data.status;
+      this.userID = data.user_id;
     }, err => {
       if (err.status === 403) {
         this.navCtrl.setRoot(LoginPage);
@@ -44,7 +46,7 @@ export class HomePage {
   }
 
   verifyProfile() {
-    this.navCtrl.push(VerifyAccountPage);
+    this.navCtrl.push(VerifyAccountPage, {userID: this.userID});
   }
 
   goToRates() {

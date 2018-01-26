@@ -14,5 +14,58 @@
 
 
 <ion-content padding>
+  <form id="verifyProfileForm" [formGroup]="verifyProfileForm" (ngSubmit)="submitForm(verifyProfileForm.value)" novalidate>
+    <ion-list>
 
+      <ion-item>
+        <ion-icon name="person" item-start color="primary"></ion-icon>
+        <ion-label floating>Full name</ion-label>
+        <ion-input
+          type="text"
+          formControlName="full_name"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+        ></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!verifyProfileForm.get('full_name').valid && verifyProfileForm.get('full_name').touched" no-lines>
+        <p class="error">Full name is required</p>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="mail" item-start color="primary"></ion-icon>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email"
+                   formControlName="email"
+                   autocorrect="off"
+                   autocapitalize="off"
+                   spellcheck="false"
+        ></ion-input>
+      </ion-item>
+      <ion-item
+        class="no-lines"
+        *ngIf="!verifyProfileForm.get('email').valid && verifyProfileForm.get('email').touched" no-lines>
+        <p class="error">Correct e-mail is required</p>
+      </ion-item>
+
+    </ion-list>
+  </form>
 </ion-content>
+
+<ion-footer class="clear-toolbar">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <button
+            ion-button
+            [disabled]="!verifyProfileForm.valid"
+            type="submit"
+            form="verifyProfileForm"
+            class="orange footer-button"
+            full
+          >Confirm</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

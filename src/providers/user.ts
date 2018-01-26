@@ -97,4 +97,10 @@ export class UserProvider extends BaseProvider {
       .catch((error: any) => Observable.throw(error))
   }
 
+  verifyEmailAndName(data, id) {
+    return this._http.put(this.API + "verify_account/" + id, data, this.generateRequestOptions())
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error))
+  }
+
 }
