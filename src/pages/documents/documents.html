@@ -1,0 +1,63 @@
+<!--
+  Generated template for the DocumentsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Documents</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="skip()">
+        Skip
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list ion-fixed>
+    <ion-item *ngFor="let document of documents" [style.height]="itemHeight + '%'">
+      <ion-thumbnail item-start>
+        <img
+          [src]="document.tmpImage?document.tmpImage:(baseURL + document.thumb)"
+          (click)="elementRef.nativeElement.querySelector('#photo_' + document.field_name).click()"
+        >
+      </ion-thumbnail>
+      <p>{{document.name}}</p>
+      <p class="upload-photo" [hidden]="document.image">
+        <a href="#"
+           (click)="elementRef.nativeElement.querySelector('#photo_' + document.field_name).click()"
+        >Upload photo</a>
+      </p>
+      <p class="remove-photo" [hidden]="!document.image"><a href="#" (click)="removePhoto(document)">Delete photo</a></p>
+      <input type="file"
+             hidden
+             accept="image/x-png,image/gif,image/jpeg"
+             (change)="selectPhoto(document, elementRef.nativeElement.querySelector('#photo_' + document.field_name).files)"
+             id="photo_{{document.field_name}}"
+      >
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer class="clear-toolbar">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <button
+            (click)="sendDocuments()"
+            ion-button
+            [disabled]="!submitEnabled()"
+            class="orange footer-button"
+            full
+          >Confirm</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

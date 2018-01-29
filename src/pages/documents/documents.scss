@@ -1,0 +1,33 @@
+page-documents {
+  .upload-photo, .remove-photo {
+    a {
+      text-decoration: none;
+      font-weight: bold;
+    }
+    margin-top: 10px;
+  }
+
+
+  .item-md ion-thumbnail ion-img, .item-md ion-thumbnail img {
+    width: auto;
+    height: auto;
+  }
+
+  ion-thumbnail {
+    max-width: 20%;
+    display: flex;
+    align-items: center;
+    img {
+      vertical-align: middle;
+      height: auto;
+    }
+  }
+
+  ion-label {
+    white-space: normal;
+  }
+
+  ion-list {
+    height: 100%;
+  }
+}

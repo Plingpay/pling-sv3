@@ -20,6 +20,9 @@ import {ForgotPasswordPage} from "../pages/forgot-password/forgot-password";
 import {CountrySelectorComponent} from "../components/country-selector/country-selector";
 import {HomePage} from "../pages/home/home";
 import {VerifyAccountPage} from "../pages/verify-account/verify-account";
+import {DocumentsPage} from "../pages/documents/documents";
+import {DocumentsProvider} from "../providers/documents";
+import {LoadingPage} from "../pages/loading/loading";
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import {VerifyAccountPage} from "../pages/verify-account/verify-account";
     ForgotPasswordPage,
     CountrySelectorComponent,
     HomePage,
-    VerifyAccountPage
+    VerifyAccountPage,
+    DocumentsPage,
+    LoadingPage,
   ],
   imports: [
     BrowserModule,
@@ -54,12 +59,15 @@ import {VerifyAccountPage} from "../pages/verify-account/verify-account";
     CreatePasswordPage,
     ForgotPasswordPage,
     HomePage,
-    VerifyAccountPage
+    VerifyAccountPage,
+    DocumentsPage,
+    LoadingPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     UserProvider,
+    DocumentsProvider,
     BaseSingleton,
 
     {provide: ErrorHandler, useClass: IonicErrorHandler}

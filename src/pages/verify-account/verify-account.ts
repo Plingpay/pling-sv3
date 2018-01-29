@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {FormBuilder, Validators} from "@angular/forms";
 import {UserProvider} from "../../providers/user";
+import {DocumentsPage} from "../documents/documents";
 
 /**
  * Generated class for the VerifyAccountPage page.
@@ -42,11 +43,10 @@ export class VerifyAccountPage {
       }
     );
     loading.present();
-    console.log(value);
     this.userProvider.verifyEmailAndName(value, this.userID)
       .subscribe((data) => {
           loading.dismiss();
-          alert('Go to verify second page');
+          this.navCtrl.push(DocumentsPage);
         },
         (err) => {
           console.log(err);

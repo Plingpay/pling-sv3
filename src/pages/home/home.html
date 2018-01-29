@@ -23,7 +23,7 @@
 
 
 <ion-content padding>
-<div class="hello" *ngIf="userStatus === STATUS_NOT_COMPLETED">
+<div class="hello" *ngIf="!documentsUploaded">
   <img src="assets/imgs/hello_user.png"/>
   <h3>Hello, new user</h3>
   <p>
@@ -31,10 +31,16 @@
     the registration.
   </p>
 </div>
-
+<div class="hello" *ngIf="documentsUploaded && !verified">
+  <img src="assets/imgs/hello_user.png"/>
+  <h3>Thank you!</h3>
+  <p>
+    You will get a notification once your<br/>account is verified and ready to use
+  </p>
+</div>
 </ion-content>
 
-<ion-footer class="clear-toolbar" *ngIf="userStatus === STATUS_NOT_COMPLETED">
+<ion-footer class="clear-toolbar" *ngIf="!documentsUploaded">
   <ion-toolbar>
     <ion-grid>
       <ion-row>

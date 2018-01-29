@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.plingpay.develop" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.plingpay.develop" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>PlingPay Develop</name>
     <description>In our vision, anyone should be able to send money anywhere in any currency – fast, cheap and with a smile! From our team of dedicated Engineers and Economists with experience both from traditional banking and fintech comes a service which will change your every day life.</description>
     <author email="support@plingpay.com" href="http://plingpay.com/">Plingpay Team</author>
@@ -45,6 +45,10 @@
         <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.INTERNET" />
+        </config-file>
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
