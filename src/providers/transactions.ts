@@ -10,4 +10,11 @@ export class TransactionsProvider extends BaseProvider {
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error))
   }
+
+  paymentMethods() {
+    return this._http.get(this.API + "payment_methods", this.generateRequestOptions())
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error))
+  }
+
 }

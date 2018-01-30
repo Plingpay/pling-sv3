@@ -26,6 +26,8 @@ import {LoadingPage} from "../pages/loading/loading";
 import {BalanceProvider} from "../providers/balance";
 import {TransactionsProvider} from "../providers/transactions";
 import {MomentModule} from "angular2-moment";
+import {ChoosePaymentMethodPage} from "../pages/choose-payment-method/choose-payment-method";
+import {AddCardPage} from "../pages/add-card/add-card";
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import {MomentModule} from "angular2-moment";
     VerifyAccountPage,
     DocumentsPage,
     LoadingPage,
+    ChoosePaymentMethodPage,
+    AddCardPage
   ],
   imports: [
     BrowserModule,
@@ -65,7 +69,9 @@ import {MomentModule} from "angular2-moment";
     HomePage,
     VerifyAccountPage,
     DocumentsPage,
-    LoadingPage
+    LoadingPage,
+    ChoosePaymentMethodPage,
+    AddCardPage
   ],
   providers: [
     StatusBar,

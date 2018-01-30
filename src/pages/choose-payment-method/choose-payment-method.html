@@ -1,0 +1,53 @@
+<!--
+  Generated template for the ChoosePaymentMethodPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Choose the payment method</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+ <ion-card class="method-card swish">
+   <div class="method-name">
+     Swish
+   </div>
+   <div class="card-image">
+     <img src="assets/imgs/swish_logo.svg">
+   </div>
+   <div class="action-button">
+     <a href="#">Add method</a>
+   </div>
+ </ion-card>
+  <ion-card class="method-card credit" (click)="addCard()">
+    <div class="method-name">
+      Credit card
+    </div>
+    <div class="card-note">
+      Not recommended for the best rates
+    </div>
+    <div class="card-image">
+      <img src="assets/imgs/credit.svg">
+    </div>
+    <div class="action-button">
+      <a href="#">Add method</a>
+    </div>
+  </ion-card>
+  <ion-card class="method-card bank">
+    <div class="method-name">
+      Bank account
+    </div>
+    <div class="card-image">
+      <img src="assets/imgs/bank_icon.svg">
+    </div>
+    <div class="action-button">
+      <a href="#">Add method</a>
+    </div>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,64 @@
+page-choose-payment-method {
+  .method-card {
+    height: 170px;
+    position: relative;
+    border-radius: 5px;
+    padding: 20px 20px 20px;
+    .method-name {
+      color: $white;
+      font-size: 180%;
+    }
+    .card-note {
+      opacity: 0.5;
+      color: $white;
+      margin-top: 20px;
+    }
+    .card-image {
+      position: absolute;
+      top: 0;
+      right: 0;
+      img {
+        height: 170px;
+        filter: grayscale(100%);
+      }
+    }
+    .action-button {
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      a {
+        color: orange;
+        font-weight: bold;
+        text-decoration: none;
+      }
+    }
+  }
+  .swish {
+    background-color: $dark-green;
+  }
+
+  .credit {
+    .card-image {
+      top: 10px;
+      right: -10px;
+      img {
+        width: 200px;
+        filter: grayscale(100%);
+      }
+    }
+    background-color: $blue;
+  }
+
+  .bank {
+    background-color: $dark-blue;
+    .card-image {
+      top: 10px;
+      right: -10px;
+    }
+  }
+
+  .scroll-content {
+    padding: 10px 10px 10px 10px;
+    background-color: $light-gray;
+  }
+}

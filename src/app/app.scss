@@ -17,6 +17,7 @@
 
 $white: #fff;
 $blue: rgb(63, 127, 255);
+$dark-blue: #4662CF;
 $orange: rgb(255, 174, 0);
 $dark-green: #1F7A80;
 $black: #000;
@@ -36,6 +37,14 @@ $green: #03AF15;
     .toolbar-background {
       border-width: 0 !important;
       background-color: $white !important;
+    }
+  }
+}
+.grey-toolbar {
+  .toolbar {
+    .toolbar-background {
+      border-width: 0 !important;
+      background-color: $light-gray !important;
     }
   }
 }

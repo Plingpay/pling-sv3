@@ -6,6 +6,7 @@ import {VerifyAccountPage} from "../verify-account/verify-account";
 import {ExchangeRatesPage} from "../exchange-rates/exchange-rates";
 import {BalanceProvider} from "../../providers/balance";
 import {TransactionsProvider} from "../../providers/transactions";
+import {ChoosePaymentMethodPage} from "../choose-payment-method/choose-payment-method";
 
 /**
  * Generated class for the HomePage page.
@@ -28,6 +29,7 @@ export class HomePage {
   public verified: boolean;
   public balance: Array<any>;
   public transactions: Array<any>;
+  public paymentMethods: Array<any>;
 
   private userID: number;
 
@@ -54,8 +56,19 @@ export class HomePage {
       this.balanceProvider.balances().subscribe(balances => {
         this.balance = balances;
         this.transactionsProvider.transactions().subscribe(transactions => {
-          loading.dismiss();
           this.transactions = transactions;
+          this.transactionsProvider.paymentMethods().subscribe(paymentMethods => {
+            loading.dismiss();
+            this.paymentMethods = paymentMethods;
+          }, err => {
+            loading.dismiss();
+            let alert = this.alertCtrl.create({
+              title: 'Error',
+              subTitle: 'Network error',
+              buttons: ['OK']
+            });
+            alert.present();
+          });
         }, err => {
           loading.dismiss();
           let alert = this.alertCtrl.create({
@@ -96,6 +109,18 @@ export class HomePage {
 
   goToRates() {
     this.navCtrl.push(ExchangeRatesPage);
+  }
+
+  sendMoney() {
+    if (this.paymentMethods.length > 0) {
+
+    } else {
+      this.navCtrl.push(ChoosePaymentMethodPage);
+    }
+  }
+
+  requestMoney() {
+    alert("Open request money page");
   }
 
 }
