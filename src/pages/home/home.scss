@@ -1,5 +1,5 @@
 page-home {
-  .hello {
+  .hello, .no-history {
     text-align: center;
     margin-top: 20%;
     h3 {
@@ -12,5 +12,124 @@ page-home {
   }
   .bar-buttons-md {
     order: 1;
+  }
+
+  ion-scroll {
+    height: 400px;
+  }
+
+  .currency-card {
+    width: calc(100% - 40px);
+    display: inline-block;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    padding-left: 1em;
+    border-radius: 5px;
+    height: 174px;
+    .header {
+      color: $white;
+      font-size: 120%;
+      margin-bottom: 1em;
+    }
+    .balance {
+      color: $white;
+      font-size: 180%;
+      margin-bottom: 2em;
+    }
+    .withdraw {
+      color: $orange;
+      font-weight: bold;
+    }
+    .card-logo {
+      margin-top: -160px;
+      margin-left: 100px;
+      img {
+        height: 174px;
+      }
+    }
+  }
+
+  .currency-card:nth-child(odd) {
+    background-color: $blue;
+  }
+
+  .currency-card:nth-child(even) {
+    background-color: $dark-green;
+  }
+
+  ion-scroll {
+    white-space: nowrap;
+    height: 200px;
+  }
+
+  .scroll-content {
+    background-color: $light-gray;
+  }
+
+  .fab-orange {
+    background-color: $orange;
+    color: $white;
+  }
+
+  .rotation-90 {
+    transform: rotate(90deg);
+  }
+
+  ion-fab {
+    button {
+      box-shadow: 0 4px 10px #6b6b6b;
+    }
+
+    ion-fab-list button[ion-fab] {
+      text-align: center;
+      overflow: visible;
+
+      div.label {
+        position: absolute;
+        right: 48px;
+        background: rgba(248, 248, 248, 1);
+        color: $blue;
+        font-weight: bold;
+        height: 24px;
+        line-height: 16px;
+        padding-left: 8px;
+        padding-right: 8px;
+        padding-top: 4px;
+        padding-bottom: 5px;
+        //margin-top: 8px;
+        //border-radius: 5px;
+        //box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.14), 0 4px 5px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .button-inner {
+      overflow: visible;
+    }
+  }
+
+  .fab {
+    contain: initial;
+  }
+
+  .item {
+    background-color: $light-gray;
+  }
+
+  .transaction-amount-positive {
+    color: $green;
+    font-weight: bold;
+  }
+
+  .transaction-amount-negative {
+    color: $black;
+    font-weight: bold;
+  }
+
+  .transaction-time {
+    margin-top: 5px;
+  }
+
+  .transaction-comment {
+    margin-top: 5px;
   }
 }

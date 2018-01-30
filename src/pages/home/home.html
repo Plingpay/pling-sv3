@@ -22,31 +22,70 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-scroll scrollX="true" *ngIf="verified">
-    <ion-card>
-      <ion-card-header>
-
-      </ion-card-header>
-      <ion-card-content>
-      </ion-card-content>
+<ion-content>
+  <ion-scroll scrollX="true" *ngIf="(balance !== undefined) && balance.length > 0">
+    <ion-card class="currency-card" *ngFor="let balanceUnit of balance" >
+      <div class="header">Balance</div>
+      <div class="balance">{{balanceUnit.balance}} {{balanceUnit.currency}} </div>
+      <div class="withdraw">Withdraw money</div>
+      <div class="card-logo">
+        <img src="assets/imgs/diamond.svg"/>
+      </div>
     </ion-card>
   </ion-scroll>
-<div class="hello" *ngIf="(documentsUploaded !== undefined) && !documentsUploaded">
-  <img src="assets/imgs/hello_user.png"/>
-  <h3>Hello, new user</h3>
-  <p>
-    Your account has been successfully created.<br/>Please add your name and photos of your ID to complete
-    the registration.
-  </p>
-</div>
-<div class="hello" *ngIf="documentsUploaded && !verified">
-  <img src="assets/imgs/hello_user.png"/>
-  <h3>Thank you!</h3>
-  <p>
-    You will get a notification once your<br/>account is verified and ready to use
-  </p>
-</div>
+  <div class="no-history" *ngIf="(transactions !== undefined) && transactions.length === 0">
+    <img src="assets/imgs/astronaut.svg"/>
+    <h3>No transaction history</h3>
+    <p>
+      Tap + to send money to someone speicial
+    </p>
+  </div>
+  <div class="hello" *ngIf="(documentsUploaded !== undefined) && !documentsUploaded">
+    <img src="assets/imgs/hello_user.svg"/>
+    <h3>Hello, new user</h3>
+    <p>
+      Your account has been successfully created.<br/>Please add your name and photos of your ID to complete
+      the registration.
+    </p>
+  </div>
+  <div class="hello" *ngIf="documentsUploaded && !verified">
+    <img src="assets/imgs/hello_user.svg"/>
+    <h3>Thank you!</h3>
+    <p>
+      You will get a notification once your<br/>account is verified and ready to use
+    </p>
+  </div>
+  <ion-item-group *ngIf="(transactions !== undefined) && transactions.length > 0">
+    <ion-item-divider color="light">Today</ion-item-divider>
+    <ion-item *ngFor="let transaction of transactions">
+      <ion-avatar item-start>
+        <img src="{{transaction.user.photo !== ''?
+        (userProvider.envVars.API + transaction.user.photo):
+        'assets/icon/empty_avatar.svg'}}"/>
+      </ion-avatar>
+      <h2>{{transaction.user.first_name || transaction.user.phone_number}}</h2>
+      <p class="transaction-time">{{(transaction.created_at | amDateFormat: 'h:mm a').toUpperCase()}}</p>
+      <p *ngIf="transaction.comment" class="transaction-comment">"{{transaction.comment}}"</p>
+      <ion-note item-end [ngClass]="{'transaction-amount-positive': transaction.type === '+',
+                                   'transaction-amount-negative': transaction.type === '-'}">
+        {{transaction.type}} {{transaction.amount}} {{transaction.currency.currency}}
+      </ion-note>
+    </ion-item>
+  </ion-item-group>
+  <ion-fab right bottom>
+    <button ion-fab class="fab-orange"><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab color="primary">
+        <ion-icon name="wifi" class="rotation-90"></ion-icon>
+        <div class="label">Money request</div>
+      </button>
+      <button ion-fab class="fab-orange">
+        <ion-icon name="arrow-round-forward"></ion-icon>
+        <div class="label">Send money</div>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+
 </ion-content>
 
 <ion-footer class="clear-toolbar" *ngIf="(documentsUploaded !== undefined) && !documentsUploaded">

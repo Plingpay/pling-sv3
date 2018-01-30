@@ -23,6 +23,9 @@ import {VerifyAccountPage} from "../pages/verify-account/verify-account";
 import {DocumentsPage} from "../pages/documents/documents";
 import {DocumentsProvider} from "../providers/documents";
 import {LoadingPage} from "../pages/loading/loading";
+import {BalanceProvider} from "../providers/balance";
+import {TransactionsProvider} from "../providers/transactions";
+import {MomentModule} from "angular2-moment";
 
 @NgModule({
   declarations: [
@@ -45,6 +48,7 @@ import {LoadingPage} from "../pages/loading/loading";
   imports: [
     BrowserModule,
     HttpModule,
+    MomentModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -68,6 +72,8 @@ import {LoadingPage} from "../pages/loading/loading";
     SplashScreen,
     UserProvider,
     DocumentsProvider,
+    BalanceProvider,
+    TransactionsProvider,
     BaseSingleton,
 
     {provide: ErrorHandler, useClass: IonicErrorHandler}

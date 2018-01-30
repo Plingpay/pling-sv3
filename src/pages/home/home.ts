@@ -4,6 +4,8 @@ import {UserProvider} from "../../providers/user";
 import {LoginPage} from "../login/login";
 import {VerifyAccountPage} from "../verify-account/verify-account";
 import {ExchangeRatesPage} from "../exchange-rates/exchange-rates";
+import {BalanceProvider} from "../../providers/balance";
+import {TransactionsProvider} from "../../providers/transactions";
 
 /**
  * Generated class for the HomePage page.
@@ -24,20 +26,21 @@ export class HomePage {
   public userStatus: String;
   public documentsUploaded: boolean;
   public verified: boolean;
+  public balance: Array<any>;
+  public transactions: Array<any>;
+
   private userID: number;
 
   constructor(public navCtrl: NavController,
               public userProvider: UserProvider,
               public alertCtrl: AlertController,
+              public balanceProvider: BalanceProvider,
+              public transactionsProvider: TransactionsProvider,
               public loadingCtrl: LoadingController,
               public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-
-  }
-
-  ionViewWillEnter() {
     let loading = this.loadingCtrl.create({
         content: 'Please wait...'
       }
@@ -48,7 +51,29 @@ export class HomePage {
       this.userID = data.user_id;
       this.documentsUploaded = data.documents_uploaded;
       this.verified = data.verify;
-      loading.dismiss();
+      this.balanceProvider.balances().subscribe(balances => {
+        this.balance = balances;
+        this.transactionsProvider.transactions().subscribe(transactions => {
+          loading.dismiss();
+          this.transactions = transactions;
+        }, err => {
+          loading.dismiss();
+          let alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: 'Network error',
+            buttons: ['OK']
+          });
+          alert.present();
+        });
+      }, err => {
+        loading.dismiss();
+        let alert = this.alertCtrl.create({
+          title: 'Error',
+          subTitle: 'Network error',
+          buttons: ['OK']
+        });
+        alert.present();
+      });
     }, err => {
       loading.dismiss();
       if (err.status === 403) {
