@@ -12,7 +12,6 @@ export class BaseProvider {
   public envVars = ENV;
   public API: string = ENV.API + '/api/';
 
-  private isLoading: boolean;
   private show403Error: boolean;
 
   constructor(public _http: Http,
@@ -46,7 +45,7 @@ export class BaseProvider {
   }
 
   private _catchRequestError(error: HttpErrorResponse, source: string): void {
-    this.hideLoader();
+    this.events.publish('loading:hide');
     if (error.status === 403) {
       if (source !== 'LoadingEntry') this.show403();
     } else {
@@ -55,21 +54,7 @@ export class BaseProvider {
   }
 
   private _catchRequestResult(result: HttpResponse<any>): void {
-    this.hideLoader();
-  }
-
-  private showLoader() {
-    if (!this.isLoading) {
-      this.isLoading = true;
-      this.events.publish('loading:show');
-    }
-  }
-
-  private hideLoader() {
-    if (this.isLoading) {
-      this.isLoading = false;
-      this.events.publish('loading:hide');
-    }
+    this.events.publish('loading:hide');
   }
 
   private show403() {
@@ -80,9 +65,9 @@ export class BaseProvider {
   }
 
   protected makeRawRequest(method: any, path: String, data: object = {}, source: string = ''): Promise<any> {
-    this.showLoader();
+    this.events.publish('loading:show');
     let action = (method === 'get')?this.http[method](this.API + path, this.reqOptions())
-                                    :this.http[method](this.API + path, data, this.reqOptions())
+                                    :this.http[method](this.API + path, data, this.reqOptions());
     return action
       .do((res: any) => {this._catchRequestResult(res)})
       .catch((error: any) => Observable.throw(this._catchRequestError(error, source)))

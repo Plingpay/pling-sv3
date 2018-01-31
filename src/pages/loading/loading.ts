@@ -22,6 +22,7 @@ import {ErrorPage} from "../error/error";
 })
 export class LoadingPage {
   private loader: Loading;
+  private loadingCounter: Array<boolean>;
 
   constructor(public navCtrl: NavController,
               public userProvider: UserProvider,
@@ -30,14 +31,12 @@ export class LoadingPage {
               public modalCtrl: ModalController,
               public loadingCtrl: LoadingController,
               public navParams: NavParams) {
+    this.loadingCounter = [];
     events.subscribe('loading:show', (message) => {
-      this.loader = this.loadingCtrl.create({
-        content: message || "Please wait...",
-      });
-      this.loader.present();
+      this.showLoader(message);
     });
     events.subscribe('loading:hide', () => {
-      this.loader.dismiss();
+      this.hideLoader();
     });
     events.subscribe('error:show', (title, message) => {
       let modal = this.modalCtrl.create(ErrorPage, {title: title, message: message});
@@ -67,6 +66,21 @@ export class LoadingPage {
       this.navCtrl.setRoot(LoginPage);
       this.navCtrl.popToRoot();
     });
+  }
+
+  private showLoader(message: string): void {
+    if (this.loadingCounter.length === 0) {
+      this.loader = this.loadingCtrl.create({
+        content: message || "Please wait...",
+      });
+      this.loader.present();
+    }
+    this.loadingCounter.push(true);
+  }
+
+  private hideLoader(): void {
+    if (this.loadingCounter.length > 0) this.loadingCounter.pop();
+    if (this.loadingCounter.length === 0) this.loader.dismiss();
   }
 
 }

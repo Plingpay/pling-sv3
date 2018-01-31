@@ -19,7 +19,11 @@
       <ion-item>
         <ion-icon name="card" item-start color="primary"></ion-icon>
         <ion-label stacked>Card number</ion-label>
-        <ion-input formControlName="number" type="tel" maxlength="16"></ion-input>
+        <ion-input
+          formControlName="number"
+          type="tel"
+          maxlength="16"
+        ></ion-input>
       </ion-item>
       <ion-item *ngIf="!cardForm.get('number').valid && cardForm.get('number').touched" no-lines>
         <p class="error">16 numbers required</p>

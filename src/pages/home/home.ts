@@ -40,22 +40,20 @@ export class HomePage {
               public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    this.userProvider.status().then(data => {
-      this.userStatus = data.status;
-      this.userID = data.user_id;
-      this.documentsUploaded = data.documents_uploaded;
-      this.verified = data.verify;
-      this.balanceProvider.balances().subscribe(balances => {
-        this.balance = balances;
-        this.transactionsProvider.transactions().subscribe(transactions => {
-          this.transactions = transactions;
-          this.transactionsProvider.paymentMethods().subscribe(paymentMethods => {
-            this.paymentMethods = paymentMethods;
-          }, err => {});
-        }, err => {});
-      }, err => {});
-    }, err => {});
+  async ionViewDidEnter() {
+    // Call provider methods async
+    let statusCall = this.userProvider.status();
+    let balanceCall = this.balanceProvider.balances();
+    let transactionsCall = this.transactionsProvider.transactions();
+    let paymentMethodsCall = this.transactionsProvider.paymentMethods();
+    let userStatus = await statusCall;
+    this.userStatus = userStatus.status;
+    this.userID = userStatus.user_id;
+    this.documentsUploaded = userStatus.documents_uploaded;
+    this.verified = userStatus.verify;
+    this.balance = await balanceCall;
+    this.transactions = await transactionsCall;
+    this.paymentMethods = await paymentMethodsCall;
   }
 
   verifyProfile() {
