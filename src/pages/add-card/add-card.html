@@ -14,19 +14,65 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-icon name="card" item-start color="primary"></ion-icon>
-      <ion-label stacked>Card number</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <div class="" item-start>
-
-      </div>
-      <ion-icon name="card" item-start color="primary"></ion-icon>
-      <ion-label stacked>Calendar</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-  </ion-list>
+  <form [formGroup]="cardForm" (ngSubmit)="submitForm()" novalidate>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="card" item-start color="primary"></ion-icon>
+        <ion-label stacked>Card number</ion-label>
+        <ion-input formControlName="number" type="tel" maxlength="16"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!cardForm.get('number').valid && cardForm.get('number').touched" no-lines>
+        <p class="error">16 numbers required</p>
+      </ion-item>
+        <ion-row>
+          <ion-col col-6>
+            <ion-item>
+              <ion-icon name="calendar" item-start color="primary"></ion-icon>
+              <ion-label stacked>Expiration date</ion-label>
+              <ion-datetime formControlName="expDate" displayFormat="MM/YY" min="2018" max="2030"></ion-datetime>
+            </ion-item>
+            <ion-item *ngIf="!cardForm.get('expDate').valid && cardForm.get('expDate').touched" no-lines>
+              <p class="error">required</p>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+              <ion-icon name="lock" item-start color="primary"></ion-icon>
+              <ion-label stacked>CVC</ion-label>
+              <ion-input type="tel" formControlName="cvc" maxlength="3" pattern="[0-9]*" inputmode="numeric" min="000" max="999" style="-webkit-text-security: disc;"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!cardForm.get('cvc').valid && cardForm.get('cvc').touched" no-lines>
+              <p class="error">3 numbers</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      <ion-item>
+        <ion-label>Card currency</ion-label>
+        <ion-select formControlName="currency" >
+          <ion-option *ngFor="let currency of currencies">{{currency.currency}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="!cardForm.get('currency').valid && cardForm.get('currency').touched" no-lines>
+        <p class="error">Card currency is required</p>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>
+
+<ion-footer class="clear-toolbar">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <button
+            ion-button
+            class="orange footer-button"
+            [disabled]="!cardForm.valid"
+            full
+            (click)="addCard()"
+          >Confirm</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

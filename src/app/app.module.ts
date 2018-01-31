@@ -28,6 +28,9 @@ import {TransactionsProvider} from "../providers/transactions";
 import {MomentModule} from "angular2-moment";
 import {ChoosePaymentMethodPage} from "../pages/choose-payment-method/choose-payment-method";
 import {AddCardPage} from "../pages/add-card/add-card";
+import {HttpClientModule} from "@angular/common/http";
+import {CurrencyProvider} from "../providers/currency";
+import {ErrorPage} from "../pages/error/error";
 
 @NgModule({
   declarations: [
@@ -47,12 +50,14 @@ import {AddCardPage} from "../pages/add-card/add-card";
     DocumentsPage,
     LoadingPage,
     ChoosePaymentMethodPage,
-    AddCardPage
+    AddCardPage,
+    ErrorPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     MomentModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -71,7 +76,8 @@ import {AddCardPage} from "../pages/add-card/add-card";
     DocumentsPage,
     LoadingPage,
     ChoosePaymentMethodPage,
-    AddCardPage
+    AddCardPage,
+    ErrorPage
   ],
   providers: [
     StatusBar,
@@ -81,6 +87,7 @@ import {AddCardPage} from "../pages/add-card/add-card";
     BalanceProvider,
     TransactionsProvider,
     BaseSingleton,
+    CurrencyProvider,
 
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

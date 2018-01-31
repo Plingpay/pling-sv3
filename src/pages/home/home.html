@@ -42,7 +42,8 @@
     </p>
   </div>
   <div class="no-history" *ngIf="((transactions !== undefined) && transactions.length === 0)
-                                && ((paymentMethods !== undefined) && paymentMethods.length === 0) ">
+                                && ((paymentMethods !== undefined) && paymentMethods.length === 0)
+                                && ((documentsUploaded !== undefined) && documentsUploaded)">
     <img src="assets/imgs/skate_man.png"/>
     <h3>Congratulations!</h3>
     <p>
@@ -98,7 +99,7 @@
 
 </ion-content>
 
-<ion-footer class="clear-toolbar" *ngIf="(documentsUploaded !== undefined) && !documentsUploaded">
+<ion-footer class="grey-toolbar" *ngIf="(documentsUploaded !== undefined) && !documentsUploaded">
   <ion-toolbar>
     <ion-grid>
       <ion-row>
@@ -116,7 +117,8 @@
 </ion-footer>
 
 <ion-footer class="grey-toolbar" *ngIf="((transactions !== undefined) && transactions.length === 0)
-                                && ((paymentMethods !== undefined) && paymentMethods.length === 0) ">
+                                && ((paymentMethods !== undefined) && paymentMethods.length === 0)
+                                && ((documentsUploaded !== undefined) && documentsUploaded)">
   <ion-toolbar>
     <ion-grid>
       <ion-row>

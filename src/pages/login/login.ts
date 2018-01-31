@@ -1,7 +1,6 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController} from 'ionic-angular';
+import {IonicPage, NavController} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
-import {Cookie} from "ng2-cookies";
 import {RegisterPhonePage} from "../register-phone/register-phone";
 import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditions";
 import {ExchangeRatesPage} from "../exchange-rates/exchange-rates";
@@ -28,9 +27,7 @@ export class LoginPage {
   @ViewChild('phoneInput') phoneInput ;
 
   constructor(public navCtrl: NavController,
-              private loadingCtrl: LoadingController,
               public user: UserProvider,
-              public alertCtrl: AlertController,
               public elRef: ElementRef) {
   }
 
@@ -39,32 +36,12 @@ export class LoginPage {
   }
 
   submitForm() {
-    let loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      }
-    );
-    loading.present();
     this.user.userAuth({phone_number: this.phone_number, password: this.password})
-      .subscribe((data) => {
-          Cookie.set('is_authenticated', 'yes', 365);
-          loading.dismiss();
+      .then((data) => {
           this.navCtrl.push(RegisterCodePage, {phone: this.phone_number, user: data.user_id, source: 'signin'})
-        },
-        (err) => {
-          loading.dismiss();
-          this.presentAlert();
-        })
+        }, err => {});
   }
 
-
-  presentAlert(text = '') {
-    let alert = this.alertCtrl.create({
-      title: 'Error',
-      subTitle: text||'Phone or password is incorrect',
-      buttons: ['OK']
-    });
-    alert.present();
-  }
 
   openTerms() {
     this.navCtrl.push(TermsAndConditionsPage);

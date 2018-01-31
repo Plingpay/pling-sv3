@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
-import {UserProvider} from "../../providers/user";
+import {CurrencyProvider} from "../../providers/currency";
 
 /**
  * Generated class for the ExchangeRatesPage page.
@@ -20,27 +20,14 @@ export class ExchangeRatesPage {
   private rates: any = [];
 
   constructor(public navCtrl: NavController,
-              public user: UserProvider,
+              public currencyProvider: CurrencyProvider,
               public alertCtrl: AlertController,
               private loadingCtrl: LoadingController,
               public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    let loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      }
-    );
-    loading.present();
-    this.user.currencyList()
-      .subscribe((data) => {
-          this.currencies = data;
-          loading.dismiss();
-        },
-        (err) => {
-          loading.dismiss();
-          this.presentAlert();
-        })
+  async ionViewDidLoad() {
+    this.currencies = await this.currencyProvider.currencyList();
   }
 
   loadRates() {
@@ -49,7 +36,7 @@ export class ExchangeRatesPage {
       }
     );
     loading.present();
-    this.user.currencyRate(this.currency)
+    this.currencyProvider.currencyRate(this.currency)
       .subscribe((data) => {
           this.rates = data;
           loading.dismiss();

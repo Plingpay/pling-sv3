@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
-import {LoginPage} from "../login/login";
 import {VerifyAccountPage} from "../verify-account/verify-account";
 import {ExchangeRatesPage} from "../exchange-rates/exchange-rates";
 import {BalanceProvider} from "../../providers/balance";
@@ -35,7 +34,6 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
               public userProvider: UserProvider,
-              public alertCtrl: AlertController,
               public balanceProvider: BalanceProvider,
               public transactionsProvider: TransactionsProvider,
               public loadingCtrl: LoadingController,
@@ -43,12 +41,7 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    let loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      }
-    );
-    loading.present();
-    this.userProvider.status().subscribe(data => {
+    this.userProvider.status().then(data => {
       this.userStatus = data.status;
       this.userID = data.user_id;
       this.documentsUploaded = data.documents_uploaded;
@@ -58,49 +51,11 @@ export class HomePage {
         this.transactionsProvider.transactions().subscribe(transactions => {
           this.transactions = transactions;
           this.transactionsProvider.paymentMethods().subscribe(paymentMethods => {
-            loading.dismiss();
             this.paymentMethods = paymentMethods;
-          }, err => {
-            loading.dismiss();
-            let alert = this.alertCtrl.create({
-              title: 'Error',
-              subTitle: 'Network error',
-              buttons: ['OK']
-            });
-            alert.present();
-          });
-        }, err => {
-          loading.dismiss();
-          let alert = this.alertCtrl.create({
-            title: 'Error',
-            subTitle: 'Network error',
-            buttons: ['OK']
-          });
-          alert.present();
-        });
-      }, err => {
-        loading.dismiss();
-        let alert = this.alertCtrl.create({
-          title: 'Error',
-          subTitle: 'Network error',
-          buttons: ['OK']
-        });
-        alert.present();
-      });
-    }, err => {
-      loading.dismiss();
-      if (err.status === 403) {
-        this.navCtrl.setRoot(LoginPage);
-        this.navCtrl.popToRoot();
-      } else {
-        let alert = this.alertCtrl.create({
-          title: 'Error',
-          subTitle: 'Network error',
-          buttons: ['OK']
-        });
-        alert.present();
-      }
-    });
+          }, err => {});
+        }, err => {});
+      }, err => {});
+    }, err => {});
   }
 
   verifyProfile() {

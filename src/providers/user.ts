@@ -14,9 +14,7 @@ import {ENV} from "@environment";
 export class UserProvider extends BaseProvider {
 
   userAuth(data) {
-    return this._http.post(this.API + "login", data, this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
+    return this.makeRawRequest('post', 'login', data);
   }
 
   registerPhone(data) {
@@ -73,28 +71,14 @@ export class UserProvider extends BaseProvider {
       .catch((error: any) => Observable.throw(error))
   }
 
-  currencyList() {
-    return this._http.get(this.API + "currency", this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
-  }
-
-  currencyRate(currency) {
-    return this._http.post(this.API + "currency", {currency: currency}, this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
-  }
-
   countries() {
     return this._http.get(this.API + "countries", this.generateRequestOptions())
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error))
   }
 
-  status() {
-    return this._http.get(this.API + "login_status", this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
+  status(source: string = '') {
+    return this.makeRawRequest('get', 'login_status', {}, source);
   }
 
   verifyEmailAndName(data, id) {
