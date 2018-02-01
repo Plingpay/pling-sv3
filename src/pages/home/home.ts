@@ -53,7 +53,8 @@ export class HomePage {
     this.verified = userStatus.verify;
     this.balance = await balanceCall;
     this.transactions = await transactionsCall;
-    this.paymentMethods = await paymentMethodsCall;
+    this.paymentMethods = (await paymentMethodsCall).results;
+    console.log(this.paymentMethods);
   }
 
   verifyProfile() {
