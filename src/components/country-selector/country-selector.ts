@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Output, Renderer} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, Renderer} from '@angular/core';
 import {CountryPhoneSelectorPage} from "../../pages/country-phone-selector/country-phone-selector";
 import { ModalController} from "ionic-angular";
 import {UserProvider} from "../../providers/user";
@@ -15,7 +15,7 @@ import {UserProvider} from "../../providers/user";
 })
 export class CountrySelectorComponent {
   @Output() onSelect = new EventEmitter();
-  public inputModel: String;
+  @Input('inputModel') inputModel: string;
 
   public imagePath: String;
   private countries: Array<any>;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {FormBuilder, Validators} from "@angular/forms";
 import {CurrencyProvider} from "../../providers/currency";
 import {TransactionsProvider} from "../../providers/transactions";
@@ -24,6 +24,7 @@ export class AddCardPage {
               public formBuilder: FormBuilder,
               public currencyProvider: CurrencyProvider,
               public transactionsProvider: TransactionsProvider,
+              public viewCtrl: ViewController,
               public navParams: NavParams) {
     this.cardForm = this.formBuilder.group({
       number: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{16}')])],
@@ -34,7 +35,7 @@ export class AddCardPage {
   }
 
   async ionViewDidLoad() {
-    this.currencies = await this.currencyProvider.currencyList();
+    this.currencies = (await this.currencyProvider.currencyList()).results;
   }
 
   addCard() {
@@ -45,7 +46,7 @@ export class AddCardPage {
       cvc: this.cardForm.controls['cvc'].value,
       currency: this.cardForm.controls['currency'].value,
     }).then(res => {
-      this.navCtrl.popToRoot();
+      this.viewCtrl.dismiss();
     }, err => {});
   }
 

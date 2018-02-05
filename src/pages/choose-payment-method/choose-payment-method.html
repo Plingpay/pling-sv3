@@ -25,7 +25,7 @@
      <a href="#">Add method</a>
    </div>
  </ion-card>
-  <ion-card class="method-card credit" (click)="addCard()">
+  <ion-card class="method-card credit" (click)="selectCard()">
     <div class="method-name">
       Credit card
     </div>
@@ -36,7 +36,8 @@
       <img src="assets/imgs/credit.svg">
     </div>
     <div class="action-button">
-      <a href="#">Add method</a>
+      <a href="#" *ngIf="!creditCardNumber">Add method</a>
+      <a href="#" *ngIf="creditCardNumber">**** **** **** {{creditCardNumber}}</a>
     </div>
   </ion-card>
   <ion-card class="method-card bank">

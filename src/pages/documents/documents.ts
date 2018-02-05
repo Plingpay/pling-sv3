@@ -32,7 +32,7 @@ export class DocumentsPage {
 
   ionViewDidLoad() {
     this.docsProvider.documentsList().then(data => {
-      this.documents = data;
+      this.documents = data.results;
       this.itemHeight = 100/data.length;
     }, err => {});
   }

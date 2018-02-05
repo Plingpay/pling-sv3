@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {VerifyAccountPage} from "../verify-account/verify-account";
 import {ExchangeRatesPage} from "../exchange-rates/exchange-rates";
@@ -36,25 +36,23 @@ export class HomePage {
               public userProvider: UserProvider,
               public balanceProvider: BalanceProvider,
               public transactionsProvider: TransactionsProvider,
-              public loadingCtrl: LoadingController,
               public navParams: NavParams) {
   }
 
-  async ionViewDidEnter() {
+  ionViewDidEnter() {
     // Call provider methods async
-    let statusCall = this.userProvider.status();
-    let balanceCall = this.balanceProvider.balances();
-    let transactionsCall = this.transactionsProvider.transactions();
-    let paymentMethodsCall = this.transactionsProvider.paymentMethods();
-    let userStatus = await statusCall;
-    this.userStatus = userStatus.status;
-    this.userID = userStatus.user_id;
-    this.documentsUploaded = userStatus.documents_uploaded;
-    this.verified = userStatus.verify;
-    this.balance = (await balanceCall).results;
-    this.transactions = (await transactionsCall).results;
-    this.paymentMethods = (await paymentMethodsCall).results;
-    console.log(this.paymentMethods);
+    this.userProvider.status().then(
+      data => {
+        let userStatus = data;
+        this.userStatus = userStatus.status;
+        this.userID = userStatus.user_id;
+        this.documentsUploaded = userStatus.documents_uploaded;
+        this.verified = userStatus.verify;
+      }, err => {}
+      );
+    this.balanceProvider.balances().then(data => {this.balance = data.results}, err => {});
+    this.transactionsProvider.transactions().then(data => {this.transactions = data.results}, err => {});
+    this.transactionsProvider.paymentMethods().then(data => {this.paymentMethods = data.results}, err => {});
   }
 
   verifyProfile() {
@@ -66,11 +64,7 @@ export class HomePage {
   }
 
   sendMoney() {
-    if (this.paymentMethods.length > 0) {
-
-    } else {
-      this.navCtrl.push(ChoosePaymentMethodPage);
-    }
+    this.navCtrl.push(ChoosePaymentMethodPage);
   }
 
   requestMoney() {

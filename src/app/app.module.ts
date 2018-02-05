@@ -30,6 +30,9 @@ import {AddCardPage} from "../pages/add-card/add-card";
 import {HttpClientModule} from "@angular/common/http";
 import {CurrencyProvider} from "../providers/currency";
 import {ErrorPage} from "../pages/error/error";
+import {ContactListPage} from "../pages/contact-list/contact-list";
+import {Contacts} from "@ionic-native/contacts";
+import {AmountPage} from "../pages/amount/amount";
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import {ErrorPage} from "../pages/error/error";
     LoadingPage,
     ChoosePaymentMethodPage,
     AddCardPage,
-    ErrorPage
+    ErrorPage,
+    ContactListPage,
+    AmountPage
   ],
   imports: [
     BrowserModule,
@@ -75,7 +80,9 @@ import {ErrorPage} from "../pages/error/error";
     LoadingPage,
     ChoosePaymentMethodPage,
     AddCardPage,
-    ErrorPage
+    ErrorPage,
+    ContactListPage,
+    AmountPage
   ],
   providers: [
     StatusBar,
@@ -86,7 +93,7 @@ import {ErrorPage} from "../pages/error/error";
     TransactionsProvider,
     BaseSingleton,
     CurrencyProvider,
-
+    Contacts,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

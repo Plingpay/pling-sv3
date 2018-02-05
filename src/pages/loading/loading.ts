@@ -43,6 +43,7 @@ export class LoadingPage {
       modal.present();
     });
     events.subscribe('403:show', () => {
+      console.log("Asdasd");
       let prompt = this.alertCtrl.create({
         message: "Your session has expired or you have insufficient rights to access this content. Please sign in again.",
         buttons: [

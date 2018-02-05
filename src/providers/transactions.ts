@@ -11,6 +11,10 @@ export class TransactionsProvider extends BaseProvider {
     return this.makeRawRequest('get', 'payment_methods')
   }
 
+  selectPaymentMethod(id) {
+    return this.makeRawRequest('get', 'payment_methods/' + id);
+  }
+
   addCard(data) {
     return this.makeRawRequest('post', 'add_card', data);
   }

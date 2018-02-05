@@ -1,0 +1,16 @@
+page-contact-list {
+  .contact-list {
+    margin-top: 20px;
+  }
+
+  .contact-number {
+    color: $black;
+    font-weight: bold;
+  }
+
+  .phone-selector {
+    ion-item {
+      margin-top: 20px;
+    }
+  }
+}
