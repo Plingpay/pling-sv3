@@ -1,5 +1,5 @@
 import {Component, ElementRef, Renderer} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {CreatePasswordPage} from "../create-password/create-password";
 import {HomePage} from "../home/home";
@@ -30,7 +30,6 @@ export class RegisterCodePage {
   constructor(public navCtrl: NavController,
               private elementRef: ElementRef,
               private renderer: Renderer,
-              private loadingCtrl: LoadingController,
               private user: UserProvider,
               private alertCtrl: AlertController,
               public navParams: NavParams) {
@@ -106,11 +105,6 @@ export class RegisterCodePage {
   }
 
   registerCode() {
-    let loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      }
-    );
-    loading.present();
     let action;
     switch (this.source) {
       case 'signup':
@@ -122,8 +116,7 @@ export class RegisterCodePage {
       case 'signin':
         action = this.user.registerSmsSignin("" + this.codeNum1 + this.codeNum2 + this.codeNum3 + this.codeNum4, this.registerUserID);
     }
-    action.subscribe((data) => {
-          loading.dismiss();
+    action.then((data) => {
           switch (this.source) {
             case 'signup':
               this.navCtrl.push(CreatePasswordPage, {userID: this.registerUserID, source: 'signup'});
@@ -137,22 +130,13 @@ export class RegisterCodePage {
           }
 
         },
-        (err) => {
-          loading.dismiss();
-          this.presentAlert();
-        })
+        (err) => {})
   }
 
   retry() {
-    let loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      }
-    );
-    loading.present();
     let phone_striped = this.registerPhone.replace(/\D/g,'');
     this.user.repeatSms({phone_number: '+' + phone_striped})
-      .subscribe((data) => {
-          loading.dismiss();
+      .then((data) => {
           let alert = this.alertCtrl.create({
             title: 'Success',
             subTitle: 'Please wait for sms',
@@ -160,21 +144,7 @@ export class RegisterCodePage {
           });
           alert.present();
         },
-        (err) => {
-          loading.dismiss();
-          this.presentAlert();
-        })
+        (err) => {})
   }
-
-  presentAlert(text = '') {
-    let alert = this.alertCtrl.create({
-      title: 'Error',
-      subTitle: text||'Sms code is incorrect',
-      buttons: ['OK']
-    });
-    alert.present();
-  }
-
-
 
 }

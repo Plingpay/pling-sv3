@@ -31,24 +31,10 @@ export class DocumentsPage {
   }
 
   ionViewDidLoad() {
-    let loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      }
-    );
-    loading.present();
-    this.docsProvider.documentsList().subscribe(data => {
+    this.docsProvider.documentsList().then(data => {
       this.documents = data;
       this.itemHeight = 100/data.length;
-      loading.dismiss();
-    }, err => {
-      let alert = this.alertCtrl.create({
-        title: 'Error',
-        subTitle: 'Cannot load documents list',
-        buttons: ['OK']
-      });
-      loading.dismiss();
-      alert.present();
-    });
+    }, err => {});
   }
 
   skip() {
@@ -93,23 +79,9 @@ export class DocumentsPage {
   }
 
   sendDocuments() {
-    let loading = this.loadingCtrl.create({
-        content: 'Saving...'
-      }
-    );
-    loading.present();
-    this.docsProvider.saveDocuments(this.documents).subscribe((res) => {
-      loading.dismiss();
+    this.docsProvider.saveDocuments(this.documents).then((res) => {
       this.navCtrl.popToRoot();
-    }, err => {
-      loading.dismiss();
-      let alert = this.alertCtrl.create({
-        title: 'Error',
-        subTitle: 'Cannot save photos',
-        buttons: ['OK']
-      });
-      alert.present();
-    });
+    }, err => {});
   }
 
 }

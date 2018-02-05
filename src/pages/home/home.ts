@@ -51,8 +51,8 @@ export class HomePage {
     this.userID = userStatus.user_id;
     this.documentsUploaded = userStatus.documents_uploaded;
     this.verified = userStatus.verify;
-    this.balance = await balanceCall;
-    this.transactions = await transactionsCall;
+    this.balance = (await balanceCall).results;
+    this.transactions = (await transactionsCall).results;
     this.paymentMethods = (await paymentMethodsCall).results;
     console.log(this.paymentMethods);
   }

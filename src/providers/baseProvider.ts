@@ -1,7 +1,4 @@
 import { Injectable } from "@angular/core";
-import {
-  Http, Headers, RequestOptions,
-} from '@angular/http';
 import {ENV} from "@environment";
 import {Observable} from "rxjs/Rx";
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
@@ -14,8 +11,7 @@ export class BaseProvider {
 
   private show403Error: boolean;
 
-  constructor(public _http: Http,
-              private events: Events,
+  constructor(private events: Events,
               public http: HttpClient
               ) {
     events.subscribe('403:hide', () => {
@@ -23,18 +19,6 @@ export class BaseProvider {
     });
   }
 
-  protected generateRequestOptions() {
-    let _headers: Headers;
-    let _options: RequestOptions;
-    _headers = new Headers({
-      'Accept': 'application/json'
-    });
-    _options = new RequestOptions({
-      headers: _headers,
-      withCredentials: true
-    });
-    return _options;
-  }
 
   private reqOptions() {
     return {
@@ -66,8 +50,9 @@ export class BaseProvider {
 
   protected makeRawRequest(method: any, path: String, data: object = {}, source: string = ''): Promise<any> {
     this.events.publish('loading:show');
-    let action = (method === 'get')?this.http[method](this.API + path, this.reqOptions())
-                                    :this.http[method](this.API + path, data, this.reqOptions());
+    let finalPath = (path.indexOf('http') !== -1) ? path : this.API + path;
+    let action = (method === 'get')?this.http[method](finalPath, this.reqOptions())
+                                    :this.http[method](finalPath, data, this.reqOptions());
     return action
       .do((res: any) => {this._catchRequestResult(res)})
       .catch((error: any) => Observable.throw(this._catchRequestError(error, source)))

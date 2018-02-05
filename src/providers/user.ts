@@ -1,10 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-  Response
-} from '@angular/http';
 
-
-import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import {BaseProvider} from "./baseProvider";
@@ -18,63 +13,43 @@ export class UserProvider extends BaseProvider {
   }
 
   registerPhone(data) {
-    return this._http.post(this.API + "signup_phone", data, this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
+    return this.makeRawRequest('post', 'signup_phone', data);
   }
 
   resetPassword(data) {
-    return this._http.post(this.API + "resset_password", data, this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
+    return this.makeRawRequest('post', 'resset_password', data);
   }
 
   registerSmsSignup(token, id) {
-    return this._http.put(this.API + "signup_sms/" + id, {token: token}, this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
+    return this.makeRawRequest('put', 'signup_sms/' + id, {token: token});
   }
 
   registerSmsReset(token, id) {
-    return this._http.post(this.API + "resset_password_sms", {token: token, user_id: id}, this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
+    return this.makeRawRequest('post', 'resset_password_sms',  {token: token, user_id: id});
   }
 
   signupPassword(password, id) {
-    return this._http.put(this.API + "signup_password/" + id, {password: password}, this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
+    return this.makeRawRequest('put', 'signup_password/' + id, {password: password});
   }
 
   changePassword(password, url) {
-    return this._http.post(ENV.API + url, {new_password: password}, this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
+    return this.makeRawRequest('post', ENV.API + url, {new_password: password});
   }
 
   registerSmsSignin(token, id) {
-    return this._http.put(this.API + "login_sms/" + id, {token: token}, this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
+    return this.makeRawRequest('put', 'login_sms/' + id, {token: token});
   }
 
   repeatSms(data) {
-    return this._http.post(this.API + "repeat_sms", data, this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
+    return this.makeRawRequest('post', 'repeat_sms', data);
   }
 
   termsAndConditions() {
-    return this._http.get(this.API + "policy", this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
+    return this.makeRawRequest('get', 'policy');
   }
 
   countries() {
-    return this._http.get(this.API + "countries", this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
+    return this.makeRawRequest('get', 'countries');
   }
 
   status(source: string = '') {
@@ -82,9 +57,7 @@ export class UserProvider extends BaseProvider {
   }
 
   verifyEmailAndName(data, id) {
-    return this._http.put(this.API + "verify_account/" + id, data, this.generateRequestOptions())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error))
+    return this.makeRawRequest('put', 'verify_account/' + id, data);
   }
 
 }

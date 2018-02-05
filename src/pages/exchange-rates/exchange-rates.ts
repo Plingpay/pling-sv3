@@ -21,12 +21,11 @@ export class ExchangeRatesPage {
 
   constructor(public navCtrl: NavController,
               public currencyProvider: CurrencyProvider,
-              public alertCtrl: AlertController,
               public navParams: NavParams) {
   }
 
   async ionViewDidLoad() {
-    this.currencies = await this.currencyProvider.currencyList();
+    this.currencies = (await this.currencyProvider.currencyList()).results;
   }
 
   async loadRates() {

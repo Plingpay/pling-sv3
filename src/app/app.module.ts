@@ -6,7 +6,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import {UserProvider} from "../providers/user";
-import {HttpModule} from "@angular/http";
 import {BaseSingleton} from "../services/base";
 import {LoginPage} from "../pages/login/login";
 import {RegisterPhonePage} from "../pages/register-phone/register-phone";
@@ -55,7 +54,6 @@ import {ErrorPage} from "../pages/error/error";
   ],
   imports: [
     BrowserModule,
-    HttpModule,
     MomentModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp)
