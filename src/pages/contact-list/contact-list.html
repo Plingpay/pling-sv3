@@ -19,15 +19,18 @@
     [inputModel]="phoneNumber"
     class="phone-selector"></country-selector>
   <ion-list *ngIf="contactsList.length" class="contact-list">
-    <ion-item *ngFor="let contact of contactsList" (click)="selectContact(contact)">
-      <ion-avatar item-start>
-        <img src="assets/icon/empty_avatar.svg"/>
-      </ion-avatar>
-      <h2>{{contact.displayName}}</h2>
-      <ion-note item-end class="contact-number">
-        {{contact.phoneNumbers.length?contact.phoneNumbers[0].value:'Unknown'}}
-      </ion-note>
-    </ion-item>
+    <ng-container *ngFor="let contact of contactsList">
+      <ion-item  (click)="selectContact(contact)" *ngIf="contact.phoneNumbers">
+        <ion-avatar item-start>
+          <img src="assets/icon/empty_avatar.svg"/>
+        </ion-avatar>
+        <h2>{{contact.displayName}}</h2>
+        <ion-note item-end class="contact-number">
+          {{contact.phoneNumbers[0].value}}
+        </ion-note>
+      </ion-item>
+    </ng-container>
+
   </ion-list>
 
 </ion-content>

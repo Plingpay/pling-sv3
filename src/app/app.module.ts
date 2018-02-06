@@ -33,6 +33,7 @@ import {ErrorPage} from "../pages/error/error";
 import {ContactListPage} from "../pages/contact-list/contact-list";
 import {Contacts} from "@ionic-native/contacts";
 import {AmountPage} from "../pages/amount/amount";
+import {TransactionSubmitPage} from "../pages/transaction-submit/transaction-submit";
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {AmountPage} from "../pages/amount/amount";
     AddCardPage,
     ErrorPage,
     ContactListPage,
-    AmountPage
+    AmountPage,
+    TransactionSubmitPage
   ],
   imports: [
     BrowserModule,
@@ -82,7 +84,8 @@ import {AmountPage} from "../pages/amount/amount";
     AddCardPage,
     ErrorPage,
     ContactListPage,
-    AmountPage
+    AmountPage,
+    TransactionSubmitPage
   ],
   providers: [
     StatusBar,

@@ -21,14 +21,14 @@ export class ContactListPage {
     {
       displayName: "Ivan Petrov",
       phoneNumbers: [ {
-        value: "+2342342342323"
+        value: "+380956446122"
           }
       ],
     },
     {
-      displayName: "Ivan Sidorov",
+      displayName: "Belka Sidorov",
       phoneNumbers: [ {
-        value: "+2234232323242"
+        value: "+380974279509"
       }
       ]
     }
@@ -41,14 +41,11 @@ export class ContactListPage {
   }
 
   ionViewDidLoad() {
-    console.log(this.contacts.find(['*']).then(contacts => {
+    this.contacts.find(['*']).then(contacts => {
       this.contactsList = contacts;
-      console.log(this.contactsList[0].displayName);
-      console.log(this.contactsList[0].phoneNumbers[0].value);
     }, err => {
       //alert('Cannot read contacts list');
-      console.log(err);
-    }));
+    });
   }
 
   selectContact(contact) {

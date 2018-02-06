@@ -1,0 +1,95 @@
+<!--
+  Generated template for the TransactionSubmitPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Payment info</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="edit()">
+        Edit
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <div class="item-icon" item-start><img src="assets/icon/right-top-arrow.svg"/></div>
+      Transfer to
+      <ion-note item-end class="value">{{transaction.user_to.full_name || transaction.user_to.phone_number}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <div class="item-icon" item-start><img src="assets/icon/card.svg"/></div>
+      Payment method
+      <ion-note item-end class="value">{{transaction.payment_method.name}}
+        {{transaction.payment_method.name === 'Credit card'?' *** ' + transaction.payment_method.last4:''}}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <div class="item-icon" item-start><img src="assets/icon/wallet-gray.svg"/></div>
+      Transfer amount
+      <ion-note item-end class="value">{{transaction.amount.amount}} {{transaction.amount.currency}}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <div class="item-icon" item-start><img src="assets/icon/db.svg"/></div>
+      Total
+      <ion-note item-end class="value">{{transaction.total.total}} {{transaction.total.currency}}
+      </ion-note>
+    </ion-item>
+    <ion-item text-wrap *ngIf="transaction.comment">
+      <ion-row>
+        <ion-col col-2 class="icon-col">
+          <img src="assets/icon/comment-gray.svg"/>
+        </ion-col>
+        <ion-col col-3 class="name-col">
+          Comment
+        </ion-col>
+        <ion-col col-7>
+          "{{transaction.comment}}"
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <ion-list >
+
+
+  </ion-list>
+</ion-content>
+
+<ion-footer class="clear-toolbar">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="save-checkbox">
+        <ion-col col-3></ion-col>
+        <ion-col col-7>
+          <ion-item>
+            <ion-label>Save as template</ion-label>
+            <ion-checkbox [(ngModel)]="saveAsTemplate"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-2></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6><button
+          ion-button
+          class="sign-up footer-button"
+          (click)="cancel()"
+          block>Cancel</button></ion-col>
+        <ion-col col-6><button
+          ion-button
+          block
+          (click)="submit()"
+          class="orange footer-button"
+        >Submit</button></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

@@ -19,4 +19,19 @@ export class TransactionsProvider extends BaseProvider {
     return this.makeRawRequest('post', 'add_card', data);
   }
 
+  prepareTransaction(data) {
+    return this.makeRawRequest('post', 'transactions', data);
+  }
+
+  saveTransactionAsTemplate(id) {
+    return this.makeRawRequest('post', 'transactions/' + id + '/' + 'save_as_template');
+  }
+
+  approveTransaction(id) {
+    return this.makeRawRequest('post', 'transactions/' + id + '/' + 'user_approve');
+  }
+
+  cancelTransaction(id) {
+    return this.makeRawRequest('post', 'transactions/' + id + '/' + 'user_cancel');
+  }
 }
