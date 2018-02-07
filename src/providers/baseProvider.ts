@@ -33,7 +33,9 @@ export class BaseProvider {
     if (error.status === 403) {
       if (source !== 'LoadingEntry') this.show403();
     } else {
-      this.events.publish('error:show', 'Error', ('message' in error.error)?error.error.message:error.message);
+      //console.log(error);
+      //console.log(('message' in error.error)?error.error.message:error.message);
+      this.events.publish('error:show', 'Error', (('message' in error.error)?error.error.message:error.message));
     }
   }
 

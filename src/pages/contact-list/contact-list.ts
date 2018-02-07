@@ -29,7 +29,14 @@ export class ContactListPage {
       displayName: "Belka Sidorov",
       phoneNumbers: [ {
         value: "+380974279509"
-      }
+      },
+      ]
+    },
+    {
+      displayName: "Guest",
+      phoneNumbers: [ {
+        value: "+380956448129"
+      },
       ]
     }
   ];

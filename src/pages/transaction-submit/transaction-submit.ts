@@ -32,14 +32,12 @@ export class TransactionSubmitPage {
   }
 
   submit() {
-    this.transactionsProvider.cancelTransaction(this.transaction.id).then(
+    this.transactionsProvider.approveTransaction(this.transaction.id).then(
       data => {
         if (this.saveAsTemplate) {
           this.transactionsProvider.saveTransactionAsTemplate(this.transaction.id).then(()=>{},()=>{});
         }
-        this.transactionsProvider.approveTransaction(this.transaction.id).then(()=>{
-          this.navCtrl.popToRoot()
-        }, () => {})
+        this.navCtrl.popToRoot();
       },
       err => {}
     )

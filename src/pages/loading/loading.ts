@@ -50,6 +50,8 @@ export class LoadingPage {
           {
             text: 'OK',
             handler: data => {
+              this.navCtrl.setRoot(LoginPage);
+              this.navCtrl.popToRoot();
               this.events.publish('403:hide');
             }
           },
