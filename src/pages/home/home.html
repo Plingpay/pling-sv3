@@ -73,7 +73,7 @@
         (userProvider.envVars.API + transaction.user.photo):
         'assets/icon/empty_avatar.svg'}}"/>
       </ion-avatar>
-      <h2>{{transaction.user.first_name || transaction.user.phone_number}}</h2>
+      <h2>{{transaction.user.full_name || transaction.user.phone_number}}</h2>
       <p class="transaction-time">{{(transaction.created_at | amDateFormat: 'h:mm a').toUpperCase()}}</p>
       <p *ngIf="transaction.comment" class="transaction-comment">"{{transaction.comment}}"</p>
       <ion-note item-end [ngClass]="{'transaction-amount-positive': transaction.type === '+',
