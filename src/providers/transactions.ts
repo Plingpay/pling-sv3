@@ -34,5 +34,5 @@ export class TransactionsProvider extends BaseProvider {
   cancelTransaction(id) {
     return this.makeRawRequest('post', 'transactions/' + id + '/' + 'user_cancel');
   }
-  
+
 }
