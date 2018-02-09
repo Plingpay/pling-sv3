@@ -23,7 +23,7 @@
 
 
 <ion-content>
-  <ion-scroll scrollX="true" *ngIf="(balance !== undefined) && balance.length > 0">
+  <ion-scroll scrollX="true" *ngIf="balance !== undefined && balance.length > 0 && userStatus === STATUS_ACTIVE">
     <ion-card class="currency-card" *ngFor="let balanceUnit of balance" >
       <div class="header">Balance</div>
       <div class="balance">{{balanceUnit.balance}} {{balanceUnit.currency}} </div>
@@ -33,24 +33,21 @@
       </div>
     </ion-card>
   </ion-scroll>
-  <div class="no-history" *ngIf="((transactions !== undefined) && transactions.length === 0)
-                                && ((paymentMethods !== undefined) && paymentMethods.length > 0) ">
+  <div class="no-history" *ngIf="userStatus === STATUS_NO_TRANSACTIONS">
     <img src="assets/imgs/astronaut.svg"/>
     <h3>No transaction history</h3>
     <p>
       Tap + to send money to someone special
     </p>
   </div>
-  <div class="no-history" *ngIf="((transactions !== undefined) && transactions.length === 0)
-                                && ((paymentMethods !== undefined) && paymentMethods.length === 0)
-                                && ((documentsUploaded !== undefined) && documentsUploaded)">
-    <img src="assets/imgs/skate_man.png"/>
+  <div class="no-history" *ngIf="userStatus === STATUS_APPROVED">
+    <img src="assets/imgs/skate_man.svg"/>
     <h3>Congratulations!</h3>
     <p>
       Your account has been verified. What <br/>would you like to do next?
     </p>
   </div>
-  <div class="hello" *ngIf="(documentsUploaded !== undefined) && !documentsUploaded">
+  <div class="hello" *ngIf="userStatus === STATUS_BLANK">
     <img src="assets/imgs/hello_user.svg"/>
     <h3>Hello, new user</h3>
     <p>
@@ -58,14 +55,14 @@
       the registration.
     </p>
   </div>
-  <div class="hello" *ngIf="documentsUploaded && !verified">
+  <div class="hello" *ngIf="userStatus === STATUS_HAVE_DOCS">
     <img src="assets/imgs/hello_user.svg"/>
     <h3>Thank you!</h3>
     <p>
       You will get a notification once your<br/>account is verified and ready to use
     </p>
   </div>
-  <ion-item-group *ngIf="(transactions !== undefined) && transactions.length > 0">
+  <ion-item-group *ngIf="transactions !== undefined && transactions.length > 0 && (userStatus === STATUS_ACTIVE)">
     <ion-item-divider color="light">Today</ion-item-divider>
     <ion-item *ngFor="let transaction of transactions">
       <ion-avatar item-start>
@@ -82,8 +79,7 @@
       </ion-note>
     </ion-item>
   </ion-item-group>
-  <ion-fab right bottom *ngIf="((transactions !== undefined) && transactions.length > 0) ||
-                                  ((paymentMethods !== undefined) && paymentMethods.length > 0)">
+  <ion-fab right bottom *ngIf="userStatus === STATUS_NO_TRANSACTIONS || userStatus === STATUS_ACTIVE">
     <button ion-fab class="fab-orange"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list side="top">
       <button ion-fab color="primary" (click)="requestMoney()">
@@ -99,7 +95,7 @@
 
 </ion-content>
 
-<ion-footer class="grey-toolbar" *ngIf="(documentsUploaded !== undefined) && !documentsUploaded">
+<ion-footer class="grey-toolbar" *ngIf="userStatus === STATUS_BLANK">
   <ion-toolbar>
     <ion-grid>
       <ion-row>
@@ -116,9 +112,7 @@
   </ion-toolbar>
 </ion-footer>
 
-<ion-footer class="grey-toolbar" *ngIf="((transactions !== undefined) && transactions.length === 0)
-                                && ((paymentMethods !== undefined) && paymentMethods.length === 0)
-                                && ((documentsUploaded !== undefined) && documentsUploaded)">
+<ion-footer class="grey-toolbar" *ngIf="userStatus === STATUS_APPROVED">
   <ion-toolbar>
     <ion-grid>
       <ion-row>

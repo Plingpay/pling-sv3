@@ -21,7 +21,12 @@ import {ChoosePaymentMethodPage} from "../choose-payment-method/choose-payment-m
 })
 export class HomePage {
 
-  public STATUS_NOT_COMPLETED = 'Not comlite';
+  public STATUS_ACTIVE = 'ACTIVE';
+  public STATUS_HAVE_DOCS = "HAVE_DOCS";
+  public STATUS_REJECT = "REJECT";
+  public STATUS_APPROVED = "APPROVED";
+  public STATUS_NO_TRANSACTIONS = "NO_TRANSACTIONS";
+  public STATUS_BLANK = "BLANK";
 
   public userStatus: String;
   public documentsUploaded: boolean;

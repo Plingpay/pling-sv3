@@ -1,5 +1,5 @@
 import {Component, ElementRef} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {DocumentsProvider} from "../../providers/documents";
 import {DomSanitizer} from "@angular/platform-browser";
 
@@ -18,11 +18,9 @@ import {DomSanitizer} from "@angular/platform-browser";
 export class DocumentsPage {
   public documents: Array<any> = [];
   public baseURL: String;
-  public itemHeight: number;
 
   constructor(public navCtrl: NavController,
               public docsProvider: DocumentsProvider,
-              public alertCtrl: AlertController,
               public loadingCtrl: LoadingController,
               private sanitizer: DomSanitizer,
               public elementRef: ElementRef,
@@ -33,7 +31,6 @@ export class DocumentsPage {
   ionViewDidLoad() {
     this.docsProvider.documentsList().then(data => {
       this.documents = data.results;
-      this.itemHeight = 100/data.length;
     }, err => {});
   }
 

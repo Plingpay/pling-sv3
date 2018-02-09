@@ -19,8 +19,8 @@
 
 
 <ion-content padding>
-  <ion-list ion-fixed>
-    <ion-item *ngFor="let document of documents" [style.height]="itemHeight + '%'">
+  <ion-list>
+    <ion-item *ngFor="let document of documents">
       <ion-thumbnail item-start>
         <img
           [src]="document.tmpImage?document.tmpImage:(baseURL + document.thumb)"
