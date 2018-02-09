@@ -8,6 +8,11 @@
 
   <ion-navbar color="primary">
     <ion-title>Contact list</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="confirm()">
+        ok
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -34,3 +39,20 @@
   </ion-list>
 
 </ion-content>
+
+<ion-footer class="clear-toolbar" *ngIf="showConfirmButton">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <button
+            ion-button
+            class="orange footer-button"
+            full
+            (click)="confirm()"
+          >Confirm</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

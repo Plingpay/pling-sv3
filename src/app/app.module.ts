@@ -34,6 +34,7 @@ import {ContactListPage} from "../pages/contact-list/contact-list";
 import {Contacts} from "@ionic-native/contacts";
 import {AmountPage} from "../pages/amount/amount";
 import {TransactionSubmitPage} from "../pages/transaction-submit/transaction-submit";
+import {Keyboard} from "@ionic-native/keyboard";
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import {TransactionSubmitPage} from "../pages/transaction-submit/transaction-sub
     BaseSingleton,
     CurrencyProvider,
     Contacts,
+    Keyboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
