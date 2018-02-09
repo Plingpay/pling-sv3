@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {Content, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {VerifyAccountPage} from "../verify-account/verify-account";
 import {ExchangeRatesPage} from "../exchange-rates/exchange-rates";
@@ -36,6 +36,7 @@ export class HomePage {
   public paymentMethods: Array<any>;
 
   private userID: number;
+  @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController,
               public userProvider: UserProvider,
@@ -53,6 +54,7 @@ export class HomePage {
         this.userID = userStatus.user_id;
         this.documentsUploaded = userStatus.documents_uploaded;
         this.verified = userStatus.verify;
+        this.content.resize();
       }, err => {}
       );
     this.balanceProvider.balances().then(data => {this.balance = data.results}, err => {});
