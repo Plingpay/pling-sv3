@@ -60,4 +60,20 @@ export class UserProvider extends BaseProvider {
     return this.makeRawRequest('put', 'verify_account/' + id, data);
   }
 
+  logout() {
+    return this.makeRawRequest('get', 'logout');
+  }
+
+  profile() {
+    return this.makeRawRequest('get', 'profile');
+  }
+
+  saveProfile(data) {
+    let formData: FormData = new FormData();
+    if (data.photo instanceof File) formData.append('photo', data.image, data.image.name);
+    formData.append('withdraw_type', data.withdraw_type);
+    formData.append('currency', data.currency);
+    return this.makeRawRequest('post', 'profile/change', formData)
+  }
+
 }

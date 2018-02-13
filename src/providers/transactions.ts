@@ -39,4 +39,8 @@ export class TransactionsProvider extends BaseProvider {
     return this.makeRawRequest('post', 'transactions/' + id + '/' + 'user_cancel');
   }
 
+  withdrawMethods() {
+    return this.makeRawRequest('get', 'withdrow_methods');
+  }
+
 }

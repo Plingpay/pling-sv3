@@ -1,0 +1,86 @@
+page-profile {
+  .scroll-content {
+    background-color: $light-gray;
+    padding-top: 30px;
+  }
+
+  .item {
+    background-color: $light-gray;
+    padding-right: 16px;
+  }
+
+  .list-header {
+    border-top: none;
+  }
+
+  .user-full-name {
+    text-align: center;
+  }
+
+  .avatar-container {
+    display: flex;
+    justify-content: center;
+    .user-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 100px;
+      background-color: $white;
+      text-align: center;
+      position: relative;
+      .plus {
+        display: block;
+        position: absolute;
+        top: 30px;
+        left: 47%;
+        font-size: 120%;
+      }
+      .add-photo {
+        position: absolute;
+        top: 50px;
+        left: 26%;
+        font-size: 80%;
+      }
+      .plus, .add-photo {
+        color: $blue;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .logout-button {
+    color: $light-black;
+  }
+
+  ion-list-header {
+    ion-label {
+      font-weight: bold;
+      font-size: 90%;
+    }
+  }
+
+  ion-label {
+    color: $black !important;
+  }
+
+  .item-icon {
+    width: 30px;
+  }
+
+  .choose-method-button {
+    background-color: $light-gray;
+    color: $orange;
+    font-size: 100%;
+  }
+
+  .payment-method-name {
+    .container-right {
+      display: inline-block;
+      float: right;
+      margin-right: 5px;
+      ion-icon {
+        color: $light-black;
+      }
+    }
+
+  }
+}

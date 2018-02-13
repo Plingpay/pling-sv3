@@ -36,6 +36,7 @@ import {AmountPage} from "../pages/amount/amount";
 import {TransactionSubmitPage} from "../pages/transaction-submit/transaction-submit";
 import {Keyboard} from "@ionic-native/keyboard";
 import {ContactConfirmPage} from "../pages/contact-confirm/contact-confirm";
+import {ProfilePage} from "../pages/profile/profile";
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import {ContactConfirmPage} from "../pages/contact-confirm/contact-confirm";
     ContactListPage,
     AmountPage,
     TransactionSubmitPage,
-    ContactConfirmPage
+    ContactConfirmPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -89,7 +91,8 @@ import {ContactConfirmPage} from "../pages/contact-confirm/contact-confirm";
     ContactListPage,
     AmountPage,
     TransactionSubmitPage,
-    ContactConfirmPage
+    ContactConfirmPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,

@@ -6,6 +6,7 @@ import {ExchangeRatesPage} from "../exchange-rates/exchange-rates";
 import {BalanceProvider} from "../../providers/balance";
 import {TransactionsProvider} from "../../providers/transactions";
 import {ChoosePaymentMethodPage} from "../choose-payment-method/choose-payment-method";
+import {ProfilePage} from "../profile/profile";
 
 /**
  * Generated class for the HomePage page.
@@ -76,6 +77,10 @@ export class HomePage {
 
   requestMoney() {
     alert("Open request money page");
+  }
+
+  profile() {
+    this.navCtrl.push(ProfilePage);
   }
 
 }

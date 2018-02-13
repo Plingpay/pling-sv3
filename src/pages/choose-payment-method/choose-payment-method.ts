@@ -19,11 +19,14 @@ import {BaseSingleton} from "../../services/base";
 })
 export class ChoosePaymentMethodPage {
   public static CREDIT_CARD_METHOD = 'Credit card';
+  public static SOURCE_PROFILE = 1;
 
   public creditCardNumber: string;
   public creditCardId: number;
 
   public paymentMethods: Array<any>;
+
+  private source: number;
 
   constructor(public navCtrl: NavController,
               public transactionsProvider: TransactionsProvider,
@@ -31,6 +34,7 @@ export class ChoosePaymentMethodPage {
               public modalCtrl: ModalController,
               public viewCtrl: ViewController,
               public navParams: NavParams) {
+    this.source = this.navParams.get('source');
   }
 
   ionViewDidLoad() {
@@ -58,7 +62,15 @@ export class ChoosePaymentMethodPage {
       });
     } else {
       this.transactionsProvider.selectPaymentMethod(this.creditCardId).then(
-        res => {this.navCtrl.push(ContactListPage)},
+        res => {
+          switch (this.source) {
+            case ChoosePaymentMethodPage.SOURCE_PROFILE:
+              this.navCtrl.pop();
+              break;
+            default:
+              this.navCtrl.push(ContactListPage);
+          }
+        },
         err => {}
       );
 
