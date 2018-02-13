@@ -70,7 +70,7 @@ export class UserProvider extends BaseProvider {
 
   saveProfile(data) {
     let formData: FormData = new FormData();
-    if (data.photo instanceof File) formData.append('photo', data.image, data.image.name);
+    if (data.photo instanceof File) formData.append('photo', data.photo, data.photo.name);
     formData.append('withdraw_type', data.withdraw_type);
     formData.append('currency', data.currency);
     return this.makeRawRequest('post', 'profile/change', formData)

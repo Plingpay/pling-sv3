@@ -92,6 +92,7 @@ export class ProfilePage {
       reader.onload = () => {
         this.tmpImage = this.sanitizer.bypassSecurityTrustUrl(reader.result);
         loading.dismiss();
+        this.saveProfile();
       };
       reader.onerror = (error) => {
         loading.dismiss();
