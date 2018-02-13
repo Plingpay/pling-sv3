@@ -15,9 +15,12 @@ import {UserProvider} from "../../providers/user";
 })
 export class CountrySelectorComponent {
   @Output() onSelect = new EventEmitter();
+  @Output() onCountriesLoaded = new EventEmitter();
   @Input('inputModel') inputModel: string;
+  @Input('inputLabel') inputLabel: string = 'Phone';
+  @Input('inputFlag') imagePath: string;
+  @Input('inputCode') selectedCode: string;
 
-  public imagePath: String;
   private countries: Array<any>;
 
   constructor(
@@ -30,8 +33,9 @@ export class CountrySelectorComponent {
     this.userProvider.countries()
       .then((data) => {
           this.countries = data.results;
+          this.onCountriesLoaded.emit({data: this.countries});
           this.imagePath = this.userProvider.envVars.API + data.results[0].flag_image;
-          this.inputModel = data.results[0].phone_code;
+          this.selectedCode = data.results[0].phone_code;
           this.triggerInputEvent();
         },
         (err) => {})
@@ -41,7 +45,7 @@ export class CountrySelectorComponent {
     let countryModal = this.modalCtrl.create(CountryPhoneSelectorPage, {countries: this.countries});
     countryModal.onDidDismiss(data => {
       if (data) {
-        this.inputModel = data.phone_code;
+        this.selectedCode = data.phone_code;
         this.triggerInputEvent();
         this.imagePath = this.userProvider.envVars.API + data.flag_image;
         let phoneNativeInput = this.elementRef.nativeElement.querySelector('#phoneNativeInput>input');
@@ -54,8 +58,10 @@ export class CountrySelectorComponent {
   }
 
   triggerInputEvent() {
-    let phone_striped = this.inputModel.replace(/\D/g,'');
-    this.onSelect.emit({data: '+' + phone_striped});
+    let phoneStriped;
+    if (this.inputModel) {phoneStriped = this.inputModel.replace(/\D/g,'')}
+    let codeStriped = this.selectedCode.replace(/\D/g,'');
+    this.onSelect.emit({data: '+' + codeStriped + phoneStriped});
   }
 
 

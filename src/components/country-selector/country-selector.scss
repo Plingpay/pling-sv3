@@ -5,15 +5,24 @@ country-selector {
   #phone-country {
     border-bottom: 0.55px solid #c8c7cc;
     position: absolute;
-    top: 35px;
+    top: 28px;
+    width: 70px;
+    padding-bottom: 2px;
     img {
-      height: 20px;
+      height: 25px;
+      padding-bottom: 6px;
+    }
+    .selected-code {
+      position: absolute;
+      bottom: 9px;
+      left: 35px;
+      color: $blue;
     }
   }
 
   #phoneInput {
     .item-inner {
-      margin-left: 40px !important;
+      margin-left: 80px !important;
     }
   }
 }

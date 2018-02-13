@@ -8,11 +8,6 @@
 
   <ion-navbar color="primary">
     <ion-title>Contact list</ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="confirm()">
-        ok
-      </button>
-    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -21,8 +16,16 @@
 <ion-content>
   <country-selector
     (onSelect)="phoneNumber = $event.data"
-    [inputModel]="phoneNumber"
     class="phone-selector"></country-selector>
+  <div class="recent-selector" *ngIf="lastContactsList.length">
+    <p class="recent-text">Recent contacts</p>
+    <ng-container  *ngFor="let recentContact of lastContactsList">
+      <div class="recent-contact" (click)="selectContactFromLast(recentContact)">
+        <img [src]="recentContact.photo?transactionsProvider.envVars.API + recentContact.photo: 'assets/icon/empty_avatar.svg'"/>
+        <span class="contact-number-wrap">{{recentContact.full_name || recentContact.phone_number}}</span>
+      </div>
+    </ng-container>
+  </div>
   <ion-list *ngIf="contactsList.length" class="contact-list">
     <ng-container *ngFor="let contact of contactsList">
       <ion-item  (click)="selectContact(contact)" *ngIf="contact.phoneNumbers">

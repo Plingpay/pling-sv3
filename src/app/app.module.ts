@@ -35,6 +35,7 @@ import {Contacts} from "@ionic-native/contacts";
 import {AmountPage} from "../pages/amount/amount";
 import {TransactionSubmitPage} from "../pages/transaction-submit/transaction-submit";
 import {Keyboard} from "@ionic-native/keyboard";
+import {ContactConfirmPage} from "../pages/contact-confirm/contact-confirm";
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {Keyboard} from "@ionic-native/keyboard";
     ErrorPage,
     ContactListPage,
     AmountPage,
-    TransactionSubmitPage
+    TransactionSubmitPage,
+    ContactConfirmPage
   ],
   imports: [
     BrowserModule,
@@ -86,7 +88,8 @@ import {Keyboard} from "@ionic-native/keyboard";
     ErrorPage,
     ContactListPage,
     AmountPage,
-    TransactionSubmitPage
+    TransactionSubmitPage,
+    ContactConfirmPage
   ],
   providers: [
     StatusBar,

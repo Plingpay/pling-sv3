@@ -2,8 +2,9 @@
 <ion-item id="phoneInput">
   <div id="phone-country" (click)="openCodesSelector()" item-start>
     <img src="{{imagePath}}"/>
+    <span class="selected-code">{{selectedCode}}</span>
   </div>
-  <ion-label floating>Phone</ion-label>
+  <ion-label floating>{{inputLabel}}</ion-label>
   <ion-input
     type="tel"
     pattern="\d*"

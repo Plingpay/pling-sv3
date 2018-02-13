@@ -1,0 +1,55 @@
+<!--
+  Generated template for the ContactConfirmPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Confirm phone number</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <h3>Check the number</h3>
+  <p class="text-muted">below or international format and correct them if needed</p>
+  <country-selector
+    (onSelect)="userPhoneInput = $event.data"
+    (onCountriesLoaded)="countriesData = $event.data"
+    [inputLabel]="userName"
+    [inputModel]="userPhone"
+    [inputCode]="selectedCode"
+    [inputFlag]="selectedFlag"
+  ></country-selector>
+  <ion-list no-lines class="country-list">
+    <ng-container *ngFor="let country of countriesData" >
+      <ion-item class="country-item" (click)="selectCountry(country)">
+        <ion-label><img src="{{userProvider.envVars.API + country.flag_image}}"/>
+          <span class="country-code">{{country.country_name}}</span> </ion-label>
+        <ion-note item-end>
+          {{country.phone_code}}
+        </ion-note>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>
+
+<ion-footer class="grey-toolbar">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <button
+            ion-button
+            class="orange footer-button"
+            full
+            (click)="confirm()"
+          >Confirm</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

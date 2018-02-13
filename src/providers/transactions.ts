@@ -7,6 +7,10 @@ export class TransactionsProvider extends BaseProvider {
     return this.makeRawRequest('get', 'transactions')
   }
 
+  lastContacts() {
+    return this.makeRawRequest('get', 'last_contacts');
+  }
+
   paymentMethods() {
     return this.makeRawRequest('get', 'payment_methods')
   }

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, ModalController, NavController, NavParams, ViewController} from 'ionic-angular';
 import {AddCardPage} from "../add-card/add-card";
 import {TransactionsProvider} from "../../providers/transactions";
 import {ContactListPage} from "../contact-list/contact-list";
+import {BaseSingleton} from "../../services/base";
 
 /**
  * Generated class for the ChoosePaymentMethodPage page.
@@ -26,11 +27,14 @@ export class ChoosePaymentMethodPage {
 
   constructor(public navCtrl: NavController,
               public transactionsProvider: TransactionsProvider,
+              public baseService: BaseSingleton,
               public modalCtrl: ModalController,
+              public viewCtrl: ViewController,
               public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
+    this.baseService.paymentOptionsView = this.viewCtrl.index;
     this.loadMethods();
   }
 

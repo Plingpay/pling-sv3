@@ -1,0 +1,55 @@
+page-contact-confirm {
+
+  .scroll-content {
+    background-color: $light-gray;
+  }
+
+  h3 {
+    margin: 40px 26px 0 26px;
+    font-size: 130%;
+  }
+
+  p {
+    margin: 10px 26px 0 26px;
+  }
+
+  .text-muted {
+    color: $light-black !important;
+  }
+
+  country-selector {
+    .item {
+      padding-right: 16px;
+      margin-bottom: 5px;
+      background-color: $light-gray;
+    }
+    #phone-country {
+      padding-bottom: 1px;
+    }
+  }
+
+  .country-list {
+    .country-item {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      img {
+        height: 20px;
+        position: absolute;
+        top: 17px;
+      }
+    }
+    .country-code {
+      margin-left: 40px;
+    }
+    ion-note {
+      color: $black !important;
+    }
+    ion-item:nth-child(odd) {
+      background-color: $light-gray;
+    }
+  }
+
+  country-selector {
+    margin-bottom: 20px;
+  }
+}

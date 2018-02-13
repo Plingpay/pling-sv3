@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {TransactionsProvider} from "../../providers/transactions";
+import {BaseSingleton} from "../../services/base";
 
 /**
  * Generated class for the TransactionSubmitPage page.
@@ -20,6 +21,7 @@ export class TransactionSubmitPage {
 
   constructor(public navCtrl: NavController,
               public transactionsProvider: TransactionsProvider,
+              public baseService: BaseSingleton,
               public navParams: NavParams) {
     this.transaction = this.navParams.get('transaction');
   }
@@ -28,7 +30,7 @@ export class TransactionSubmitPage {
   }
 
   edit() {
-    alert("TBD");
+    this.navCtrl.popTo(this.baseService.paymentOptionsView);
   }
 
   submit() {
