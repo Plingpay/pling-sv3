@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {CurrencyProvider} from "../../providers/currency";
 import {TransactionsProvider} from "../../providers/transactions";
 import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
+import {BaseSingleton} from "../../services/base";
+import {HomePage} from "../home/home";
+import {RequestSubmitPage} from "../request-submit/request-submit";
 
 /**
  * Generated class for the AmountPage page.
@@ -28,6 +31,7 @@ export class AmountPage {
   constructor(public navCtrl: NavController,
               public currencyProvider: CurrencyProvider,
               public transactionsProvider: TransactionsProvider,
+              public baseSingleton: BaseSingleton,
               public navParams: NavParams) {
     this.userPhone = this.navParams.get('phoneNumber');
   }
@@ -46,13 +50,19 @@ export class AmountPage {
   }
 
   confirm() {
-    this.transactionsProvider.prepareTransaction({
-      amount_to: this.moneyAmount,
-      phone_number_to: this.userPhone,
-      currency_to: this.selectedCurrency
-    }).then(transaction => {
-      this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
-    }, err => {})
+    switch (this.baseSingleton.actionSource) {
+      case HomePage.SOURCE_TRANSACTION:
+        this.transactionsProvider.prepareTransaction({
+          amount_to: this.moneyAmount,
+          phone_number_to: this.userPhone,
+          currency_to: this.selectedCurrency
+        }).then(transaction => {
+          this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
+        }, err => {});
+        break;
+      case HomePage.SOURCE_REQUEST:
+        this.navCtrl.push(RequestSubmitPage, {request: null});
+    }
   }
 
 }

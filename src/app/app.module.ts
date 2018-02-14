@@ -37,6 +37,8 @@ import {TransactionSubmitPage} from "../pages/transaction-submit/transaction-sub
 import {Keyboard} from "@ionic-native/keyboard";
 import {ContactConfirmPage} from "../pages/contact-confirm/contact-confirm";
 import {ProfilePage} from "../pages/profile/profile";
+import {TransactionSuccessPage} from "../pages/transaction-success/transaction-success";
+import {RequestSubmitPage} from "../pages/request-submit/request-submit";
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import {ProfilePage} from "../pages/profile/profile";
     AmountPage,
     TransactionSubmitPage,
     ContactConfirmPage,
-    ProfilePage
+    ProfilePage,
+    TransactionSuccessPage,
+    RequestSubmitPage
   ],
   imports: [
     BrowserModule,
@@ -92,7 +96,9 @@ import {ProfilePage} from "../pages/profile/profile";
     AmountPage,
     TransactionSubmitPage,
     ContactConfirmPage,
-    ProfilePage
+    ProfilePage,
+    TransactionSuccessPage,
+    RequestSubmitPage
   ],
   providers: [
     StatusBar,

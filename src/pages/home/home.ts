@@ -7,6 +7,8 @@ import {BalanceProvider} from "../../providers/balance";
 import {TransactionsProvider} from "../../providers/transactions";
 import {ChoosePaymentMethodPage} from "../choose-payment-method/choose-payment-method";
 import {ProfilePage} from "../profile/profile";
+import {BaseSingleton} from "../../services/base";
+import {ContactListPage} from "../contact-list/contact-list";
 
 /**
  * Generated class for the HomePage page.
@@ -29,6 +31,9 @@ export class HomePage {
   public STATUS_NO_TRANSACTIONS = "NO_TRANSACTIONS";
   public STATUS_BLANK = "BLANK";
 
+  public static SOURCE_TRANSACTION = 'transaction';
+  public static SOURCE_REQUEST = 'request';
+
   public userStatus: String;
   public documentsUploaded: boolean;
   public verified: boolean;
@@ -42,6 +47,7 @@ export class HomePage {
   constructor(public navCtrl: NavController,
               public userProvider: UserProvider,
               public balanceProvider: BalanceProvider,
+              public baseSingleton: BaseSingleton,
               public transactionsProvider: TransactionsProvider,
               public navParams: NavParams) {
   }
@@ -72,11 +78,13 @@ export class HomePage {
   }
 
   sendMoney() {
+    this.baseSingleton.actionSource = HomePage.SOURCE_TRANSACTION;
     this.navCtrl.push(ChoosePaymentMethodPage);
   }
 
   requestMoney() {
-    alert("Open request money page");
+    this.baseSingleton.actionSource = HomePage.SOURCE_REQUEST;
+    this.navCtrl.push(ContactListPage);
   }
 
   profile() {

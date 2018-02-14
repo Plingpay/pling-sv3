@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {TransactionsProvider} from "../../providers/transactions";
 import {BaseSingleton} from "../../services/base";
+import {TransactionSuccessPage} from "../transaction-success/transaction-success";
 
 /**
  * Generated class for the TransactionSubmitPage page.
@@ -18,6 +19,8 @@ import {BaseSingleton} from "../../services/base";
 export class TransactionSubmitPage {
   public saveAsTemplate: boolean;
   public transaction: any;
+
+  public source: any;
 
   constructor(public navCtrl: NavController,
               public transactionsProvider: TransactionsProvider,
@@ -39,6 +42,10 @@ export class TransactionSubmitPage {
         if (this.saveAsTemplate) {
           this.transactionsProvider.saveTransactionAsTemplate(this.transaction.id).then(()=>{},()=>{});
         }
+        this.navCtrl.push(TransactionSuccessPage, {
+          address: this.transaction.user_to.full_name || this.transaction.user_to.phone_number,
+          amount: this.transaction.amount.amount + ' ' + this.transaction.amount.currency
+        });
         this.navCtrl.popToRoot();
       },
       err => {}
