@@ -5,6 +5,7 @@ import {HomePage} from "../pages/home/home";
 
 export class BaseSingleton {
   public paymentOptionsView: any;
+  public contactListView: any;
   public actionSource: string = HomePage.SOURCE_TRANSACTION;
 
   constructor() {

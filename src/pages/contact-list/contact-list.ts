@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, LoadingController, NavController, NavParams, ViewController} from 'ionic-angular';
 import {Contacts} from "@ionic-native/contacts";
 import {AmountPage} from "../amount/amount";
 import {Keyboard} from "@ionic-native/keyboard";
 import {TransactionsProvider} from "../../providers/transactions";
 import {ContactConfirmPage} from "../contact-confirm/contact-confirm";
+import {BaseSingleton} from "../../services/base";
 
 /**
  * Generated class for the ContactListPage page.
@@ -45,6 +46,8 @@ export class ContactListPage {
               public contacts: Contacts,
               private keyboard: Keyboard,
               public loadingCtrl: LoadingController,
+              public baseService: BaseSingleton,
+              public viewCtrl: ViewController,
               public transactionsProvider: TransactionsProvider,
               public navParams: NavParams) {
     this.keyboard.onKeyboardShow().subscribe(()=>{this.showConfirmButton = true});
@@ -52,6 +55,7 @@ export class ContactListPage {
   }
 
   ionViewDidLoad() {
+    this.baseService.contactListView = this.viewCtrl.index;
     this.transactionsProvider.lastContacts().then(data => {
       this.lastContactsList = data.results;
     }, () => {});

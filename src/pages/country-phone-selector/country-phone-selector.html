@@ -20,15 +20,12 @@
 
 <ion-content>
   <ion-list no-lines>
-    <ng-container *ngFor="let country of countriesData" >
-      <ion-item class="country-item" (click)="selectCountry(country)">
+      <ion-item class="country-item" (click)="selectCountry(country)" *ngFor="let country of countriesData" >
         <ion-label><img src="{{userProvider.envVars.API + country.flag_image}}"/>
         <span class="country-code">{{country.country_name}}</span> </ion-label>
       <ion-note item-end>
         {{country.phone_code}}
       </ion-note>
       </ion-item>
-    </ng-container>
-
   </ion-list>
 </ion-content>

@@ -17,6 +17,7 @@ import {BaseSingleton} from "../../services/base";
 })
 export class TransactionSuccessPage {
   public source: string = HomePage.SOURCE_TRANSACTION;
+  public HomePage = HomePage;
 
   public address: string = 'Brandon George';
   public amount: string = '1250 USD';

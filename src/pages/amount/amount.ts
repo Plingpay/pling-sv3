@@ -6,6 +6,7 @@ import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
 import {BaseSingleton} from "../../services/base";
 import {HomePage} from "../home/home";
 import {RequestSubmitPage} from "../request-submit/request-submit";
+import {PaymentRequestsProvider} from "../../providers/paymentRequests";
 
 /**
  * Generated class for the AmountPage page.
@@ -31,6 +32,7 @@ export class AmountPage {
   constructor(public navCtrl: NavController,
               public currencyProvider: CurrencyProvider,
               public transactionsProvider: TransactionsProvider,
+              public paymentRequestsProvider: PaymentRequestsProvider,
               public baseSingleton: BaseSingleton,
               public navParams: NavParams) {
     this.userPhone = this.navParams.get('phoneNumber');
@@ -55,13 +57,19 @@ export class AmountPage {
         this.transactionsProvider.prepareTransaction({
           amount_to: this.moneyAmount,
           phone_number_to: this.userPhone,
-          currency_to: this.selectedCurrency
+          currency_to: this.selectedCurrency,
+          comment: this.comment
         }).then(transaction => {
           this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
         }, err => {});
         break;
       case HomePage.SOURCE_REQUEST:
-        this.navCtrl.push(RequestSubmitPage, {request: null});
+        this.navCtrl.push(RequestSubmitPage, {request: {
+            amount: this.moneyAmount,
+            phone_number_from: this.userPhone,
+            currency: this.selectedCurrency,
+            comment: this.comment
+          }});
     }
   }
 

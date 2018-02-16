@@ -132,4 +132,19 @@ page-home {
   .transaction-comment {
     margin-top: 5px;
   }
+
+  .transaction-status {
+    margin-left: 10px;
+    display: inline;
+    font-size: 80%;
+    .transaction-status-warning {
+      color: $orange;
+    }
+    .transaction-status-hide {
+      display: none;
+    }
+    .transaction-status-error {
+      color: $red;
+    }
+  }
 }

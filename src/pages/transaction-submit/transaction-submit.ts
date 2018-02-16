@@ -46,7 +46,6 @@ export class TransactionSubmitPage {
           address: this.transaction.user_to.full_name || this.transaction.user_to.phone_number,
           amount: this.transaction.amount.amount + ' ' + this.transaction.amount.currency
         });
-        this.navCtrl.popToRoot();
       },
       err => {}
     )

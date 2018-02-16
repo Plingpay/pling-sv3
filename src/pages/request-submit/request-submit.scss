@@ -1,3 +1,44 @@
 page-request-submit {
+  .item-icon {
+    width: 30px;
+  }
+  .value {
+    color: $black;
+    font-weight: bold;
+  }
+  .icon-col {
+    flex: 0 0 9%;
+    margin-top: 3px;
+    padding-left: 0;
+  }
+  .name-col {
+    font-size: 16px;
+  }
+  .scroll-content {
+    padding-top: 15px;
+  }
 
+  .save-checkbox {
+    ion-item {
+      color: $blue;
+      size: 16px;
+    }
+    .item-inner {
+      border-bottom: none !important;
+    }
+    .checkbox {
+      margin-right: 15px !important;
+      .checkbox-icon {
+        width: 20px;
+        height: 20px;
+        border-color: $blue;
+        border-radius: 0;
+      }
+      .checkbox-checked {
+        .checkbox-inner {
+          width: 8px;
+        }
+      }
+    }
+  }
 }
