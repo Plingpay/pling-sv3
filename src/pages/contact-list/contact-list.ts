@@ -87,7 +87,8 @@ export class ContactListPage {
     if (this.phoneNumber.indexOf('+') === -1) {
       this.navCtrl.push(ContactConfirmPage, {userPhone: this.phoneNumber, userName: this.userName})
     } else {
-      this.navCtrl.push(AmountPage, {phoneNumber: this.phoneNumber})
+      this.baseService.transactionDetails.phoneNumber = this.phoneNumber;
+      this.navCtrl.push(AmountPage)
     }
   }
 

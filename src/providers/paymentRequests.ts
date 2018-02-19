@@ -8,6 +8,7 @@ export class PaymentRequestsProvider extends BaseProvider {
   }
 
   sendPaymentRequest(data) {
+    if (!data.comment) delete data.comment;
     return this.makeRawRequest('post', 'payment_requests', data);
   }
 

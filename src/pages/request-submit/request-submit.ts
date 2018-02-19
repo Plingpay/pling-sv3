@@ -17,14 +17,12 @@ import {PaymentRequestsProvider} from "../../providers/paymentRequests";
   templateUrl: 'request-submit.html',
 })
 export class RequestSubmitPage {
-  public request: any;
   public saveAsTemplate: boolean;
 
   constructor(public navCtrl: NavController,
               public baseService: BaseSingleton,
               public paymentRequestsProvider: PaymentRequestsProvider,
               public navParams: NavParams) {
-    this.request = this.navParams.get('request');
   }
 
   ionViewDidLoad() {
@@ -35,15 +33,17 @@ export class RequestSubmitPage {
   }
 
   submit() {
-    this.paymentRequestsProvider.sendPaymentRequest(this.request).then(
+    this.paymentRequestsProvider.sendPaymentRequest({
+      amount: this.baseService.transactionDetails.amount,
+      phone_number_from: this.baseService.transactionDetails.phoneNumber,
+      currency: this.baseService.transactionDetails.currency,
+      comment: this.baseService.transactionDetails.comment
+    }).then(
       data => {
         if (this.saveAsTemplate) {
           this.paymentRequestsProvider.savePaymentRequestAsTemplate(data.payment_rquest_id).then(()=>{},()=>{});
         }
-        this.navCtrl.push(TransactionSuccessPage, {
-          address: this.request.phone_number_from,
-          amount: this.request.amount + ' ' + this.request.currency
-        });
+        this.navCtrl.push(TransactionSuccessPage);
       },
       err => {}
     )

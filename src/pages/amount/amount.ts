@@ -6,7 +6,6 @@ import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
 import {BaseSingleton} from "../../services/base";
 import {HomePage} from "../home/home";
 import {RequestSubmitPage} from "../request-submit/request-submit";
-import {PaymentRequestsProvider} from "../../providers/paymentRequests";
 
 /**
  * Generated class for the AmountPage page.
@@ -21,33 +20,28 @@ import {PaymentRequestsProvider} from "../../providers/paymentRequests";
   templateUrl: 'amount.html',
 })
 export class AmountPage {
-  public selectedCurrency: string;
   public currencies: Array<any>;
-  public showCommentInput: boolean = false;
-  public userPhone: string;
-
-  public moneyAmount: number;
-  public comment: string;
 
   constructor(public navCtrl: NavController,
               public currencyProvider: CurrencyProvider,
               public transactionsProvider: TransactionsProvider,
-              public paymentRequestsProvider: PaymentRequestsProvider,
               public baseSingleton: BaseSingleton,
               public navParams: NavParams) {
-    this.userPhone = this.navParams.get('phoneNumber');
   }
 
   ionViewDidLoad() {
     this.currencyProvider.currencyList().then(data => {
       this.currencies = data.results;
-      this.currencyProvider.defaultCurrencyByUser(this.userPhone).then(data => {
-        if (data.currency) {
-          this.selectedCurrency = data.currency
-        } else {
-          this.selectedCurrency = this.currencies[0].currency;
-        }
-      }, err => {});
+      if (!this.baseSingleton.transactionDetails.currency) {
+        this.currencyProvider.defaultCurrencyByUser(this.baseSingleton.transactionDetails.phoneNumber).then(data => {
+          if (data.currency) {
+            this.baseSingleton.transactionDetails.currency = data.currency
+          } else {
+            this.baseSingleton.transactionDetails.currency = this.currencies[0].currency;
+          }
+        }, err => {
+        });
+      }
     }, err => {});
   }
 
@@ -55,21 +49,17 @@ export class AmountPage {
     switch (this.baseSingleton.actionSource) {
       case HomePage.SOURCE_TRANSACTION:
         this.transactionsProvider.prepareTransaction({
-          amount_to: this.moneyAmount,
-          phone_number_to: this.userPhone,
-          currency_to: this.selectedCurrency,
-          comment: this.comment
+          amount_to: this.baseSingleton.transactionDetails.amount,
+          phone_number_to: this.baseSingleton.transactionDetails.phoneNumber,
+          currency_to: this.baseSingleton.transactionDetails.currency,
+          comment: this.baseSingleton.transactionDetails.comment
         }).then(transaction => {
           this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
         }, err => {});
         break;
       case HomePage.SOURCE_REQUEST:
-        this.navCtrl.push(RequestSubmitPage, {request: {
-            amount: this.moneyAmount,
-            phone_number_from: this.userPhone,
-            currency: this.selectedCurrency,
-            comment: this.comment
-          }});
+
+        this.navCtrl.push(RequestSubmitPage);
     }
   }
 

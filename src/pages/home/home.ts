@@ -11,6 +11,7 @@ import {BaseSingleton} from "../../services/base";
 import {ContactListPage} from "../contact-list/contact-list";
 import * as _ from 'lodash';
 import {PaymentRequestsProvider} from "../../providers/paymentRequests";
+import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
 
 /**
  * Generated class for the HomePage page.
@@ -73,6 +74,8 @@ export class HomePage {
   public Object = Object;
   public HomePage = HomePage;
 
+  public today = (new Date().toDateString());
+
   private userID: number;
   @ViewChild(Content) content: Content;
 
@@ -112,7 +115,7 @@ export class HomePage {
         let sortedArray = _.sortBy(mergedArray, [(historyItem) => { return historyItem.created_at; }]);
         let groupedArray = _.groupBy(sortedArray, (historyItem) => {
           let formattedDate = (new Date(historyItem.created_at).toDateString());
-          return (formattedDate === (new Date().toDateString()) ? 'Today' : formattedDate);
+          return formattedDate;
         });
         let historyKeys = _.reverse(_.keys(groupedArray));
         this.historyKeysToShow = historyKeys;
@@ -135,17 +138,35 @@ export class HomePage {
   }
 
   sendMoney() {
+    this.baseSingleton.initiateTransactionDetails();
     this.baseSingleton.actionSource = HomePage.SOURCE_TRANSACTION;
     this.navCtrl.push(ChoosePaymentMethodPage);
   }
 
   requestMoney() {
+    this.baseSingleton.initiateTransactionDetails();
     this.baseSingleton.actionSource = HomePage.SOURCE_REQUEST;
     this.navCtrl.push(ContactListPage);
   }
 
   profile() {
     this.navCtrl.push(ProfilePage);
+  }
+
+  processTransaction(transaction) {
+    if (transaction.source_type !== HomePage.SOURCE_REQUEST) return;
+    this.baseSingleton.transactionDetails.amount = transaction.amount;
+    this.baseSingleton.transactionDetails.currency = transaction.currency.currency;
+    this.baseSingleton.transactionDetails.comment = transaction.comment;
+    this.baseSingleton.transactionDetails.phoneNumber = transaction.user.phone_number;
+    this.transactionsProvider.prepareTransaction({
+      amount_to: this.baseSingleton.transactionDetails.amount,
+      phone_number_to: this.baseSingleton.transactionDetails.phoneNumber,
+      currency_to: this.baseSingleton.transactionDetails.currency,
+      comment: this.baseSingleton.transactionDetails.comment
+    }).then(transaction => {
+      this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
+    }, err => {});
   }
 
 }

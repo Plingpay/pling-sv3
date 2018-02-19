@@ -24,6 +24,7 @@ export class TransactionsProvider extends BaseProvider {
   }
 
   prepareTransaction(data) {
+    if (!data.comment) delete data.comment;
     return this.makeRawRequest('post', 'transactions', data);
   }
 

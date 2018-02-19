@@ -19,15 +19,13 @@ export class TransactionSuccessPage {
   public source: string = HomePage.SOURCE_TRANSACTION;
   public HomePage = HomePage;
 
-  public address: string = 'Brandon George';
-  public amount: string = '1250 USD';
+  public address: string;
+  public amount: string;
 
   constructor(public navCtrl: NavController,
               public baseSingleton: BaseSingleton,
               public navParams: NavParams) {
     this.source = this.baseSingleton.actionSource;
-    this.address = this.navParams.get('address');
-    this.amount = this.navParams.get('amount');
   }
 
   ionViewDidLoad() {

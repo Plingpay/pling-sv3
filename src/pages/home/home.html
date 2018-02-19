@@ -63,40 +63,42 @@
     </p>
   </div>
   <ion-item-group *ngFor="let day of historyKeysToShow">
-    <ion-item-divider color="light">{{day}}</ion-item-divider>
-    <ion-item *ngFor="let transaction of historyToShow[day]">
-      <ion-avatar item-start>
-        <img src="{{transaction.user.photo !== ''?
-      (userProvider.envVars.API + transaction.user.photo):
-      'assets/icon/empty_avatar.svg'}}"/>
-      </ion-avatar>
-      <h2 *ngIf="transaction.source_type === HomePage.SOURCE_TRANSACTION">
-        {{transaction.user.full_name || transaction.user.phone_number}}
-      </h2>
-      <h2 *ngIf="transaction.source_type === HomePage.SOURCE_REQUEST">
-        <b>{{transaction.user.full_name || transaction.user.phone_number}}</b> sent a request for <b>{{transaction.amount}} {{transaction.currency.currency}}</b>
-      </h2>
-      <div class="transaction-time">
-        {{(transaction.created_at | amDateFormat: 'h:mm a').toUpperCase()}}
-        <div class="transaction-status" *ngIf="transaction.source_type === HomePage.SOURCE_TRANSACTION">
-          <ng-container *ngFor="let status of HomePage.TRANSACTION_STATUSES">
-            <span *ngIf="transaction.status === status.value"
-                  [class]="status.class">
-              {{status.display}}
-            </span>
-          </ng-container>
+    <ion-item-divider color="light">{{(day === today) ? 'Today' : day}}</ion-item-divider>
+    <ng-container *ngFor="let transaction of historyToShow[day]">
+      <ion-item *ngIf="transaction.user" (click)="processTransaction(transaction)">
+        <ion-avatar item-start>
+          <img src="{{transaction.user.photo !== ''?
+        (userProvider.envVars.API + transaction.user.photo):
+        'assets/icon/empty_avatar.svg'}}"/>
+        </ion-avatar>
+        <h2 *ngIf="transaction.source_type === HomePage.SOURCE_TRANSACTION">
+          {{transaction.user.full_name || transaction.user.phone_number}}
+        </h2>
+        <h2 *ngIf="transaction.source_type === HomePage.SOURCE_REQUEST">
+          <b>{{transaction.user.full_name || transaction.user.phone_number}}</b> sent a request for <b>{{transaction.amount}} {{transaction.currency.currency}}</b>
+        </h2>
+        <div class="transaction-time">
+          {{(transaction.created_at | amDateFormat: 'h:mm a').toUpperCase()}}
+          <div class="transaction-status" *ngIf="transaction.source_type === HomePage.SOURCE_TRANSACTION">
+            <ng-container *ngFor="let status of HomePage.TRANSACTION_STATUSES">
+              <span *ngIf="transaction.status === status.value"
+                    [class]="status.class">
+                {{status.display}}
+              </span>
+            </ng-container>
+          </div>
         </div>
-      </div>
-      <p *ngIf="transaction.comment" class="transaction-comment">"{{transaction.comment}}"</p>
-      <ion-note
-        item-end
-        *ngIf="transaction.source_type === HomePage.SOURCE_TRANSACTION"
-        [ngClass]="{'transaction-amount-positive': transaction.type === '+',
-                                 'transaction-amount-negative': transaction.type === '-'}"
-      >
-        {{transaction.type}} {{transaction.amount}} {{transaction.currency.currency}}
-      </ion-note>
-    </ion-item>
+        <p *ngIf="transaction.comment" class="transaction-comment">"{{transaction.comment}}"</p>
+        <ion-note
+          item-end
+          *ngIf="transaction.source_type === HomePage.SOURCE_TRANSACTION"
+          [ngClass]="{'transaction-amount-positive': transaction.type === '+',
+                                   'transaction-amount-negative': transaction.type === '-'}"
+        >
+          {{transaction.type}} {{transaction.amount}} {{transaction.currency.currency}}
+        </ion-note>
+      </ion-item>
+    </ng-container>
   </ion-item-group>
   <ion-fab right bottom *ngIf="userStatus === STATUS_NO_TRANSACTIONS || userStatus === STATUS_ACTIVE">
     <button ion-fab class="fab-orange"><ion-icon name="add"></ion-icon></button>

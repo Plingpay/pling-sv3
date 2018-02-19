@@ -23,15 +23,15 @@
     <ion-item>
       <div class="item-icon" item-start><img src="assets/icon/right-top-arrow.svg"/></div>
       Request to
-      <ion-note item-end class="value">{{request.phone_number_from}}</ion-note>
+      <ion-note item-end class="value">{{baseService.transactionDetails.phoneNumber}}</ion-note>
     </ion-item>
     <ion-item>
       <div class="item-icon" item-start><img src="assets/icon/wallet-gray.svg"/></div>
       Amount
-      <ion-note item-end class="value">{{request.amount}} {{request.currency}}
+      <ion-note item-end class="value">{{baseService.transactionDetails.amount}} {{baseService.transactionDetails.currency}}
       </ion-note>
     </ion-item>
-    <ion-item text-wrap *ngIf="request.comment">
+    <ion-item text-wrap *ngIf="baseService.transactionDetails.comment">
       <ion-row>
         <ion-col col-2 class="icon-col">
           <img src="assets/icon/comment-gray.svg"/>
@@ -40,7 +40,7 @@
           Comment
         </ion-col>
         <ion-col col-7>
-          "{{request.comment}}"
+          "{{baseService.transactionDetails.comment}}"
         </ion-col>
       </ion-row>
     </ion-item>
