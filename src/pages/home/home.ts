@@ -173,7 +173,7 @@ export class HomePage {
       }, err => {
       });
     } else {
-      this.navCtrl.push(TransactionSubmitPage, {source: ChoosePaymentMethodPage.SOURCE_PAYMENT_REQUEST, transaction: transaction});
+      this.navCtrl.push(ChoosePaymentMethodPage, {source: ChoosePaymentMethodPage.SOURCE_PAYMENT_REQUEST, transaction: transaction});
     }
   }
 
