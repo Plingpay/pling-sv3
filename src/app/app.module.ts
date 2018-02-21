@@ -73,7 +73,9 @@ import {PaymentRequestsProvider} from "../providers/paymentRequests";
     BrowserModule,
     MomentModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      mode: 'md'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
