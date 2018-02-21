@@ -4,6 +4,7 @@ import {AddCardPage} from "../add-card/add-card";
 import {TransactionsProvider} from "../../providers/transactions";
 import {ContactListPage} from "../contact-list/contact-list";
 import {BaseSingleton} from "../../services/base";
+import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
 
 /**
  * Generated class for the ChoosePaymentMethodPage page.
@@ -20,6 +21,7 @@ import {BaseSingleton} from "../../services/base";
 export class ChoosePaymentMethodPage {
   public static CREDIT_CARD_METHOD = 'Credit card';
   public static SOURCE_PROFILE = 1;
+  public static SOURCE_PAYMENT_REQUEST = 2;
 
   public creditCardNumber: string;
   public creditCardId: number;
@@ -27,6 +29,7 @@ export class ChoosePaymentMethodPage {
   public paymentMethods: Array<any>;
 
   private source: number;
+  private paymentRequestTransaction: any;
 
   constructor(public navCtrl: NavController,
               public transactionsProvider: TransactionsProvider,
@@ -35,6 +38,7 @@ export class ChoosePaymentMethodPage {
               public viewCtrl: ViewController,
               public navParams: NavParams) {
     this.source = this.navParams.get('source');
+    this.paymentRequestTransaction = this.navParams.get('transaction');
   }
 
   ionViewDidLoad() {
@@ -66,6 +70,20 @@ export class ChoosePaymentMethodPage {
           switch (this.source) {
             case ChoosePaymentMethodPage.SOURCE_PROFILE:
               this.navCtrl.pop();
+              break;
+            case ChoosePaymentMethodPage.SOURCE_PAYMENT_REQUEST:
+              this.baseService.transactionDetails.amount = this.paymentRequestTransaction.amount;
+              this.baseService.transactionDetails.currency = this.paymentRequestTransaction.currency.currency;
+              this.baseService.transactionDetails.comment = this.paymentRequestTransaction.comment;
+              this.baseService.transactionDetails.phoneNumber = this.paymentRequestTransaction.user.phone_number;
+              this.transactionsProvider.prepareTransaction({
+                amount_to: this.baseService.transactionDetails.amount,
+                phone_number_to: this.baseService.transactionDetails.phoneNumber,
+                currency_to: this.baseService.transactionDetails.currency,
+                comment: this.baseService.transactionDetails.comment
+              }).then(transaction => {
+                this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
+              }, err => {});
               break;
             default:
               this.navCtrl.push(ContactListPage);

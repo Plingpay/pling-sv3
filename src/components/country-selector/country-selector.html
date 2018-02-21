@@ -14,6 +14,3 @@
     (ionChange)="triggerInputEvent()"
   ></ion-input>
 </ion-item>
-<ion-item *ngIf="elementRef.nativeElement.querySelector('#phoneInput').classList.contains('ng-touched') && !inputModel" no-lines>
-  <p class="error">Correct phone is required</p>
-</ion-item>

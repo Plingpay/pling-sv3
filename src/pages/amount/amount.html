@@ -60,6 +60,7 @@
             ion-button
             class="orange footer-button"
             full
+            [disabled]="!baseSingleton.transactionDetails.amount"
             (click)="confirm()"
           >Confirm</button>
         </ion-col>

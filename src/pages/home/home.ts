@@ -27,12 +27,12 @@ import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
 })
 export class HomePage {
 
-  public readonly STATUS_ACTIVE = 'ACTIVE';
-  public readonly STATUS_HAVE_DOCS = "HAVE_DOCS";
-  public readonly STATUS_REJECT = "REJECT";
-  public readonly STATUS_APPROVED = "APPROVED";
-  public readonly STATUS_NO_TRANSACTIONS = "NO_TRANSACTIONS";
-  public readonly STATUS_BLANK = "BLANK";
+  public static readonly STATUS_ACTIVE = 'ACTIVE';
+  public static readonly STATUS_HAVE_DOCS = "HAVE_DOCS";
+  public static readonly STATUS_REJECT = "REJECT";
+  public static readonly STATUS_APPROVED = "APPROVED";
+  public static readonly STATUS_NO_TRANSACTIONS = "NO_TRANSACTIONS";
+  public static readonly STATUS_BLANK = "BLANK";
 
   public static readonly SOURCE_TRANSACTION = 'transaction';
   public static readonly SOURCE_REQUEST = 'request';
@@ -93,6 +93,9 @@ export class HomePage {
     this.userProvider.status().then(
       data => {
         let userStatus = data;
+        this.baseSingleton.currentUserPaymentMethod = userStatus.payment_method;
+        this.baseSingleton.currentUserStatus = userStatus.status;
+        this.baseSingleton.currentUserCountry = userStatus.country;
         this.userStatus = userStatus.status;
         this.userID = userStatus.user_id;
         this.documentsUploaded = userStatus.documents_uploaded;
@@ -155,18 +158,23 @@ export class HomePage {
 
   processTransaction(transaction) {
     if (transaction.source_type !== HomePage.SOURCE_REQUEST) return;
-    this.baseSingleton.transactionDetails.amount = transaction.amount;
-    this.baseSingleton.transactionDetails.currency = transaction.currency.currency;
-    this.baseSingleton.transactionDetails.comment = transaction.comment;
-    this.baseSingleton.transactionDetails.phoneNumber = transaction.user.phone_number;
-    this.transactionsProvider.prepareTransaction({
-      amount_to: this.baseSingleton.transactionDetails.amount,
-      phone_number_to: this.baseSingleton.transactionDetails.phoneNumber,
-      currency_to: this.baseSingleton.transactionDetails.currency,
-      comment: this.baseSingleton.transactionDetails.comment
-    }).then(transaction => {
-      this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
-    }, err => {});
+    if ('id' in this.baseSingleton.currentUserPaymentMethod) {
+      this.baseSingleton.transactionDetails.amount = transaction.amount;
+      this.baseSingleton.transactionDetails.currency = transaction.currency.currency;
+      this.baseSingleton.transactionDetails.comment = transaction.comment;
+      this.baseSingleton.transactionDetails.phoneNumber = transaction.user.phone_number;
+      this.transactionsProvider.prepareTransaction({
+        amount_to: this.baseSingleton.transactionDetails.amount,
+        phone_number_to: this.baseSingleton.transactionDetails.phoneNumber,
+        currency_to: this.baseSingleton.transactionDetails.currency,
+        comment: this.baseSingleton.transactionDetails.comment
+      }).then(transaction => {
+        this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
+      }, err => {
+      });
+    } else {
+      this.navCtrl.push(TransactionSubmitPage, {source: ChoosePaymentMethodPage.SOURCE_PAYMENT_REQUEST, transaction: transaction});
+    }
   }
 
 }

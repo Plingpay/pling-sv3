@@ -8,6 +8,9 @@ export class BaseSingleton {
   public contactListView: any;
   public actionSource: string = HomePage.SOURCE_TRANSACTION;
 
+  public currentUserPaymentMethod: any;
+  public currentUserStatus: string;
+  public currentUserCountry: string;
   public transactionDetails: any = {
     phoneNumber: '',
     amount: '',

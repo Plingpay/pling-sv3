@@ -30,9 +30,6 @@
         [ngModelOptions]="{standalone: true}"
       ></ion-input>
     </ion-item>
-    <ion-item *ngIf="elRef.nativeElement.querySelector('#passwordInput').classList.contains('ng-touched') && (password.length < 6)" no-lines>
-      <p class="error">Password should contain min 6 symbols</p>
-    </ion-item>
     <ion-item class="hollow-item">
       <span class="forgot-pass" (click)="goToForgotPassword()">Forgot password?</span>
     </ion-item>

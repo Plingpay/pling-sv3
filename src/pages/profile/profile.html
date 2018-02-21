@@ -46,6 +46,7 @@
       <div class="item-icon" item-start><img src="assets/icon/card-gray.svg"/></div>
       <ion-label>Payment method</ion-label>
       <button
+        [disabled]="!enablePaymentOptions"
         clear
         item-end
         class="choose-method-button"
@@ -53,7 +54,8 @@
         *ngIf="profile.payment_method == 0"
       >Choose method</button>
       <ion-label class="payment-method-name"
-        *ngIf="profile.payment_method > 0"
+                 [hidden]="!enablePaymentOptions"
+                 *ngIf="profile.payment_method > 0"
         (click)="chooseMethod()"
                  item-end><div class="container-right">{{methodString}} <ion-icon name="arrow-dropdown"></ion-icon></div>
       </ion-label>
@@ -62,6 +64,7 @@
       <div class="item-icon" item-start><img src="assets/icon/cash-gray.svg"/></div>
       <ion-label>Withdraw money</ion-label>
       <ion-select
+        [disabled]="!enablePaymentOptions"
         [(ngModel)]="profile.withdraw_type"
         (ionChange)="saveProfile()"
         class="method-selector"
@@ -73,6 +76,7 @@
       <div class="item-icon" item-start><img src="assets/icon/currency-gray.svg"/></div>
       <ion-label>Currency</ion-label>
       <ion-select
+        [disabled]="!enablePaymentOptions"
         [(ngModel)]="profile.currency"
         (ionChange)="saveProfile()"
         class="currency-selector" item-end>

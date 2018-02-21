@@ -14,7 +14,7 @@
 
 
 <ion-content>
- <ion-card class="method-card swish">
+ <ion-card class="method-card swish" *ngIf="baseService.currentUserCountry === 'SWE'">
    <div class="method-name">
      Swish
    </div>

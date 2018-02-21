@@ -6,6 +6,8 @@ import {CurrencyProvider} from "../../providers/currency";
 import {TransactionsProvider} from "../../providers/transactions";
 import {ChoosePaymentMethodPage} from "../choose-payment-method/choose-payment-method";
 import {DomSanitizer} from "@angular/platform-browser";
+import {BaseSingleton} from "../../services/base";
+import {HomePage} from "../home/home";
 
 /**
  * Generated class for the ProfilePage page.
@@ -29,9 +31,12 @@ export class ProfilePage {
   public methodString: string;
   public tmpImage: any = false;
 
+  public enablePaymentOptions: boolean;
+
   constructor(public navCtrl: NavController,
               public userProvider: UserProvider,
               public currencyProvider: CurrencyProvider,
+              public baseSingleton: BaseSingleton,
               private sanitizer: DomSanitizer,
               public transactionsProvider: TransactionsProvider,
               public loadingCtrl: LoadingController,
@@ -40,6 +45,7 @@ export class ProfilePage {
   }
 
   ionViewDidEnter() {
+    if ([HomePage.STATUS_ACTIVE, HomePage.STATUS_APPROVED, HomePage.STATUS_NO_TRANSACTIONS].indexOf(this.baseSingleton.currentUserStatus) > -1)  this.enablePaymentOptions = true;
     this.userProvider.profile().then(profileData => {
       this.profile = profileData;
       this.transactionsProvider.paymentMethods().then(data => {

@@ -138,7 +138,6 @@ export class RegisterCodePage {
     this.user.repeatSms({phone_number: '+' + phone_striped})
       .then((data) => {
           let alert = this.alertCtrl.create({
-            title: 'Success',
             subTitle: 'Please wait for sms',
             buttons: ['OK']
           });
