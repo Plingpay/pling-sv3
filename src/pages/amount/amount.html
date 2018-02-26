@@ -21,30 +21,30 @@
       <ion-col col-11 class="amount-container">
         <ion-item>
           <ion-label floating>Amount</ion-label>
-          <ion-input type="number" [(ngModel)]="baseSingleton.transactionDetails.amount"></ion-input>
+          <ion-input type="number" [(ngModel)]="amount"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-4 class="select-currency-container">
         <ion-item class="select-currency">
-          <ion-select [(ngModel)]="baseSingleton.transactionDetails.currency" class="currency-selector">
+          <ion-select [(ngModel)]="currency" class="currency-selector">
             <ion-option *ngFor="let currencyItem of currencies">{{currencyItem.currency}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>
     </ion-row>
-    <ion-item *ngIf="!baseSingleton.transactionDetails.showCommentInput" class="comment-container">
+    <ion-item *ngIf="!baseSingleton.transactionDetails.showCommentInput && !baseSingleton.transactionDetails.comment" class="comment-container">
       <div class="add-container" *ngIf="!baseSingleton.transactionDetails.showCommentInput" >
         <a href="#"(click)="baseSingleton.transactionDetails.showCommentInput = true">Add a comment</a>
       </div>
     </ion-item>
-    <ion-row *ngIf="baseSingleton.transactionDetails.showCommentInput">
+    <ion-row *ngIf="baseSingleton.transactionDetails.showCommentInput || baseSingleton.transactionDetails.comment">
       <ion-col col-1 class="icon-container">
         <img src="assets/icon/comment.svg"/>
       </ion-col>
       <ion-col col-11 class="comment-input-col">
         <ion-item>
           <ion-label floating class="comment-label">Comment</ion-label>
-          <ion-input type="text" [(ngModel)]="baseSingleton.transactionDetails.comment"></ion-input>
+          <ion-input type="text" [(ngModel)]="comment"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -60,7 +60,7 @@
             ion-button
             class="orange footer-button"
             full
-            [disabled]="!baseSingleton.transactionDetails.amount"
+            [disabled]="!amount"
             (click)="confirm()"
           >Confirm</button>
         </ion-col>

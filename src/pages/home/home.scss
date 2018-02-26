@@ -118,19 +118,25 @@ page-home {
   .transaction-amount-positive {
     color: $green;
     font-weight: bold;
+    align-self: flex-start;
+    margin-top: 15px !important;
   }
 
   .transaction-amount-negative {
     color: $black;
     font-weight: bold;
+    align-self: flex-start;
+    margin-top: 15px !important;
   }
 
   .transaction-time {
-    margin-top: 5px;
+    margin-top: 10px;
+    color: $light-black;
   }
 
   .transaction-comment {
-    margin-top: 5px;
+    margin-top: 10px;
+    color: $black;
   }
 
   .transaction-status {
@@ -146,5 +152,21 @@ page-home {
     .transaction-status-error {
       color: $red;
     }
+  }
+
+  .wrap {
+    white-space: normal;
+  }
+
+  .explore-button {
+    display: inline;
+    float: right;
+    color: $blue;
+    font-weight: bold;
+  }
+
+  ion-avatar {
+    align-self: flex-start;
+    margin-top: 15px !important;
   }
 }

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import {TransactionsProvider} from "../../providers/transactions";
 import {BaseSingleton} from "../../services/base";
 import {TransactionSuccessPage} from "../transaction-success/transaction-success";
-import {ChoosePaymentMethodPage} from "../choose-payment-method/choose-payment-method";
+import {AmountPage} from "../amount/amount";
 
 /**
  * Generated class for the TransactionSubmitPage page.
@@ -21,32 +21,32 @@ export class TransactionSubmitPage {
   public saveAsTemplate: boolean;
   public transaction: any;
 
-  public source: any;
+  public fromRequest : boolean;
 
   constructor(public navCtrl: NavController,
               public transactionsProvider: TransactionsProvider,
               public baseService: BaseSingleton,
-              public viewCtrl: ViewController,
+              public modalCtrl: ModalController,
               public navParams: NavParams) {
     this.transaction = this.navParams.get('transaction');
+    this.fromRequest = this.navParams.get('fromRequest');
   }
 
   ionViewDidLoad() {
   }
 
   edit() {
-    this.transactionsProvider.cancelTransaction(this.transaction.id).then(
-      data => {
-        if (!this.baseService.paymentOptionsView) {
-          let currentViewIndex = this.viewCtrl.index;
-          this.navCtrl.push(ChoosePaymentMethodPage);
-          this.navCtrl.remove(currentViewIndex);
-        } else {
-          this.navCtrl.popTo(this.baseService.paymentOptionsView);
-        }
-        },
-      err => {}
-    )
+    let amountModal = this.modalCtrl.create(AmountPage, { isModal: true });
+    amountModal.onDidDismiss(data => {
+      this.transactionsProvider.editTransaction(this.transaction.id, {
+        amount_to: this.baseService.transactionDetails.amount,
+        currency_to: this.baseService.transactionDetails.currency,
+        comment: this.baseService.transactionDetails.comment
+      }).then(transaction => {
+        this.transaction = transaction.transaction;
+      }, err => {});
+    });
+    amountModal.present();
   }
 
   submit() {

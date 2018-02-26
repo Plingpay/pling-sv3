@@ -9,7 +9,10 @@
   <ion-navbar color="primary">
     <ion-title>Payment info</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="edit()">
+      <button
+        ion-button
+        *ngIf="fromRequest || transaction.from_template"
+        (click)="edit()">
         Edit
       </button>
     </ion-buttons>

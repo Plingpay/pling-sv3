@@ -44,4 +44,12 @@ export class TransactionsProvider extends BaseProvider {
     return this.makeRawRequest('get', 'withdrow_methods');
   }
 
+  checkIfTransactionTemplate(phone_number) {
+    return this.makeRawRequest('post', 'transactions/check_template', phone_number, 'hideError');
+  }
+
+  editTransaction(id, data) {
+    return this.makeRawRequest('put', 'transactions/' + id, data);
+  }
+
 }

@@ -63,7 +63,7 @@ export class ProfilePage {
       this.currencies = data.results;
     }, err => {});
     this.transactionsProvider.withdrawMethods().then(data => {
-      this.withdrawMethods = data;
+      this.withdrawMethods = data.results;
     }, err => {});
 
   }

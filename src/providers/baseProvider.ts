@@ -30,11 +30,10 @@ export class BaseProvider {
 
   private _catchRequestError(error: HttpErrorResponse, source: string): void {
     this.events.publish('loading:hide');
+    if (source === 'hideError') return;
     if (error.status === 403) {
       if (source !== 'LoadingEntry') this.show403();
     } else {
-      //console.log(error);
-      //console.log(('message' in error.error)?error.error.message:error.message);
       this.events.publish('error:show', 'Error', (('message' in error.error)?error.error.message:error.message));
     }
   }

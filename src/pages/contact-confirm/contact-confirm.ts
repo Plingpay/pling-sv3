@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ElementRef, Renderer} from '@angular/core';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
-import {AmountPage} from "../amount/amount";
+import {BaseSingleton} from "../../services/base";
 
 /**
  * Generated class for the ContactConfirmPage page.
@@ -27,6 +27,10 @@ export class ContactConfirmPage {
 
   constructor(public navCtrl: NavController,
               public userProvider: UserProvider,
+              public viewCtrl: ViewController,
+              private elementRef: ElementRef,
+              private renderer: Renderer,
+              public baseSingleton: BaseSingleton,
               public navParams: NavParams) {
     this.userPhone = this.navParams.get('userPhone');
     this.userName = this.navParams.get('userName');
@@ -38,10 +42,16 @@ export class ContactConfirmPage {
   selectCountry(country) {
     this.selectedCode = country.phone_code;
     this.selectedFlag = this.userProvider.envVars.API + country.flag_image;
+    let phoneInput = this.elementRef.nativeElement.querySelector('#phoneNativeInput>input');
+    setTimeout(() => {
+      console.log("elementSelected");
+      this.renderer.invokeElementMethod(phoneInput, 'focus', []);
+    }, 0);
   }
 
   confirm() {
-    this.navCtrl.push(AmountPage, {phoneNumber: this.userPhoneInput})
+    this.baseSingleton.transactionDetails.phoneNumber = this.userPhoneInput;
+    this.viewCtrl.dismiss();
   }
 
 }

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams, ViewController} from 'ionic-angular';
+import {IonicPage, LoadingController, ModalController, NavController, NavParams, ViewController} from 'ionic-angular';
 import {Contacts} from "@ionic-native/contacts";
 import {AmountPage} from "../amount/amount";
 import {Keyboard} from "@ionic-native/keyboard";
 import {TransactionsProvider} from "../../providers/transactions";
 import {ContactConfirmPage} from "../contact-confirm/contact-confirm";
 import {BaseSingleton} from "../../services/base";
+import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
 
 /**
  * Generated class for the ContactListPage page.
@@ -48,6 +49,7 @@ export class ContactListPage {
               public loadingCtrl: LoadingController,
               public baseService: BaseSingleton,
               public viewCtrl: ViewController,
+              public modalCtrl: ModalController,
               public transactionsProvider: TransactionsProvider,
               public navParams: NavParams) {
     this.keyboard.onKeyboardShow().subscribe(()=>{this.showConfirmButton = true});
@@ -85,11 +87,28 @@ export class ContactListPage {
 
   confirm() {
     if (this.phoneNumber.indexOf('+') === -1) {
-      this.navCtrl.push(ContactConfirmPage, {userPhone: this.phoneNumber, userName: this.userName})
+      let contactModal = this.modalCtrl.create(ContactConfirmPage, {userPhone: this.phoneNumber, userName: this.userName});
+      contactModal.onDidDismiss(data => {
+        this.finalStep()
+      });
+      contactModal.present();
     } else {
       this.baseService.transactionDetails.phoneNumber = this.phoneNumber;
-      this.navCtrl.push(AmountPage)
+      this.finalStep()
     }
+  }
+
+  finalStep() {
+    this.transactionsProvider.checkIfTransactionTemplate({phone_number: this.baseService.transactionDetails.phoneNumber})
+      .then(transaction => {
+        console.log(transaction);
+        this.baseService.transactionDetails.amount = transaction.transaction.amount.amount;
+        this.baseService.transactionDetails.currency = transaction.transaction.amount.currency;
+        this.baseService.transactionDetails.comment = transaction.transaction.comment;
+        this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
+      }, err => {
+        this.navCtrl.push(AmountPage)
+      });
   }
 
 }

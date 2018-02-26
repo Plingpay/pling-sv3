@@ -41,22 +41,22 @@ export class HomePage {
     {
       value: 'PENDING',
       display: 'Pending',
-      class: 'transaction-status-warning'
+      className: 'transaction-status-warning'
     },
     {
       value: 'SUCCESS',
       display: 'Success',
-      class: 'transaction-status-hide'
+      className: 'transaction-status-hide'
     },
     {
       value: 'CANCELED',
       display: 'Canceled',
-      class: 'transaction-status-error'
+      className: 'transaction-status-error'
     },
     {
       value: 'UNSUCCESS',
       display: 'Failed',
-      class: 'transaction-status-error'
+      className: 'transaction-status-error'
     }
   ];
 
@@ -143,7 +143,11 @@ export class HomePage {
   sendMoney() {
     this.baseSingleton.initiateTransactionDetails();
     this.baseSingleton.actionSource = HomePage.SOURCE_TRANSACTION;
-    this.navCtrl.push(ChoosePaymentMethodPage);
+    if ('id' in this.baseSingleton.currentUserPaymentMethod) {
+      this.navCtrl.push(ContactListPage);
+    } else {
+      this.navCtrl.push(ChoosePaymentMethodPage);
+    }
   }
 
   requestMoney() {
@@ -161,7 +165,6 @@ export class HomePage {
     if ('id' in this.baseSingleton.currentUserPaymentMethod) {
       this.baseSingleton.transactionDetails.amount = transaction.amount;
       this.baseSingleton.transactionDetails.currency = transaction.currency.currency;
-      this.baseSingleton.transactionDetails.comment = transaction.comment;
       this.baseSingleton.transactionDetails.phoneNumber = transaction.user.phone_number;
       this.transactionsProvider.prepareTransaction({
         amount_to: this.baseSingleton.transactionDetails.amount,
@@ -169,7 +172,7 @@ export class HomePage {
         currency_to: this.baseSingleton.transactionDetails.currency,
         comment: this.baseSingleton.transactionDetails.comment
       }).then(transaction => {
-        this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
+        this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction, fromRequest: true});
       }, err => {
       });
     } else {

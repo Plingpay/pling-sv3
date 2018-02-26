@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {CurrencyProvider} from "../../providers/currency";
 import {TransactionsProvider} from "../../providers/transactions";
 import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
@@ -21,23 +21,33 @@ import {RequestSubmitPage} from "../request-submit/request-submit";
 })
 export class AmountPage {
   public currencies: Array<any>;
+  public isModal: boolean = false;
+
+  public amount: number;
+  public currency: string;
+  public comment: string;
 
   constructor(public navCtrl: NavController,
               public currencyProvider: CurrencyProvider,
               public transactionsProvider: TransactionsProvider,
+              public viewCtrl: ViewController,
               public baseSingleton: BaseSingleton,
               public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
+    this.amount = this.baseSingleton.transactionDetails.amount;
+    this.currency = this.baseSingleton.transactionDetails.currency;
+    this.comment = this.baseSingleton.transactionDetails.comment;
+    this.isModal = this.navParams.get('isModal');
     this.currencyProvider.currencyList().then(data => {
       this.currencies = data.results;
       if (!this.baseSingleton.transactionDetails.currency) {
         this.currencyProvider.defaultCurrencyByUser(this.baseSingleton.transactionDetails.phoneNumber).then(data => {
           if (data.currency) {
-            this.baseSingleton.transactionDetails.currency = data.currency
+            this.currency = data.currency
           } else {
-            this.baseSingleton.transactionDetails.currency = this.currencies[0].currency;
+            this.currency = this.currencies[0].currency;
           }
         }, err => {
         });
@@ -46,6 +56,13 @@ export class AmountPage {
   }
 
   confirm() {
+    this.baseSingleton.transactionDetails.amount = this.amount;
+    this.baseSingleton.transactionDetails.currency = this.currency;
+    this.baseSingleton.transactionDetails.comment = this.comment;
+    if (this.isModal) {
+      this.viewCtrl.dismiss();
+      return
+    }
     switch (this.baseSingleton.actionSource) {
       case HomePage.SOURCE_TRANSACTION:
         this.transactionsProvider.prepareTransaction({
@@ -58,7 +75,6 @@ export class AmountPage {
         }, err => {});
         break;
       case HomePage.SOURCE_REQUEST:
-
         this.navCtrl.push(RequestSubmitPage);
     }
   }
