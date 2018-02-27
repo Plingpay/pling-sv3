@@ -76,6 +76,8 @@ export class HomePage {
 
   public today = (new Date().toDateString());
 
+  public rejectReason: string;
+
   private userID: number;
   @ViewChild(Content) content: Content;
 
@@ -97,6 +99,7 @@ export class HomePage {
         this.baseSingleton.currentUserStatus = userStatus.status;
         this.baseSingleton.currentUserCountry = userStatus.country;
         this.userStatus = userStatus.status;
+        this.rejectReason = userStatus.reason;
         this.userID = userStatus.user_id;
         this.documentsUploaded = userStatus.documents_uploaded;
         this.verified = userStatus.verify;
