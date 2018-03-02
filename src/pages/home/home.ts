@@ -29,7 +29,7 @@ export class HomePage {
 
   public static readonly STATUS_ACTIVE = 'ACTIVE';
   public static readonly STATUS_HAVE_DOCS = "HAVE_DOCS";
-  public static readonly STATUS_REJECT = "REJECT";
+  public static readonly STATUS_REJECT = "REJECTED";
   public static readonly STATUS_APPROVED = "APPROVED";
   public static readonly STATUS_NO_TRANSACTIONS = "NO_TRANSACTIONS";
   public static readonly STATUS_BLANK = "BLANK";
@@ -60,7 +60,7 @@ export class HomePage {
     }
   ];
 
-  public userStatus: String;
+  public userStatus: string;
   public documentsUploaded: boolean;
   public verified: boolean;
   public balance: Array<any>;
