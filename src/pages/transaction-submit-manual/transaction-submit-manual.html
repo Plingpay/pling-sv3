@@ -1,0 +1,58 @@
+<!--
+  Generated template for the TransactionSubmitSwishPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Payment info</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="steps-container">
+    <img src="assets/icon/swish-transfer.svg"/>
+    <img src="assets/icon/big-blue-right-arrow.svg"/>
+    <img src="assets/icon/plingpay-transfer.svg"/>
+    <img src="assets/icon/big-blue-right-arrow.svg"/>
+    <img src="assets/icon/user-transfer.svg"/>
+  </div>
+  <div class="instructions">
+    To send <span class="receiver-name">Katy Perry</span> 100 USD transfer <span class="amount">123 SEK</span>
+    to the PlingPay account in SWISH
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Swish number</ion-label>
+      <ion-input type="text" value="1236144570" disabled></ion-input>
+      <span class="copy" item-end>Copy</span>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Comment</ion-label>
+      <ion-input type="text" value="ID 453534" disabled></ion-input>
+      <span class="copy" item-end>Copy</span>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer class="grey-toolbar">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <button
+            ion-button
+            type="submit"
+            class="orange footer-button"
+            (click)="confirm()"
+            full
+          >I have paid</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

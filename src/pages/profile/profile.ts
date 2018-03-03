@@ -55,6 +55,9 @@ export class ProfilePage {
             if (method.method_type === ChoosePaymentMethodPage.CREDIT_CARD_METHOD) {
               this.methodString = 'Card **** ' + method.last_4;
             }
+            if (method.method_type === ChoosePaymentMethodPage.BANK_ACCOUNT_METHOD) {
+              this.methodString = 'Bank account';
+            }
           }
         });
       }, err => {});

@@ -10,7 +10,7 @@
     <ion-title>Contact list</ion-title>
     <ion-buttons end>
       <button ion-button (click)="confirm()">
-        OK
+
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -26,7 +26,7 @@
     <p class="recent-text">Recent contacts</p>
     <ng-container  *ngFor="let recentContact of lastContactsList">
       <div class="recent-contact" (click)="selectContactFromLast(recentContact)">
-        <img [src]="recentContact.photo?transactionsProvider.envVars.API + recentContact.photo: 'assets/icon/empty_avatar.svg'"/>
+        <img [src]="recentContact.avatar?transactionsProvider.envVars.API + recentContact.avatar: 'assets/icon/empty_avatar.svg'"/>
         <span class="contact-number-wrap">{{recentContact.full_name || recentContact.phone_number}}</span>
       </div>
     </ng-container>

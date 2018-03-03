@@ -1,0 +1,58 @@
+page-transaction-submit-manual {
+  .scroll-content {
+    background-color: $light-gray;
+    padding-top: 43px;
+  }
+
+  .steps-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      margin-right: 21px;
+    }
+    img:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .instructions {
+    text-align: center;
+    margin: 43px 20px 43px 20px;
+    font-size: 16px;
+    .receiver-name {
+      font-weight: bold;
+    }
+    .amount {
+      font-weight: bold;
+    }
+  }
+
+  .item {
+    background-color: $light-gray;
+  }
+
+  .list-md .item-input:last-child {
+    border-bottom: none;
+  }
+
+  .item-input .label-md, .item-select .label-md, .item-datetime .label-md {
+    color: $black;
+  }
+
+  .text-input[disabled] {
+    opacity: 1;
+  }
+
+  .list-md .item-block .item-inner {
+    border-bottom: 1px solid $grey-lines !important;
+  }
+
+  .copy {
+    margin-bottom: -20px !important;
+    color: $blue;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+}

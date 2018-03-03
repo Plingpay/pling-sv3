@@ -7,6 +7,8 @@ import {TransactionsProvider} from "../../providers/transactions";
 import {ContactConfirmPage} from "../contact-confirm/contact-confirm";
 import {BaseSingleton} from "../../services/base";
 import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
+import * as _ from 'lodash';
+
 
 /**
  * Generated class for the ContactListPage page.
@@ -66,7 +68,7 @@ export class ContactListPage {
     });
     loader.present();
     this.contacts.find(['*']).then(contacts => {
-      this.contactsList = contacts;
+      this.contactsList = _.sortBy(contacts, [user => { return user.displayName }]);
       loader.dismiss();
     }, err => {
       loader.dismiss();

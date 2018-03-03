@@ -40,6 +40,7 @@ import {ProfilePage} from "../pages/profile/profile";
 import {TransactionSuccessPage} from "../pages/transaction-success/transaction-success";
 import {RequestSubmitPage} from "../pages/request-submit/request-submit";
 import {PaymentRequestsProvider} from "../providers/paymentRequests";
+import {TransactionSubmitManualPage} from "../pages/transaction-submit-manual/transaction-submit-manual";
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import {PaymentRequestsProvider} from "../providers/paymentRequests";
     ContactListPage,
     AmountPage,
     TransactionSubmitPage,
+    TransactionSubmitManualPage,
     ContactConfirmPage,
     ProfilePage,
     TransactionSuccessPage,
@@ -98,6 +100,7 @@ import {PaymentRequestsProvider} from "../providers/paymentRequests";
     ContactListPage,
     AmountPage,
     TransactionSubmitPage,
+    TransactionSubmitManualPage,
     ContactConfirmPage,
     ProfilePage,
     TransactionSuccessPage,

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {LoadingPage} from "../pages/loading/loading";
+import { LoadingPage } from "../pages/loading/loading";
 
 @Component({
   templateUrl: 'app.html'

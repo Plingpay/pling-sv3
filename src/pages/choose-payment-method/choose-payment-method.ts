@@ -20,6 +20,7 @@ import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
 })
 export class ChoosePaymentMethodPage {
   public static CREDIT_CARD_METHOD = 'Credit card';
+  public static BANK_ACCOUNT_METHOD = 'Bank account';
   public static SOURCE_PROFILE = 1;
   public static SOURCE_PAYMENT_REQUEST = 2;
 

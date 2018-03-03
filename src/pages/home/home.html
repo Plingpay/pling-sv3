@@ -4,7 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header [ngClass]="{ 'blur' : blurPage }">
 
   <ion-navbar color="primary">
     <ion-buttons start>
@@ -23,7 +23,9 @@
 
 
 <ion-content>
-  <ion-scroll scrollX="true" *ngIf="balance !== undefined && balance.length > 0 && userStatus === HomePage.STATUS_ACTIVE">
+  <ion-scroll scrollX="true"
+              [ngClass]="{ 'blur' : blurPage }"
+              *ngIf="balance !== undefined && balance.length > 0 && userStatus === HomePage.STATUS_ACTIVE">
     <ion-card class="currency-card" *ngFor="let balanceUnit of balance" >
       <div class="header">Balance</div>
       <div class="balance">{{balanceUnit.balance}} {{balanceUnit.currency}} </div>
@@ -33,21 +35,27 @@
       </div>
     </ion-card>
   </ion-scroll>
-  <div class="no-history" *ngIf="userStatus === HomePage.STATUS_NO_TRANSACTIONS">
+  <div class="no-history"
+       [ngClass]="{ 'blur' : blurPage }"
+       *ngIf="userStatus === HomePage.STATUS_NO_TRANSACTIONS">
     <img src="assets/imgs/astronaut.svg"/>
     <h3>No transaction history</h3>
     <p>
       Tap + to send money to someone special
     </p>
   </div>
-  <div class="no-history" *ngIf="userStatus === HomePage.STATUS_APPROVED">
+  <div class="no-history"
+       [ngClass]="{ 'blur' : blurPage }"
+       *ngIf="userStatus === HomePage.STATUS_APPROVED">
     <img src="assets/imgs/skate_man.svg"/>
     <h3>Congratulations!</h3>
     <p>
       Your account has been verified. What <br/>would you like to do next?
     </p>
   </div>
-  <div class="hello" *ngIf="[HomePage.STATUS_BLANK, HomePage.STATUS_REJECT].indexOf(userStatus) > -1">
+  <div class="hello"
+       [ngClass]="{ 'blur' : blurPage }"
+       *ngIf="[HomePage.STATUS_BLANK, HomePage.STATUS_REJECT].indexOf(userStatus) > -1">
     <img src="assets/imgs/hello_user.svg"/>
     <h3 *ngIf="userStatus === HomePage.STATUS_BLANK">Hello, new user</h3>
     <h3 *ngIf="userStatus === HomePage.STATUS_REJECT">Unverified</h3>
@@ -59,15 +67,20 @@
       {{rejectReason}}
     </p>
   </div>
-  <div class="hello" *ngIf="userStatus === HomePage.STATUS_HAVE_DOCS">
+  <div class="hello"
+       [ngClass]="{ 'blur' : blurPage }"
+       *ngIf="userStatus === HomePage.STATUS_HAVE_DOCS">
     <img src="assets/imgs/hello_user.svg"/>
     <h3>Thank you!</h3>
     <p>
       You will get a notification once your<br/>account is verified and ready to use
     </p>
   </div>
-  <ng-container *ngIf="[HomePage.STATUS_ACTIVE].indexOf(userStatus) > -1">
-    <ion-item-group *ngFor="let day of historyKeysToShow">
+  <ng-container
+    *ngIf="[HomePage.STATUS_ACTIVE].indexOf(userStatus) > -1">
+    <ion-item-group *ngFor="let day of historyKeysToShow"
+                    [ngClass]="{ 'blur' : blurPage }"
+    >
       <ion-item-divider color="light">{{(day === today) ? 'Today' : day}}</ion-item-divider>
       <ng-container *ngFor="let transaction of historyToShow[day]">
         <ion-item *ngIf="transaction.user">
@@ -110,14 +123,18 @@
       </ng-container>
     </ion-item-group>
   </ng-container>
-  <ion-fab right bottom *ngIf="userStatus === HomePage.STATUS_NO_TRANSACTIONS || userStatus === HomePage.STATUS_ACTIVE">
-    <button ion-fab class="fab-orange"><ion-icon name="add"></ion-icon></button>
+  <ion-fab right bottom
+           #fab
+           *ngIf="userStatus === HomePage.STATUS_NO_TRANSACTIONS || userStatus === HomePage.STATUS_ACTIVE">
+    <button ion-fab
+            (click)="toggleBlur()"
+            class="fab-orange"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list side="top">
-      <button ion-fab color="primary" (click)="requestMoney()">
+      <button ion-fab color="primary" (click)="requestMoney(fab)">
         <ion-icon name="wifi" class="rotation-90"></ion-icon>
         <div class="label">Money request</div>
       </button>
-      <button ion-fab class="fab-orange" (click)="sendMoney()">
+      <button ion-fab class="fab-orange" (click)="sendMoney(fab)">
         <ion-icon name="arrow-round-forward"></ion-icon>
         <div class="label">Send money</div>
       </button>

@@ -78,6 +78,8 @@ export class HomePage {
 
   public rejectReason: string;
 
+  public blurPage: boolean;
+
   private userID: number;
   @ViewChild(Content) content: Content;
 
@@ -143,7 +145,11 @@ export class HomePage {
     this.navCtrl.push(ExchangeRatesPage);
   }
 
-  sendMoney() {
+  sendMoney(fab: any = false) {
+    if (fab) {
+      fab.close();
+      this.blurPage = false;
+    }
     this.baseSingleton.initiateTransactionDetails();
     this.baseSingleton.actionSource = HomePage.SOURCE_TRANSACTION;
     if ('id' in this.baseSingleton.currentUserPaymentMethod) {
@@ -153,7 +159,11 @@ export class HomePage {
     }
   }
 
-  requestMoney() {
+  requestMoney(fab: any = false) {
+    if (fab) {
+      fab.close();
+      this.blurPage = false;
+    }
     this.baseSingleton.initiateTransactionDetails();
     this.baseSingleton.actionSource = HomePage.SOURCE_REQUEST;
     this.navCtrl.push(ContactListPage);
@@ -181,6 +191,10 @@ export class HomePage {
     } else {
       this.navCtrl.push(ChoosePaymentMethodPage, {source: ChoosePaymentMethodPage.SOURCE_PAYMENT_REQUEST, transaction: transaction});
     }
+  }
+
+  toggleBlur() {
+    this.blurPage = !this.blurPage;
   }
 
 }

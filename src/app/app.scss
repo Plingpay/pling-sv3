@@ -22,10 +22,22 @@ $orange: rgb(255, 174, 0);
 $dark-green: #1F7A80;
 $black: #0B0D0E;
 $light-black: rgb(117, 119, 119);
+$grey-lines: #E6E6E6;
 $light-gray: rgb(247, 247, 247);
 $ionic-line: #dedede;
 $green: #03AF15;
 $red: #FC5C5E;
+
+
+@font-face {
+  font-family: Lato;
+  src: url('../assets/fonts/Lato-regular.ttf') format('ttf'), url('../assets/fonts/Lato-regular.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  font-family: 'Lato';
+}
 
 .error {
   color: red !important;
@@ -34,6 +46,13 @@ $red: #FC5C5E;
   background-color: $orange;
 }
 .clear-toolbar {
+  .button-inner {
+    font-weight: bold;
+  }
+  button {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
   .toolbar {
     .toolbar-background {
       border-width: 0 !important;
@@ -42,6 +61,13 @@ $red: #FC5C5E;
   }
 }
 .grey-toolbar {
+  .button-inner {
+    font-weight: bold;
+  }
+  button {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
   .toolbar {
     .toolbar-background {
       border-width: 0 !important;
