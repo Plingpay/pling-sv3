@@ -63,8 +63,8 @@
       Your account has been successfully created.<br/>Please add your name and photos of your ID to complete
       the registration.
     </p>
-    <p *ngIf="userStatus === HomePage.STATUS_REJECT">
-      {{rejectReason}}
+    <p *ngIf="userStatus === HomePage.STATUS_REJECT" class="release-reason">
+      <span [outerHTML]="rejectReason"></span>
     </p>
   </div>
   <div class="hello"

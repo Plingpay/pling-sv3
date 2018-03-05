@@ -47,15 +47,47 @@ export class ChoosePaymentMethodPage {
     this.loadMethods();
   }
 
-  async loadMethods() {
-    this.paymentMethods = (await this.transactionsProvider.paymentMethods()).results;
-    this.paymentMethods.forEach(method => {
-      switch (method.method_type) {
-        case ChoosePaymentMethodPage.CREDIT_CARD_METHOD:
-          this.creditCardNumber = method.last_4;
-          this.creditCardId = method.id;
-      }
-    });
+  loadMethods(autoclickCard = false) {
+    this.transactionsProvider.paymentMethods().then(data => {
+      this.paymentMethods = data.results;
+      this.paymentMethods.forEach(method => {
+        switch (method.method_type) {
+          case ChoosePaymentMethodPage.CREDIT_CARD_METHOD:
+            this.creditCardNumber = method.last_4;
+            this.creditCardId = method.id;
+        }
+        if (autoclickCard) this.selectPaymentMethod(method.id);
+      });
+    }, err => {});
+  }
+
+  private selectPaymentMethod(cardId = false) {
+    this.transactionsProvider.selectPaymentMethod(cardId?cardId:this.creditCardId).then(
+      res => {
+        switch (this.source) {
+          case ChoosePaymentMethodPage.SOURCE_PROFILE:
+            if (!cardId) this.navCtrl.pop();
+            break;
+          case ChoosePaymentMethodPage.SOURCE_PAYMENT_REQUEST:
+            this.baseService.transactionDetails.amount = this.paymentRequestTransaction.amount;
+            this.baseService.transactionDetails.currency = this.paymentRequestTransaction.currency.currency;
+            this.baseService.transactionDetails.comment = this.paymentRequestTransaction.comment;
+            this.baseService.transactionDetails.phoneNumber = this.paymentRequestTransaction.user.phone_number;
+            this.transactionsProvider.prepareTransaction({
+              amount_to: this.baseService.transactionDetails.amount,
+              phone_number_to: this.baseService.transactionDetails.phoneNumber,
+              currency_to: this.baseService.transactionDetails.currency,
+              comment: this.baseService.transactionDetails.comment
+            }).then(transaction => {
+              this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
+            }, err => {});
+            break;
+          default:
+            this.navCtrl.push(ContactListPage);
+        }
+      },
+      err => {}
+    );
   }
 
   selectCard() {
@@ -63,36 +95,10 @@ export class ChoosePaymentMethodPage {
       let modal = this.modalCtrl.create(AddCardPage);
       modal.present();
       modal.onDidDismiss(data => {
-        this.loadMethods();
+        this.loadMethods(true);
       });
     } else {
-      this.transactionsProvider.selectPaymentMethod(this.creditCardId).then(
-        res => {
-          switch (this.source) {
-            case ChoosePaymentMethodPage.SOURCE_PROFILE:
-              this.navCtrl.pop();
-              break;
-            case ChoosePaymentMethodPage.SOURCE_PAYMENT_REQUEST:
-              this.baseService.transactionDetails.amount = this.paymentRequestTransaction.amount;
-              this.baseService.transactionDetails.currency = this.paymentRequestTransaction.currency.currency;
-              this.baseService.transactionDetails.comment = this.paymentRequestTransaction.comment;
-              this.baseService.transactionDetails.phoneNumber = this.paymentRequestTransaction.user.phone_number;
-              this.transactionsProvider.prepareTransaction({
-                amount_to: this.baseService.transactionDetails.amount,
-                phone_number_to: this.baseService.transactionDetails.phoneNumber,
-                currency_to: this.baseService.transactionDetails.currency,
-                comment: this.baseService.transactionDetails.comment
-              }).then(transaction => {
-                this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
-              }, err => {});
-              break;
-            default:
-              this.navCtrl.push(ContactListPage);
-          }
-        },
-        err => {}
-      );
-
+      this.selectPaymentMethod();
     }
   }
 
