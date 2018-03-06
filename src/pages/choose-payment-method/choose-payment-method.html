@@ -14,7 +14,9 @@
 
 
 <ion-content>
- <ion-card class="method-card swish" *ngIf="baseService.currentUserCountry === 'SWE'">
+ <ion-card class="method-card swish"
+           (click)="selectSwish()"
+           *ngIf="baseService.currentUserCountry === 'SWE'">
    <div class="method-name">
      Swish
    </div>
@@ -22,7 +24,7 @@
      <img src="assets/imgs/swish_logo.svg">
    </div>
    <div class="action-button">
-     <a href="#">Add method</a>
+     <a href="#"></a>
    </div>
  </ion-card>
   <ion-card class="method-card credit" (click)="selectCard()">
@@ -40,7 +42,7 @@
       <a href="#" *ngIf="creditCardNumber">**** **** **** {{creditCardNumber}}</a>
     </div>
   </ion-card>
-  <ion-card class="method-card bank">
+  <ion-card class="method-card bank" (click)="selectBankAccount()">
     <div class="method-name">
       Bank account
     </div>

@@ -52,11 +52,14 @@ export class ProfilePage {
         this.paymentMethods = data.results;
         this.paymentMethods.forEach(method => {
           if (method.id === profileData.payment_method) {
-            if (method.method_type === ChoosePaymentMethodPage.CREDIT_CARD_METHOD) {
+            if (method.type === ChoosePaymentMethodPage.CREDIT_CARD_METHOD) {
               this.methodString = 'Card **** ' + method.last_4;
             }
-            if (method.method_type === ChoosePaymentMethodPage.BANK_ACCOUNT_METHOD) {
+            if (method.type === ChoosePaymentMethodPage.BANK_ACCOUNT_METHOD) {
               this.methodString = 'Bank account';
+            }
+            if (method.type === ChoosePaymentMethodPage.SWISH_METHOD) {
+              this.methodString = 'Swish';
             }
           }
         });

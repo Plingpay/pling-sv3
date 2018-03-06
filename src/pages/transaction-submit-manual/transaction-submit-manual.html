@@ -22,19 +22,15 @@
     <img src="assets/icon/user-transfer.svg"/>
   </div>
   <div class="instructions">
-    To send <span class="receiver-name">Katy Perry</span> 100 USD transfer <span class="amount">123 SEK</span>
-    to the PlingPay account in SWISH
+    To send <span class="receiver-name">{{transaction.user_to.full_name || transaction.user_to.phone_number}}</span>
+    {{transaction.amount.amount}} {{transaction.amount.currency}} transfer <span class="amount">{{transaction.total.total}} {{transaction.total.currency}}</span>
+    to the PlingPay account
   </div>
   <ion-list>
-    <ion-item>
-      <ion-label floating>Swish number</ion-label>
-      <ion-input type="text" value="1236144570" disabled></ion-input>
-      <span class="copy" item-end>Copy</span>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Comment</ion-label>
-      <ion-input type="text" value="ID 453534" disabled></ion-input>
-      <span class="copy" item-end>Copy</span>
+    <ion-item *ngFor="let data of transaction.payment_data">
+      <ion-label floating>{{data.name}}</ion-label>
+      <ion-input type="text" value="{{data.value}}" disabled></ion-input>
+      <button class="copy" item-end ngxClipboard [cbContent]="data.value" (cbOnSuccess)="presentToast()">Copy</button>
     </ion-item>
   </ion-list>
 </ion-content>
@@ -48,7 +44,7 @@
             ion-button
             type="submit"
             class="orange footer-button"
-            (click)="confirm()"
+            (click)="submit()"
             full
           >I have paid</button>
         </ion-col>

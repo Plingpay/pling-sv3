@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {TransactionSuccessPage} from "../transaction-success/transaction-success";
+import {TransactionsProvider} from "../../providers/transactions";
 
 /**
  * Generated class for the TransactionSubmitManualPage page.
@@ -15,11 +17,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TransactionSubmitManualPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public transaction: any;
+
+  constructor(public navCtrl: NavController,
+              public transactionsProvider: TransactionsProvider,
+              public toastCtrl: ToastController,
+              public navParams: NavParams) {
+    this.transaction = this.navParams.get('transaction');
   }
 
   ionViewDidLoad() {
+  }
 
+  submit() {
+    this.transactionsProvider.approveTransaction(this.transaction.id).then(
+      data => {
+        this.navCtrl.push(TransactionSuccessPage);
+      },
+      err => {}
+    )
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Copied to clipboard',
+      duration: 3000
+    });
+    toast.present();
   }
 
 }

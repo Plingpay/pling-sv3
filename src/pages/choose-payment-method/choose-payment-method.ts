@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, ModalController, NavController, NavParams, ViewController} from 'ionic-angular';
+import {AlertController, IonicPage, ModalController, NavController, NavParams, ViewController} from 'ionic-angular';
 import {AddCardPage} from "../add-card/add-card";
 import {TransactionsProvider} from "../../providers/transactions";
 import {ContactListPage} from "../contact-list/contact-list";
@@ -19,13 +19,17 @@ import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
   templateUrl: 'choose-payment-method.html',
 })
 export class ChoosePaymentMethodPage {
-  public static CREDIT_CARD_METHOD = 'Credit card';
+  public static CREDIT_CARD_METHOD = 'Stripe Credit card';
   public static BANK_ACCOUNT_METHOD = 'Bank account';
+  public static SWISH_METHOD = 'Swish';
   public static SOURCE_PROFILE = 1;
   public static SOURCE_PAYMENT_REQUEST = 2;
 
   public creditCardNumber: string;
   public creditCardId: number;
+
+  public bankAccountId: number;
+  public swishId: number;
 
   public paymentMethods: Array<any>;
 
@@ -36,6 +40,7 @@ export class ChoosePaymentMethodPage {
               public transactionsProvider: TransactionsProvider,
               public baseService: BaseSingleton,
               public modalCtrl: ModalController,
+              public alertCtrl: AlertController,
               public viewCtrl: ViewController,
               public navParams: NavParams) {
     this.source = this.navParams.get('source');
@@ -47,26 +52,32 @@ export class ChoosePaymentMethodPage {
     this.loadMethods();
   }
 
-  loadMethods(autoclickCard = false) {
+  loadMethods() {
     this.transactionsProvider.paymentMethods().then(data => {
       this.paymentMethods = data.results;
       this.paymentMethods.forEach(method => {
-        switch (method.method_type) {
+        switch (method.type) {
           case ChoosePaymentMethodPage.CREDIT_CARD_METHOD:
             this.creditCardNumber = method.last_4;
             this.creditCardId = method.id;
+            break;
+          case ChoosePaymentMethodPage.BANK_ACCOUNT_METHOD:
+            this.bankAccountId = method.id;
+            break;
+          case ChoosePaymentMethodPage.SWISH_METHOD:
+            this.swishId = method.id;
+            break;
         }
-        if (autoclickCard) this.selectPaymentMethod(method.id);
       });
     }, err => {});
   }
 
-  private selectPaymentMethod(cardId = false) {
-    this.transactionsProvider.selectPaymentMethod(cardId?cardId:this.creditCardId).then(
+  private selectPaymentMethod(methodId) {
+    this.transactionsProvider.selectPaymentMethod(methodId).then(
       res => {
         switch (this.source) {
           case ChoosePaymentMethodPage.SOURCE_PROFILE:
-            if (!cardId) this.navCtrl.pop();
+            this.navCtrl.pop();
             break;
           case ChoosePaymentMethodPage.SOURCE_PAYMENT_REQUEST:
             this.baseService.transactionDetails.amount = this.paymentRequestTransaction.amount;
@@ -95,11 +106,41 @@ export class ChoosePaymentMethodPage {
       let modal = this.modalCtrl.create(AddCardPage);
       modal.present();
       modal.onDidDismiss(data => {
-        this.loadMethods(true);
+        this.loadMethods();
       });
     } else {
-      this.selectPaymentMethod();
+      this.selectPaymentMethod(this.creditCardId);
     }
+  }
+
+  private showError(message) {
+    let prompt = this.alertCtrl.create({
+      message: message,
+      buttons: [
+        {
+          text: 'OK',
+          handler: data => {
+          }
+        },
+      ]
+    });
+    prompt.present();
+  }
+
+  selectBankAccount() {
+    if (!this.bankAccountId) {
+      this.showError("This payment method is not available in your country");
+      return
+    }
+    this.selectPaymentMethod(this.bankAccountId)
+  }
+
+  selectSwish() {
+    if (!this.swishId) {
+      this.showError("This payment method is not available in your country");
+      return
+    }
+    this.selectPaymentMethod(this.swishId)
   }
 
 }

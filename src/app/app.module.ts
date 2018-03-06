@@ -41,6 +41,7 @@ import {TransactionSuccessPage} from "../pages/transaction-success/transaction-s
 import {RequestSubmitPage} from "../pages/request-submit/request-submit";
 import {PaymentRequestsProvider} from "../providers/paymentRequests";
 import {TransactionSubmitManualPage} from "../pages/transaction-submit-manual/transaction-submit-manual";
+import {ClipboardModule} from "ngx-clipboard";
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import {TransactionSubmitManualPage} from "../pages/transaction-submit-manual/tr
     BrowserModule,
     MomentModule,
     HttpClientModule,
+    ClipboardModule,
     IonicModule.forRoot(MyApp, {
       mode: 'md'
     })

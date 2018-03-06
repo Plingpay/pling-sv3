@@ -6,6 +6,7 @@ import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
 import {BaseSingleton} from "../../services/base";
 import {HomePage} from "../home/home";
 import {RequestSubmitPage} from "../request-submit/request-submit";
+import {TransactionSubmitManualPage} from "../transaction-submit-manual/transaction-submit-manual";
 
 /**
  * Generated class for the AmountPage page.
@@ -27,6 +28,8 @@ export class AmountPage {
   public currency: string;
   public comment: string;
 
+  public currencyFrom: string;
+
   constructor(public navCtrl: NavController,
               public currencyProvider: CurrencyProvider,
               public transactionsProvider: TransactionsProvider,
@@ -38,6 +41,7 @@ export class AmountPage {
   ionViewDidEnter() {
     this.amount = this.baseSingleton.transactionDetails.amount;
     this.currency = this.baseSingleton.transactionDetails.currency;
+    this.currencyFrom = this.baseSingleton.transactionDetails.currencyFrom,
     this.comment = this.baseSingleton.transactionDetails.comment;
     this.isModal = this.navParams.get('isModal');
     this.currencyProvider.currencyList().then(data => {
@@ -58,6 +62,7 @@ export class AmountPage {
   confirm() {
     this.baseSingleton.transactionDetails.amount = this.amount;
     this.baseSingleton.transactionDetails.currency = this.currency;
+    this.baseSingleton.transactionDetails.currencyFrom = this.currencyFrom;
     this.baseSingleton.transactionDetails.comment = this.comment;
     if (this.isModal) {
       this.viewCtrl.dismiss();
@@ -69,9 +74,14 @@ export class AmountPage {
           amount_to: this.baseSingleton.transactionDetails.amount,
           phone_number_to: this.baseSingleton.transactionDetails.phoneNumber,
           currency_to: this.baseSingleton.transactionDetails.currency,
+          currency_from: this.baseSingleton.transactionDetails.currencyFrom,
           comment: this.baseSingleton.transactionDetails.comment
         }).then(transaction => {
-          this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
+          if (this.baseSingleton.currentUserPaymentMethod.drive === 'MANUAL') {
+            this.navCtrl.push(TransactionSubmitManualPage, {transaction: transaction.transaction});
+          } else {
+            this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
+          }
         }, err => {});
         break;
       case HomePage.SOURCE_REQUEST:
