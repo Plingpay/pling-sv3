@@ -42,6 +42,8 @@ import {RequestSubmitPage} from "../pages/request-submit/request-submit";
 import {PaymentRequestsProvider} from "../providers/paymentRequests";
 import {TransactionSubmitManualPage} from "../pages/transaction-submit-manual/transaction-submit-manual";
 import {ClipboardModule} from "ngx-clipboard";
+import {ChooseWithdrawalMethodPage} from "../pages/choose-withdrawal-method/choose-withdrawal-method";
+import {WithdrawMoneyPage} from "../pages/withdraw-money/withdraw-money";
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import {ClipboardModule} from "ngx-clipboard";
     ContactConfirmPage,
     ProfilePage,
     TransactionSuccessPage,
-    RequestSubmitPage
+    RequestSubmitPage,
+    ChooseWithdrawalMethodPage,
+    WithdrawMoneyPage
   ],
   imports: [
     BrowserModule,
@@ -106,7 +110,9 @@ import {ClipboardModule} from "ngx-clipboard";
     ContactConfirmPage,
     ProfilePage,
     TransactionSuccessPage,
-    RequestSubmitPage
+    RequestSubmitPage,
+    ChooseWithdrawalMethodPage,
+    WithdrawMoneyPage
   ],
   providers: [
     StatusBar,

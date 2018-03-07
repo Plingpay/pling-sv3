@@ -29,7 +29,7 @@
     <ion-card class="currency-card" *ngFor="let balanceUnit of balance" >
       <div class="header">Balance</div>
       <div class="balance">{{balanceUnit.balance}} {{balanceUnit.currency}} </div>
-      <div class="withdraw">Withdraw money</div>
+      <div class="withdraw" (click)="withdraw(balanceUnit.id)">Withdraw money</div>
       <div class="card-logo">
         <img src="assets/imgs/diamond.svg"/>
       </div>

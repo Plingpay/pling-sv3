@@ -52,4 +52,12 @@ export class TransactionsProvider extends BaseProvider {
     return this.makeRawRequest('put', 'transactions/' + id, data);
   }
 
+  withdrawalUserMethods() {
+    return this.makeRawRequest('get', 'withdrawals/user_methods')
+  }
+
+  withdrawMoney(data) {
+    return this.makeRawRequest('post', 'withdrawals', data);
+  }
+
 }

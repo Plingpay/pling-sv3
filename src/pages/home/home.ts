@@ -12,6 +12,7 @@ import {ContactListPage} from "../contact-list/contact-list";
 import * as _ from 'lodash';
 import {PaymentRequestsProvider} from "../../providers/paymentRequests";
 import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
+import {ChooseWithdrawalMethodPage} from "../choose-withdrawal-method/choose-withdrawal-method";
 
 /**
  * Generated class for the HomePage page.
@@ -195,6 +196,10 @@ export class HomePage {
 
   toggleBlur() {
     this.blurPage = !this.blurPage;
+  }
+
+  withdraw(balanceID) {
+    this.navCtrl.push(ChooseWithdrawalMethodPage, {balanceID: balanceID})
   }
 
 }
