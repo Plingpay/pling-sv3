@@ -38,7 +38,7 @@
       <img src="assets/imgs/credit.svg">
     </div>
     <div class="action-button">
-      <a href="#" *ngIf="!creditCardNumber">Add method</a>
+      <a href="#" *ngIf="!creditCardNumber">Add card</a>
       <a href="#" *ngIf="creditCardNumber">**** **** **** {{creditCardNumber}}</a>
     </div>
   </ion-card>
@@ -50,7 +50,23 @@
       <img src="assets/imgs/bank_icon.svg">
     </div>
     <div class="action-button">
-      <a href="#">Add method</a>
+      <a href="#">Select method</a>
+    </div>
+  </ion-card>
+  <ion-card class="method-card bank" (click)="selectMobilePay()" *ngIf="baseService.currentUserCountry === 'DNK'">
+    <div class="method-name">
+      MobilePay
+    </div>
+    <div class="action-button">
+      <a href="#">Select method</a>
+    </div>
+  </ion-card>
+  <ion-card class="method-card bank" (click)="selectVips()" *ngIf="baseService.currentUserCountry === 'NOR'">
+    <div class="method-name">
+      Vips
+    </div>
+    <div class="action-button">
+      <a href="#">Select method</a>
     </div>
   </ion-card>
 </ion-content>

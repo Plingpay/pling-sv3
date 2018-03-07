@@ -143,4 +143,13 @@ export class ChoosePaymentMethodPage {
     this.selectPaymentMethod(this.swishId)
   }
 
+
+  selectMobilePay() {
+    this.showError("Service not yet available")
+  }
+
+  selectVips() {
+    this.showError("Service not yet available")
+  }
+
 }
