@@ -23,6 +23,7 @@ import {HomePage} from "../home/home";
 export class LoadingPage {
   private loader: Loading;
   private loadingCounter: Array<boolean>;
+  private show403: boolean;
 
   constructor(public navCtrl: NavController,
               public userProvider: UserProvider,
@@ -53,21 +54,25 @@ export class LoadingPage {
       prompt.present();
     });
     events.subscribe('403:show', () => {
-      let prompt = this.alertCtrl.create({
-        title: '<div class="alert-icon"><img src="assets/icon/alert.svg"/></div>',
-        message: "Your session has expired or you have insufficient rights to access this content. Please sign in again.",
-        buttons: [
-          {
-            text: 'OK',
-            handler: data => {
-              this.navCtrl.setRoot(LoginPage);
-              this.navCtrl.popToRoot();
-              this.events.publish('403:hide');
-            }
-          },
-        ]
-      });
-      prompt.present();
+      if (!this.show403) {
+        this.show403 = true;
+        this.navCtrl.setRoot(LoginPage);
+        this.navCtrl.popToRoot();
+        let prompt = this.alertCtrl.create({
+          title: '<div class="alert-icon"><img src="assets/icon/alert.svg"/></div>',
+          message: "Your session has expired or you have insufficient rights to access this content. Please sign in again.",
+          buttons: [
+            {
+              text: 'OK',
+              handler: data => {
+                this.events.publish('403:hide');
+                this.show403 = false;
+              }
+            },
+          ]
+        });
+        prompt.present();
+      }
     });
   }
 
