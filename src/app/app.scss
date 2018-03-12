@@ -38,7 +38,19 @@ $red: #FC5C5E;
 * {
   font-family: 'Lato';
 }
+.alert-icon {
+  position: absolute !important;
+  top: -26px;
+  left: 40%;
+  //z-index:9999;
+  border-radius: 53px;
+  background-color: #fafafa;
+  padding: 3px 3px 3px 3px;
 
+}
+.alert-wrapper {
+  contain: none;
+}
 .error {
   color: red !important;
 }

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import {
-  AlertController, Events, IonicPage, Loading, LoadingController, ModalController, NavController,
+  AlertController,
+  Events, IonicPage, Loading, LoadingController, ModalController, NavController,
   NavParams
 } from 'ionic-angular';
 import {LoginPage} from "../login/login";
 import {UserProvider} from "../../providers/user";
 import {HomePage} from "../home/home";
-import {ErrorPage} from "../error/error";
 
 /**
  * Generated class for the LoadingPage page.
@@ -39,11 +39,22 @@ export class LoadingPage {
       this.hideLoader();
     });
     events.subscribe('error:show', (title, message) => {
-      let modal = this.modalCtrl.create(ErrorPage, {title: title, message: message});
-      modal.present();
+      let prompt = this.alertCtrl.create({
+        title: '<div class="alert-icon"><img src="assets/icon/alert.svg"/></div>' + title,
+        message: message,
+        buttons: [
+          {
+            text: 'GOT IT',
+            handler: data => {
+            }
+          },
+        ]
+      });
+      prompt.present();
     });
     events.subscribe('403:show', () => {
       let prompt = this.alertCtrl.create({
+        title: '<div class="alert-icon"><img src="assets/icon/alert.svg"/></div>',
         message: "Your session has expired or you have insufficient rights to access this content. Please sign in again.",
         buttons: [
           {
