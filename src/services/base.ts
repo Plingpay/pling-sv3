@@ -29,6 +29,7 @@ export class BaseSingleton {
       phoneNumber: '',
       amount: '',
       currency: '',
+      currencyFrom: '',
       comment: '',
       showCommentInput: false
     }

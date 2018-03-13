@@ -179,11 +179,13 @@ export class HomePage {
     if ('id' in this.baseSingleton.currentUserPaymentMethod) {
       this.baseSingleton.transactionDetails.amount = transaction.amount;
       this.baseSingleton.transactionDetails.currency = transaction.currency.currency;
+      this.baseSingleton.transactionDetails.currencyFrom = transaction.currency_from.currency;
       this.baseSingleton.transactionDetails.phoneNumber = transaction.user.phone_number;
       this.transactionsProvider.prepareTransaction({
         amount_to: this.baseSingleton.transactionDetails.amount,
         phone_number_to: this.baseSingleton.transactionDetails.phoneNumber,
         currency_to: this.baseSingleton.transactionDetails.currency,
+        currency_from: this.baseSingleton.transactionDetails.currencyFrom,
         comment: this.baseSingleton.transactionDetails.comment
       }).then(transaction => {
         this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction, fromRequest: true});
