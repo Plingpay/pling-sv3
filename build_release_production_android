@@ -1,4 +1,6 @@
 #!/bin/bash -l
+export NODE_ENV=prod &&
+echo "SET NODE_ENV TO prod" &&
 export ANDROID_HOME=/var/lib/jenkins/android-sdk-macosx &&
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/25.0.0 &&
 node parse_config.js &&
