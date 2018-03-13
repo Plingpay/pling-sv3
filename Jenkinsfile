@@ -6,11 +6,7 @@ node {
     'develop': [
       'commandAndroid': './build_release_develop_android'
     ],
-    'master': [
-      'commandAndroid': './build_release_staging_android'
-
-    ],
-    'production': [
+    'prod': [
       'commandAndroid': './build_release_production_android'
     ]
   ]

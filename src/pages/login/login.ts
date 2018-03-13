@@ -1,5 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {IonicPage, NavController} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {RegisterPhonePage} from "../register-phone/register-phone";
 import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditions";
@@ -14,7 +14,6 @@ import {ForgotPasswordPage} from "../forgot-password/forgot-password";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',

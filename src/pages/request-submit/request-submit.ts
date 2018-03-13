@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import {TransactionSuccessPage} from "../transaction-success/transaction-success";
 import {BaseSingleton} from "../../services/base";
 import {PaymentRequestsProvider} from "../../providers/paymentRequests";
@@ -11,7 +11,6 @@ import {PaymentRequestsProvider} from "../../providers/paymentRequests";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-request-submit',
   templateUrl: 'request-submit.html',

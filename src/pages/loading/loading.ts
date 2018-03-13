@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
   AlertController,
-  Events, IonicPage, Loading, LoadingController, ModalController, NavController,
+  Events, Loading, LoadingController, ModalController, NavController,
   NavParams
 } from 'ionic-angular';
 import {LoginPage} from "../login/login";
@@ -15,7 +15,6 @@ import {HomePage} from "../home/home";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-loading',
   templateUrl: 'loading.html',

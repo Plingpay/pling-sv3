@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {NavController, NavParams, ViewController} from 'ionic-angular';
 import {FormBuilder, Validators} from "@angular/forms";
 import {CurrencyProvider} from "../../providers/currency";
 import {TransactionsProvider} from "../../providers/transactions";
@@ -11,7 +11,6 @@ import {TransactionsProvider} from "../../providers/transactions";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-add-card',
   templateUrl: 'add-card.html',

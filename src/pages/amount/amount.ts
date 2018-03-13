@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {NavController, NavParams, ViewController} from 'ionic-angular';
 import {CurrencyProvider} from "../../providers/currency";
 import {TransactionsProvider} from "../../providers/transactions";
 import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
@@ -15,7 +15,6 @@ import {TransactionSubmitManualPage} from "../transaction-submit-manual/transact
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-amount',
   templateUrl: 'amount.html',

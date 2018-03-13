@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Content, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Content, NavController, NavParams} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {VerifyAccountPage} from "../verify-account/verify-account";
 import {ExchangeRatesPage} from "../exchange-rates/exchange-rates";
@@ -21,7 +21,6 @@ import {ChooseWithdrawalMethodPage} from "../choose-withdrawal-method/choose-wit
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',

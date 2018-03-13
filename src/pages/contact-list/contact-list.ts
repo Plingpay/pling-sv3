@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, LoadingController, ModalController, NavController, NavParams, ViewController} from 'ionic-angular';
+import {LoadingController, ModalController, NavController, NavParams, ViewController} from 'ionic-angular';
 import {Contacts} from "@ionic-native/contacts";
 import {AmountPage} from "../amount/amount";
 import {Keyboard} from "@ionic-native/keyboard";
@@ -17,7 +17,6 @@ import * as _ from 'lodash';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-contact-list',
   templateUrl: 'contact-list.html',

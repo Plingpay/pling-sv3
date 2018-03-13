@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {TransactionsProvider} from "../../providers/transactions";
 
 /**
@@ -9,7 +9,6 @@ import {TransactionsProvider} from "../../providers/transactions";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-withdraw-money',
   templateUrl: 'withdraw-money.html',

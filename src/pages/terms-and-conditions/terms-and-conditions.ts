@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams} from 'ionic-angular';
+import { NavController, NavParams} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 
 /**
@@ -9,7 +9,6 @@ import {UserProvider} from "../../providers/user";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-terms-and-conditions',
   templateUrl: 'terms-and-conditions.html',

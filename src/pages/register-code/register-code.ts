@@ -1,5 +1,5 @@
 import {Component, ElementRef, Renderer} from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {CreatePasswordPage} from "../create-password/create-password";
 import {HomePage} from "../home/home";
@@ -11,7 +11,6 @@ import {HomePage} from "../home/home";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-register-code',
   templateUrl: 'register-code.html',

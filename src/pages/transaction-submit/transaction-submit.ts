@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
+import {ModalController, NavController, NavParams} from 'ionic-angular';
 import {TransactionsProvider} from "../../providers/transactions";
 import {BaseSingleton} from "../../services/base";
 import {TransactionSuccessPage} from "../transaction-success/transaction-success";
@@ -12,7 +12,6 @@ import {AmountPage} from "../amount/amount";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-transaction-submit',
   templateUrl: 'transaction-submit.html',

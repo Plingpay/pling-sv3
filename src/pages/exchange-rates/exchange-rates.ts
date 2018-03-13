@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {CurrencyProvider} from "../../providers/currency";
 
 /**
@@ -9,7 +9,6 @@ import {CurrencyProvider} from "../../providers/currency";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-exchange-rates',
   templateUrl: 'exchange-rates.html',

@@ -1,5 +1,5 @@
 import {Component, ElementRef, Renderer} from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {NavController, NavParams, ViewController} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {BaseSingleton} from "../../services/base";
 
@@ -10,7 +10,6 @@ import {BaseSingleton} from "../../services/base";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-contact-confirm',
   templateUrl: 'contact-confirm.html',

@@ -1,15 +1,15 @@
-import { Injectable } from "@angular/core";
-import {ENV} from "@environment";
+import {Inject, Injectable} from "@angular/core";
 import {Observable} from "rxjs/Rx";
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Events} from "ionic-angular";
+import {EnvVariables} from "../config/env.token";
 @Injectable()
 
 export class BaseProvider {
-  public envVars = ENV;
-  public API: string = ENV.API + '/api/';
-
+  public API: string = this.envVars.API + '/api/';
+  public ENV = this.envVars;
   constructor(private events: Events,
+              @Inject(EnvVariables) public envVars,
               public http: HttpClient
               ) {
   }

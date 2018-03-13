@@ -44,6 +44,7 @@ import {TransactionSubmitManualPage} from "../pages/transaction-submit-manual/tr
 import {ClipboardModule} from "ngx-clipboard";
 import {ChooseWithdrawalMethodPage} from "../pages/choose-withdrawal-method/choose-withdrawal-method";
 import {WithdrawMoneyPage} from "../pages/withdraw-money/withdraw-money";
+import {EnvironmentsModule} from "../config/env.module";
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import {WithdrawMoneyPage} from "../pages/withdraw-money/withdraw-money";
     MomentModule,
     HttpClientModule,
     ClipboardModule,
+    EnvironmentsModule,
     IonicModule.forRoot(MyApp, {
       mode: 'md'
     })

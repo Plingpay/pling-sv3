@@ -1,5 +1,5 @@
 import {Component, ElementRef} from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import {DocumentsProvider} from "../../providers/documents";
 import {DomSanitizer} from "@angular/platform-browser";
 
@@ -10,7 +10,6 @@ import {DomSanitizer} from "@angular/platform-browser";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-documents',
   templateUrl: 'documents.html',

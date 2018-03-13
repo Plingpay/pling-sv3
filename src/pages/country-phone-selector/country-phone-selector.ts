@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {NavController, NavParams, ViewController} from 'ionic-angular';
 import * as countryData from "country-data";
 import {UserProvider} from "../../providers/user";
 
@@ -11,7 +11,6 @@ import {UserProvider} from "../../providers/user";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-country-phone-selector',
   templateUrl: 'country-phone-selector.html',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import {TransactionsProvider} from "../../providers/transactions";
 import {WithdrawMoneyPage} from "../withdraw-money/withdraw-money";
 
@@ -10,7 +10,6 @@ import {WithdrawMoneyPage} from "../withdraw-money/withdraw-money";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-choose-withdrawal-method',
   templateUrl: 'choose-withdrawal-method.html',

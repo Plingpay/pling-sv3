@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {LoginPage} from "../login/login";
 import {CurrencyProvider} from "../../providers/currency";
@@ -16,7 +16,6 @@ import {HomePage} from "../home/home";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',

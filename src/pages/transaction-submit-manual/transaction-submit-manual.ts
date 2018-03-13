@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {TransactionSuccessPage} from "../transaction-success/transaction-success";
 import {TransactionsProvider} from "../../providers/transactions";
 
@@ -10,7 +10,6 @@ import {TransactionsProvider} from "../../providers/transactions";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-transaction-submit-manual',
   templateUrl: 'transaction-submit-manual.html',

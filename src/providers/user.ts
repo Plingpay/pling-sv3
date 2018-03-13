@@ -3,11 +3,10 @@ import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import {BaseProvider} from "./baseProvider";
-import {ENV} from "@environment";
 
 @Injectable()
 export class UserProvider extends BaseProvider {
-
+  public envVars = this.ENV;
   userAuth(data) {
     return this.makeRawRequest('post', 'login', data);
   }
@@ -33,7 +32,7 @@ export class UserProvider extends BaseProvider {
   }
 
   changePassword(password, url) {
-    return this.makeRawRequest('post', ENV.API + url, {new_password: password});
+    return this.makeRawRequest('post', this.ENV.API + url, {new_password: password});
   }
 
   registerSmsSignin(token, id) {

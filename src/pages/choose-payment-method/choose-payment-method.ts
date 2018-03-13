@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, ModalController, NavController, NavParams, ViewController} from 'ionic-angular';
+import {AlertController, ModalController, NavController, NavParams, ViewController} from 'ionic-angular';
 import {AddCardPage} from "../add-card/add-card";
 import {TransactionsProvider} from "../../providers/transactions";
 import {ContactListPage} from "../contact-list/contact-list";
@@ -13,7 +13,6 @@ import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-choose-payment-method',
   templateUrl: 'choose-payment-method.html',
