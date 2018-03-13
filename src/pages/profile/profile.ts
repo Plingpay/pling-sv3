@@ -26,7 +26,7 @@ export class ProfilePage {
     photo: undefined
   };
   public currencies: Array<any>;
-  public withdrawMethods: Array<any>;
+  //public withdrawMethods: Array<any>;
   public paymentMethods: Array<any>;
   public methodString: string;
   public tmpImage: any = false;
@@ -68,9 +68,9 @@ export class ProfilePage {
     this.currencyProvider.currencyList().then(data => {
       this.currencies = data.results;
     }, err => {});
-    this.transactionsProvider.withdrawMethods().then(data => {
-      this.withdrawMethods = data.results;
-    }, err => {});
+    // this.transactionsProvider.withdrawMethods().then(data => {
+    //   this.withdrawMethods = data.results;
+    // }, err => {});
 
   }
 

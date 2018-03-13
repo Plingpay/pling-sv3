@@ -60,18 +60,18 @@
                  item-end><div class="container-right">{{methodString}} <ion-icon name="arrow-dropdown"></ion-icon></div>
       </ion-label>
     </ion-item>
-    <ion-item>
-      <div class="item-icon" item-start><img src="assets/icon/cash-gray.svg"/></div>
-      <ion-label>Withdraw method</ion-label>
-      <ion-select
-        [disabled]="!enablePaymentOptions"
-        [(ngModel)]="profile.withdraw_type"
-        (ionChange)="saveProfile()"
-        class="method-selector"
-        placeholder="Choose option" item-end>
-        <ion-option *ngFor="let withdrawMethodItem of withdrawMethods" [value]="withdrawMethodItem.id">{{withdrawMethodItem.name}}</ion-option>
-      </ion-select>
-    </ion-item>
+    <!--<ion-item>-->
+      <!--<div class="item-icon" item-start><img src="assets/icon/cash-gray.svg"/></div>-->
+      <!--<ion-label>Withdraw method</ion-label>-->
+      <!--<ion-select-->
+        <!--[disabled]="!enablePaymentOptions"-->
+        <!--[(ngModel)]="profile.withdraw_type"-->
+        <!--(ionChange)="saveProfile()"-->
+        <!--class="method-selector"-->
+        <!--placeholder="Choose option" item-end>-->
+        <!--<ion-option *ngFor="let withdrawMethodItem of withdrawMethods" [value]="withdrawMethodItem.id">{{withdrawMethodItem.name}}</ion-option>-->
+      <!--</ion-select>-->
+    <!--</ion-item>-->
     <ion-item>
       <div class="item-icon" item-start><img src="assets/icon/currency-gray.svg"/></div>
       <ion-label>Currency</ion-label>
