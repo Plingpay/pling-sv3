@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.plingpay.develop" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>PlingPay Develop</name>
+<widget id="com.plingpay.application" version="0.4.58" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>PlingPay</name>
     <description>In our vision, anyone should be able to send money anywhere in any currency – fast, cheap and with a smile! From our team of dedicated Engineers and Economists with experience both from traditional banking and fintech comes a service which will change your every day life.</description>
     <author email="support@plingpay.com" href="http://plingpay.com/">Plingpay Team</author>
     <content src="index.html" />
@@ -92,9 +92,9 @@
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.11" />
     <plugin name="cordova-plugin-contacts" spec="^3.0.1" />
+    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <allow-navigation href="http://10.0.1.15:8100" />
     <allow-navigation href="http://192.168.56.1:8100" />
-    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <engine name="android" spec="7.0.0" />
     <engine name="browser" spec="~5.0.3" />
 </widget>
