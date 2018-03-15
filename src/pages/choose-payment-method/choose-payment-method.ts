@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, ModalController, NavController, NavParams, ViewController} from 'ionic-angular';
+import {AlertController, NavController, NavParams, ViewController} from 'ionic-angular';
 import {AddCardPage} from "../add-card/add-card";
 import {TransactionsProvider} from "../../providers/transactions";
 import {ContactListPage} from "../contact-list/contact-list";
@@ -38,7 +38,6 @@ export class ChoosePaymentMethodPage {
   constructor(public navCtrl: NavController,
               public transactionsProvider: TransactionsProvider,
               public baseService: BaseSingleton,
-              public modalCtrl: ModalController,
               public alertCtrl: AlertController,
               public viewCtrl: ViewController,
               public navParams: NavParams) {
@@ -46,7 +45,7 @@ export class ChoosePaymentMethodPage {
     this.paymentRequestTransaction = this.navParams.get('transaction');
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     this.baseService.paymentOptionsView = this.viewCtrl.index;
     this.loadMethods();
   }
@@ -102,11 +101,7 @@ export class ChoosePaymentMethodPage {
 
   selectCard() {
     if (!this.creditCardNumber) {
-      let modal = this.modalCtrl.create(AddCardPage);
-      modal.present();
-      modal.onDidDismiss(data => {
-        this.loadMethods();
-      });
+      this.navCtrl.push(AddCardPage);
     } else {
       this.selectPaymentMethod(this.creditCardId);
     }
@@ -114,6 +109,7 @@ export class ChoosePaymentMethodPage {
 
   private showError(message) {
     let prompt = this.alertCtrl.create({
+      title: '<div class="alert-icon"><img src="assets/icon/alert.svg"/></div>',
       message: message,
       buttons: [
         {
@@ -144,11 +140,11 @@ export class ChoosePaymentMethodPage {
 
 
   selectMobilePay() {
-    this.showError("Service not yet available")
+    this.showError("Service not yet available. We are working on it.")
   }
 
   selectVips() {
-    this.showError("Service not yet available")
+    this.showError("Service not yet available. We are working on it.")
   }
 
 }
