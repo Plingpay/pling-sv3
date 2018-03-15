@@ -102,7 +102,6 @@ export class ContactListPage {
   finalStep() {
     this.transactionsProvider.checkIfTransactionTemplate({phone_number: this.baseService.transactionDetails.phoneNumber})
       .then(transaction => {
-        console.log(transaction);
         this.baseService.transactionDetails.amount = transaction.transaction.amount.amount;
         this.baseService.transactionDetails.currency = transaction.transaction.amount.currency;
         this.baseService.transactionDetails.comment = transaction.transaction.comment;

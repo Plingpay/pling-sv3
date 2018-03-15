@@ -29,6 +29,8 @@ export class AmountPage {
 
   public currencyFrom: string;
 
+  public HomePage: any = HomePage;
+
   constructor(public navCtrl: NavController,
               public currencyProvider: CurrencyProvider,
               public transactionsProvider: TransactionsProvider,

@@ -32,7 +32,8 @@
         </ion-item>
       </ion-col>
     </ion-row>
-    <ion-item *ngIf="baseSingleton.currentUserPaymentMethod.drive === 'MANUAL'">
+    <ion-item *ngIf="(baseSingleton.currentUserPaymentMethod.drive === 'MANUAL')
+                      && (baseSingleton.actionSource === HomePage.SOURCE_TRANSACTION)">
       <ion-label floating>Your currency</ion-label>
       <ion-select [(ngModel)]="currencyFrom">
         <ion-option *ngFor="let currencyItem of currencies">{{currencyItem.currency}}</ion-option>
