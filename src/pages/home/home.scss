@@ -8,6 +8,7 @@ page-home {
     p {
       color: $light-black;
       margin-top: 20px;
+      padding: 0 20px 0 20px;
     }
   }
   .bar-buttons-md {
@@ -176,5 +177,10 @@ page-home {
 
   .release-reason {
     padding: 0 20px 0 20px;
+  }
+
+  ion-buttons {
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }

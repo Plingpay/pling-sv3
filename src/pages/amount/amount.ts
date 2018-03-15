@@ -71,13 +71,15 @@ export class AmountPage {
     }
     switch (this.baseSingleton.actionSource) {
       case HomePage.SOURCE_TRANSACTION:
-        this.transactionsProvider.prepareTransaction({
+        let transactionToSend = {
           amount_to: this.baseSingleton.transactionDetails.amount,
           phone_number_to: this.baseSingleton.transactionDetails.phoneNumber,
           currency_to: this.baseSingleton.transactionDetails.currency,
           currency_from: this.baseSingleton.transactionDetails.currencyFrom,
           comment: this.baseSingleton.transactionDetails.comment
-        }).then(transaction => {
+        };
+        if (!transactionToSend.currency_from) delete transactionToSend.currency_from;
+        this.transactionsProvider.prepareTransaction(transactionToSend).then(transaction => {
           if (this.baseSingleton.currentUserPaymentMethod.drive === 'MANUAL') {
             this.navCtrl.push(TransactionSubmitManualPage, {transaction: transaction.transaction});
           } else {

@@ -10,12 +10,7 @@ page-register-code {
     }
   }
 
-  .list-md .item-input.item-input-has-focus:last-child, .list-md .item-input.input-has-focus:last-child {
-    border-bottom-color: $light-gray !important;
-    box-shadow: none !important;
-  }
-
-  .list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus):last-child {
+  .list-md .item-input {
     border-bottom-color: $light-gray !important;
     box-shadow: none !important;
   }

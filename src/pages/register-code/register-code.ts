@@ -137,7 +137,8 @@ export class RegisterCodePage {
     this.user.repeatSms({phone_number: '+' + phone_striped})
       .then((data) => {
           let alert = this.alertCtrl.create({
-            subTitle: 'Please wait for sms',
+            title: '<div class="alert-icon"><img src="assets/icon/alert.svg"/></div>',
+            message: 'Please wait for sms',
             buttons: ['OK']
           });
           alert.present();
