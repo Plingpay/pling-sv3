@@ -81,7 +81,7 @@ export class ProfilePage {
   }
 
   chooseMethod() {
-    this.navCtrl.push(ChoosePaymentMethodPage, {source: ChoosePaymentMethodPage.SOURCE_PROFILE});
+    if (this.enablePaymentOptions) this.navCtrl.push(ChoosePaymentMethodPage, {source: ChoosePaymentMethodPage.SOURCE_PROFILE});
   }
 
   saveProfile() {

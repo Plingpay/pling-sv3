@@ -17,6 +17,10 @@ page-profile {
     text-align: center;
   }
 
+  .disabled {
+    color: #999 !important;
+  }
+
   .avatar-container {
     display: flex;
     justify-content: center;

@@ -31,7 +31,7 @@
     <ion-list-header>
       Personal info
     </ion-list-header>
-    <ion-item>
+    <ion-item *ngIf="profile.email">
       <div class="item-icon" item-start><img src="assets/icon/mail-gray.svg"/></div>{{profile?.email}}
     </ion-item>
     <ion-item>
@@ -44,7 +44,7 @@
     </ion-list-header>
     <ion-item>
       <div class="item-icon" item-start><img src="assets/icon/card-gray.svg"/></div>
-      <ion-label>Payment method</ion-label>
+      <ion-label [ngClass]="{'disabled': !enablePaymentOptions}">Payment method</ion-label>
       <button
         [disabled]="!enablePaymentOptions"
         clear
@@ -53,8 +53,8 @@
         (click)="chooseMethod()"
         *ngIf="profile.payment_method == 0"
       >Choose method</button>
-      <ion-label class="payment-method-name"
-                 [hidden]="!enablePaymentOptions"
+      <ion-label
+                 [ngClass]="{'disabled': !enablePaymentOptions, 'payment-method-name': true}"
                  *ngIf="profile.payment_method > 0"
         (click)="chooseMethod()"
                  item-end><div class="container-right">{{methodString}} <ion-icon name="arrow-dropdown"></ion-icon></div>
