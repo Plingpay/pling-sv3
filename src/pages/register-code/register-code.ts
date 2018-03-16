@@ -139,7 +139,7 @@ export class RegisterCodePage {
           let alert = this.alertCtrl.create({
             title: '<div class="alert-icon"><img src="assets/icon/alert.svg"/></div>',
             message: 'Please wait for sms',
-            buttons: ['OK']
+            buttons: ['GOT IT']
           });
           alert.present();
         },

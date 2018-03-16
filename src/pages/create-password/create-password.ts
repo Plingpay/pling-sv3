@@ -52,10 +52,11 @@ export class CreatePasswordPage {
               break;
             case 'reset':
               let alertPopup = this.alertCtrl.create({
-                subTitle: 'Your password has been successfully reset',
+                title: '<div class="alert-icon"><img src="assets/icon/alert.svg"/></div>',
+                message: 'Your password has been successfully reset',
                 buttons: [
                   {
-                    text: 'OK',
+                    text: 'GOT IT',
                     handler: data => {
                       this.navCtrl.setRoot(LoginPage);
                       this.navCtrl.popToRoot();

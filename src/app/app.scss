@@ -51,6 +51,9 @@ $red: #FC5C5E;
 .alert-wrapper {
   contain: none;
 }
+.alert-message {
+  text-align: center;
+}
 .error {
   color: red !important;
 }

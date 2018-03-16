@@ -39,10 +39,11 @@ export class WithdrawMoneyPage {
     });
     this.transactionsProvider.withdrawMoney(data).then(res => {
       let prompt = this.alertCtrl.create({
+        title: '<div class="alert-icon"><img src="assets/icon/alert.svg"/></div>',
         message: 'Your request has been successfully sent',
         buttons: [
           {
-            text: 'OK',
+            text: 'GOT IT',
             handler: data => {
               this.navCtrl.popToRoot();
             }

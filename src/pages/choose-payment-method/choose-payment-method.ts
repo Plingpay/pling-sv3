@@ -113,7 +113,7 @@ export class ChoosePaymentMethodPage {
       message: message,
       buttons: [
         {
-          text: 'OK',
+          text: 'GOT IT',
           handler: data => {
           }
         },

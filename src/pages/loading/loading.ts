@@ -62,7 +62,7 @@ export class LoadingPage {
           message: "Your session has expired or you have insufficient rights to access this content. Please sign in again.",
           buttons: [
             {
-              text: 'OK',
+              text: 'GOT IT',
               handler: data => {
                 this.events.publish('403:hide');
                 this.show403 = false;
