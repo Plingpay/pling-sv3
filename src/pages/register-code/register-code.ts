@@ -70,35 +70,55 @@ export class RegisterCodePage {
   }
 
   codeInputFirst(event) {
-    if (/^\d$/.test(event.key))  {
+    event.preventDefault();
+    let keyIdentifier = '';
+    if (event.keyIdentifier) keyIdentifier = String.fromCharCode(event.keyIdentifier.replace('U+', '0x'));
+    let key = event.key || keyIdentifier;
+    if (/^\d$/.test(key))  {
+      this.codeNum1 = key;
       this.selectSecond();
     }
 
   }
 
   codeInputSecond(event) {
-    if (/^\d$/.test(event.key))  {
+    event.preventDefault();
+    let keyIdentifier = '';
+    if (event.keyIdentifier) keyIdentifier = String.fromCharCode(event.keyIdentifier.replace('U+', '0x'));
+    let key = event.key || keyIdentifier;
+    if (/^\d$/.test(key))  {
+      this.codeNum2 = key;
       this.selectThird();
-    } else if ((event.key === 'Backspace') && (this.codeNum2 === '')) {
+    } else if (((event.key === 'Backspace') || (event.keyIdentifier === 'U+0008')) && (this.codeNum2 === '')) {
       this.selectFirst();
     }
   }
 
   codeInputThird(event) {
-    if (/^\d$/.test(event.key))  {
+    event.preventDefault();
+    let keyIdentifier = '';
+    if (event.keyIdentifier) keyIdentifier = String.fromCharCode(event.keyIdentifier.replace('U+', '0x'));
+    let key = event.key || keyIdentifier;
+    if (/^\d$/.test(key))  {
+      this.codeNum3 = key;
       this.selectFourth();
-    } else if ((event.key === 'Backspace') && (this.codeNum3 === '')) {
+    } else if (((event.key === 'Backspace') || (event.keyIdentifier === 'U+0008')) && (this.codeNum3 === '')) {
       this.selectSecond();
     }
   }
 
   codeInputFourth(event) {
-    if (/^\d$/.test(event.key))  {
+    event.preventDefault();
+    let keyIdentifier = '';
+    if (event.keyIdentifier) keyIdentifier = String.fromCharCode(event.keyIdentifier.replace('U+', '0x'));
+    let key = event.key || keyIdentifier;
+    if (/^\d$/.test(key))  {
+      this.codeNum4 = key;
       let submitButton = this.elementRef.nativeElement.querySelector('#submitButton');
       setTimeout(() => {
         this.renderer.invokeElementMethod(submitButton, 'focus', []);
       }, 0);
-    } else if ((event.key === 'Backspace') && (this.codeNum4 === '')) {
+    } else if ((event.key === 'Backspace') || (event.keyIdentifier === 'U+0008')) {
       this.selectThird();
     }
   }

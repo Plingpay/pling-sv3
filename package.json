@@ -29,6 +29,7 @@
     "angular2-moment": "^1.8.0",
     "cordova-android": "7.0.0",
     "cordova-browser": "~5.0.3",
+    "cordova-ios": "~4.5.4",
     "cordova-plugin-contacts": "^3.0.1",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-ionic-webview": "^1.1.16",
@@ -48,6 +49,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.6",
+    "lato-font": "^3.0.0",
     "rollup-plugin-replace": "^2.0.0",
     "typescript": "2.4.2"
   },
@@ -63,7 +65,8 @@
     },
     "platforms": [
       "android",
-      "browser"
+      "browser",
+      "ios"
     ]
   },
   "config": {
