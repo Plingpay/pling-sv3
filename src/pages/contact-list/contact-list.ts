@@ -65,9 +65,9 @@ export class ContactListPage {
     let loader = this.loadingCtrl.create({
       content: "Reading contacts...",
     });
-    loader.present();
+    if (this.contacts) loader.present();
     this.contacts.find(['*']).then(contacts => {
-      this.contactsList = _.sortBy(contacts, [user => { return user.displayName }]);
+      this.contactsList = _.sortBy(contacts, [user => { return (user.displayName || user.name.formatted) }]);
       loader.dismiss();
     }, err => {
       loader.dismiss();

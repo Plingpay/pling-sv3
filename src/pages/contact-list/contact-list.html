@@ -37,7 +37,7 @@
         <ion-avatar item-start>
           <img src="assets/icon/empty_avatar.svg"/>
         </ion-avatar>
-        <h2>{{contact.displayName}}</h2>
+        <h2>{{contact.displayName || contact.name.formatted}}</h2>
         <ion-note item-end class="contact-number">
           {{contact.phoneNumbers[0].value}}
         </ion-note>
