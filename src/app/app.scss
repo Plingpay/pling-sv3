@@ -60,6 +60,9 @@ $red: #FC5C5E;
 .orange {
   background-color: $orange;
 }
+button[disabled] {
+  background-color: $light-black;
+}
 .clear-toolbar {
   .button-inner {
     font-weight: bold;
