@@ -1,0 +1,2 @@
+workspace "platforms/ios/PlingPay Develop.xcworkspace"
+export_method "app-store"

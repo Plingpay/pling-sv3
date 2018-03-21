@@ -44,7 +44,7 @@ fs.readFile('config.xml', 'utf-8', function (err, data) {
     });
   });
 });
-/*fs.readFile('build.json', 'utf-8', function (err, data) {
+fs.readFile('build.json', 'utf-8', function (err, data) {
   if (err) console.log('\x1b[31m', err);
   var parsedJson = JSON.parse(data);
   parsedJson.ios.debug.developmentTeam = envVariables.teamID;
@@ -56,7 +56,7 @@ fs.readFile('config.xml', 'utf-8', function (err, data) {
     }
     console.log('\x1b[32m','build.json generated');
   });
-});*/
+});
 fs.writeFile("fastlane/Appfile", 'json_key_file "' + envVariables.androidKeyFile +'"\n' +
   'package_name "' + envVariables.appID +'"\n' +
   'app_identifier "' + envVariables.appID +'"\n' +
@@ -70,7 +70,7 @@ fs.writeFile("fastlane/Appfile", 'json_key_file "' + envVariables.androidKeyFile
     }
     console.log('\x1b[32m',"Successfully written fastlane AppFile");
   });
-/*fs.writeFile("fastlane/Gymfile", 'workspace "platforms/ios/' + envVariables.appName +'.xcworkspace"\n' +
+fs.writeFile("fastlane/Gymfile", 'workspace "platforms/ios/' + envVariables.appName +'.xcworkspace"\n' +
   'export_method "app-store"'
   , function(err) {
     if(err) {
@@ -78,7 +78,7 @@ fs.writeFile("fastlane/Appfile", 'json_key_file "' + envVariables.androidKeyFile
       process.exit(1);
     }
     console.log('\x1b[32m',"Successfully written fastlane GymFile");
-  });*/
+});
 fs.writeFile("fastlane/metadata/android/en-US/full_description.txt", envVariables.androidFullDescription, function(err) {
   if(err) {
     console.log('\x1b[31m', err);

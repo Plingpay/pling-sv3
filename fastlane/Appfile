@@ -1,5 +1,5 @@
 json_key_file "fastlane/gplay-enkonix-key.json"
 package_name "com.plingpay.develop"
 app_identifier "com.plingpay.develop"
-apple_id "TBD"
-team_id "TBD"
+apple_id "admin@plingpay.com"
+team_id "NH62P9MHVK"
