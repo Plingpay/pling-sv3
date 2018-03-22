@@ -3,16 +3,16 @@ import {BaseProvider} from "./baseProvider";
 
 @Injectable()
 export class TransactionsProvider extends BaseProvider {
-  transactions() {
-    return this.makeRawRequest('get', 'transactions')
+  transactions(source: string = '') {
+    return this.makeRawRequest('get', 'transactions', {}, source)
   }
 
   lastContacts() {
     return this.makeRawRequest('get', 'last_contacts');
   }
 
-  paymentMethods() {
-    return this.makeRawRequest('get', 'payment_methods')
+  paymentMethods(source: string = '') {
+    return this.makeRawRequest('get', 'payment_methods', {}, source)
   }
 
   selectPaymentMethod(id) {

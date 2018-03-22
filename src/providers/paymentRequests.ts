@@ -3,8 +3,8 @@ import {BaseProvider} from "./baseProvider";
 
 @Injectable()
 export class PaymentRequestsProvider extends BaseProvider {
-  paymentRequests() {
-    return this.makeRawRequest('get', 'payment_requests')
+  paymentRequests(source: string = '') {
+    return this.makeRawRequest('get', 'payment_requests', {}, source);
   }
 
   sendPaymentRequest(data) {

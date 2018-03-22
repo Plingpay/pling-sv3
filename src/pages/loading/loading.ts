@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
   AlertController,
-  Events, Loading, LoadingController, ModalController, NavController,
+  Events, Loading, LoadingController, NavController,
   NavParams
 } from 'ionic-angular';
 import {LoginPage} from "../login/login";
@@ -23,12 +23,13 @@ export class LoadingPage {
   private loader: Loading;
   private loadingCounter: Array<boolean>;
   private show403: boolean;
+  private show500: boolean;
+  private showOffline: boolean;
 
   constructor(public navCtrl: NavController,
               public userProvider: UserProvider,
               public alertCtrl: AlertController,
               public events: Events,
-              public modalCtrl: ModalController,
               public loadingCtrl: LoadingController,
               public navParams: NavParams) {
     this.loadingCounter = [];
@@ -66,6 +67,46 @@ export class LoadingPage {
               handler: data => {
                 this.events.publish('403:hide');
                 this.show403 = false;
+              }
+            },
+          ]
+        });
+        prompt.present();
+      }
+    });
+
+    events.subscribe('500:show', () => {
+      if (!this.show500) {
+        this.show500 = true;
+        let prompt = this.alertCtrl.create({
+          title: '<div class="alert-icon"><img src="assets/icon/alert.svg"/></div>',
+          message: "Something went wrong. Please try again later.",
+          buttons: [
+            {
+              text: 'GOT IT',
+              handler: data => {
+                this.events.publish('500:hide');
+                this.show500 = false;
+              }
+            },
+          ]
+        });
+        prompt.present();
+      }
+    });
+
+    events.subscribe('offline:show', () => {
+      if (!this.showOffline) {
+        this.showOffline = true;
+        let prompt = this.alertCtrl.create({
+          title: '<div class="alert-icon"><img src="assets/icon/alert.svg"/></div>',
+          message: "Please check your internet connection",
+          buttons: [
+            {
+              text: 'GOT IT',
+              handler: data => {
+                this.events.publish('offline:hide');
+                this.showOffline = false;
               }
             },
           ]

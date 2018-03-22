@@ -8,6 +8,9 @@ import {EnvVariables} from "../config/env.token";
 export class BaseProvider {
   public API: string = this.envVars.API + '/api/';
   public ENV = this.envVars;
+
+  public static HIDE_LOADING = 'hideLoading';
+
   constructor(private events: Events,
               @Inject(EnvVariables) public envVars,
               public http: HttpClient
@@ -24,8 +27,17 @@ export class BaseProvider {
   }
 
   private _catchRequestError(error: HttpErrorResponse, source: string): void {
-    this.events.publish('loading:hide');
+    console.log(error);
+    if (source !== BaseProvider.HIDE_LOADING) this.events.publish('loading:hide');
     if (source === 'hideError') return;
+    if (error.status === 0) {
+      this.showOfflineError();
+      return;
+    }
+    if (error.status === 500) {
+      this.show500();
+      return;
+    }
     if (error.status === 403) {
       if (source !== 'LoadingEntry') this.show403();
     } else {
@@ -41,8 +53,16 @@ export class BaseProvider {
       this.events.publish('403:show');
   }
 
+  private show500() {
+    this.events.publish('500:show');
+  }
+
+  private showOfflineError() {
+    this.events.publish('offline:show');
+  }
+
   protected makeRawRequest(method: any, path: String, data: object = {}, source: string = ''): Promise<any> {
-    this.events.publish('loading:show');
+    if (source !== BaseProvider.HIDE_LOADING) this.events.publish('loading:show');
     let finalPath = (path.indexOf('http') !== -1) ? path : this.API + path;
     let action = (method === 'get')?this.http[method](finalPath, this.reqOptions())
                                     :this.http[method](finalPath, data, this.reqOptions());

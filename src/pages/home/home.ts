@@ -13,6 +13,7 @@ import * as _ from 'lodash';
 import {PaymentRequestsProvider} from "../../providers/paymentRequests";
 import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
 import {ChooseWithdrawalMethodPage} from "../choose-withdrawal-method/choose-withdrawal-method";
+import {BaseProvider} from "../../providers/baseProvider";
 
 /**
  * Generated class for the HomePage page.
@@ -80,6 +81,8 @@ export class HomePage {
 
   public blurPage: boolean;
 
+  public requestsArray: Array<boolean> = [];
+
   private userID: number;
   @ViewChild(Content) content: Content;
 
@@ -92,10 +95,26 @@ export class HomePage {
               public navParams: NavParams) {
   }
 
-  ionViewDidEnter() {
-    // Call provider methods async
-    this.userProvider.status().then(
+  doRefresh(refresher) {
+    this.reloadData(refresher);
+  }
+
+  private requestCompleted(refresher) {
+    this.requestsArray.pop();
+    if (refresher && this.requestsArray.length === 0) {
+      refresher.complete();
+    }
+  }
+
+  private requestStarted(refresher) {
+    this.requestsArray.push(true);
+  }
+
+  reloadData(refresher = false) {
+    this.requestStarted(refresher);
+    this.userProvider.status(refresher?BaseProvider.HIDE_LOADING:'').then(
       data => {
+        this.requestCompleted(refresher);
         let userStatus = data;
         this.baseSingleton.currentUserPaymentMethod = userStatus.payment_method;
         this.baseSingleton.currentUserStatus = userStatus.status;
@@ -106,15 +125,23 @@ export class HomePage {
         this.documentsUploaded = userStatus.documents_uploaded;
         this.verified = userStatus.verify;
         this.content.resize();
-      }, err => {}
-      );
-    this.balanceProvider.balances().then(data => {this.balance = data.results}, err => {});
-    this.transactionsProvider.transactions().then(data => {
+      }, err => {this.requestCompleted(refresher);}
+    );
+    this.requestStarted(refresher);
+    this.balanceProvider.balances(refresher?BaseProvider.HIDE_LOADING:'').then(data => {
+      this.requestCompleted(refresher);
+      this.balance = data.results
+    }, err => {this.requestCompleted(refresher)});
+    this.requestStarted(refresher);
+    this.transactionsProvider.transactions(refresher?BaseProvider.HIDE_LOADING:'').then(data => {
+      this.requestCompleted(refresher);
       this.transactions = data.results;
       this.transactions.forEach(transaction => {
         transaction['source_type'] = HomePage.SOURCE_TRANSACTION;
       });
-      this.paymentRequestsProvider.paymentRequests().then(requestsData => {
+      this.requestStarted(refresher);
+      this.paymentRequestsProvider.paymentRequests(refresher?BaseProvider.HIDE_LOADING:'').then(requestsData => {
+        this.requestCompleted(refresher)
         this.paymentRequests = requestsData.results;
         this.paymentRequests.forEach(request => {
           request['source_type'] = HomePage.SOURCE_REQUEST;
@@ -132,9 +159,16 @@ export class HomePage {
           }
         );
         this.historyToShow = groupedArray;
-      }, err => {})
-    }, err => {});
-    this.transactionsProvider.paymentMethods().then(data => {this.paymentMethods = data.results}, err => {});
+      }, err => {this.requestCompleted(refresher)})
+    }, err => {this.requestCompleted(refresher)});
+    this.requestStarted(refresher);
+    this.transactionsProvider.paymentMethods(refresher?BaseProvider.HIDE_LOADING:'').then(data => {
+      this.requestCompleted(refresher);
+      this.paymentMethods = data.results}, err => {this.requestCompleted(refresher)});
+  }
+
+  ionViewDidEnter() {
+    this.reloadData();
   }
 
   verifyProfile() {

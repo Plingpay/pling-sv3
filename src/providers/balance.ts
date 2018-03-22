@@ -3,7 +3,7 @@ import {BaseProvider} from "./baseProvider";
 
 @Injectable()
 export class BalanceProvider extends BaseProvider {
-  balances() {
-    return this.makeRawRequest('get', 'balances');
+  balances(source: string = '') {
+    return this.makeRawRequest('get', 'balances', {}, source);
   }
 }
