@@ -23,7 +23,7 @@ export class LoginPage {
   public phone_number: String = '';
   private password: String = '';
 
-  @ViewChild('phoneInput') phoneInput ;
+  @ViewChild('phoneInput') phoneInput;
 
   constructor(public navCtrl: NavController,
               public user: UserProvider,
@@ -47,7 +47,13 @@ export class LoginPage {
   }
 
   signUp() {
-    this.navCtrl.push(RegisterPhonePage);
+    if (this.phone_number.length > 5) {
+      this.user.registerPhone({phone_number: this.phone_number})
+        .then((data) => {
+            this.navCtrl.push(RegisterCodePage, {phone: this.phone_number, user: data.user_id, source: 'signup'})
+          },
+          (err) => {})
+    } else this.navCtrl.push(RegisterPhonePage);
   }
 
   goToRates() {

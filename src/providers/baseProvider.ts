@@ -27,7 +27,6 @@ export class BaseProvider {
   }
 
   private _catchRequestError(error: HttpErrorResponse, source: string): void {
-    console.log(error);
     if (source !== BaseProvider.HIDE_LOADING) this.events.publish('loading:hide');
     if (source === 'hideError') return;
     if (error.status === 0) {

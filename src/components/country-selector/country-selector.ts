@@ -16,7 +16,7 @@ import {UserProvider} from "../../providers/user";
 export class CountrySelectorComponent {
   @Output() onSelect = new EventEmitter();
   @Output() onCountriesLoaded = new EventEmitter();
-  @Input('inputModel') inputModel: string;
+  @Input('inputModel') inputModel: string = '';
   @Input('inputLabel') inputLabel: string = 'Phone';
   @Input('inputFlag') imagePath: string;
   @Input('inputCode') selectedCode: string;
@@ -58,7 +58,7 @@ export class CountrySelectorComponent {
   }
 
   triggerInputEvent() {
-    let phoneStriped;
+    let phoneStriped = '';
     if (this.inputModel) {phoneStriped = this.inputModel.replace(/\D/g,'')}
     let codeStriped = this.selectedCode.replace(/\D/g,'');
     this.onSelect.emit({data: '+' + codeStriped + phoneStriped});
