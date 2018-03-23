@@ -14,47 +14,40 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-row>
-      <ion-col col-1 class="icon-container">
+    <ion-item>
+      <div class="icon-container" item-start>
         <img src="assets/icon/wallet.svg"/>
-      </ion-col>
-      <ion-col col-11 class="amount-container">
-        <ion-item>
-          <ion-label floating>Amount</ion-label>
-          <ion-input type="tel" [(ngModel)]="amount"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col col-4 class="select-currency-container">
-        <ion-item class="select-currency">
-          <ion-select [(ngModel)]="currency" class="currency-selector">
-            <ion-option *ngFor="let currencyItem of currencies">{{currencyItem.currency}}</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+      </div>
+      <!--<ion-label floating>Amount</ion-label>-->
+      <ion-input type="tel" [(ngModel)]="amount" placeholder="Amount"></ion-input>
+      <ion-select [(ngModel)]="currency" item-end>
+        <ion-option *ngFor="let currencyItem of currencies">{{currencyItem.currency}}</ion-option>
+      </ion-select>
+    </ion-item>
     <ion-item *ngIf="(baseSingleton.currentUserPaymentMethod.drive === 'MANUAL')
                       && (baseSingleton.actionSource === HomePage.SOURCE_TRANSACTION)">
-      <ion-label floating>Your currency</ion-label>
-      <ion-select [(ngModel)]="currencyFrom">
+      <div class="icon-container" item-start>
+        <img src="assets/icon/currency-gray.svg"/>
+      </div>
+      <!--<ion-label floating>Your currency</ion-label>-->
+      <ion-input disabled placeholder="Your currency" (click)="currency.open()"></ion-input>
+      <ion-select [(ngModel)]="currencyFrom" #currency item-end>
         <ion-option *ngFor="let currencyItem of currencies">{{currencyItem.currency}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item *ngIf="!baseSingleton.transactionDetails.showCommentInput && !baseSingleton.transactionDetails.comment" class="comment-container">
-      <div class="add-container" *ngIf="!baseSingleton.transactionDetails.showCommentInput" >
+      <div *ngIf="!baseSingleton.transactionDetails.showCommentInput" class="add-comment-link">
         <a href="#"(click)="baseSingleton.transactionDetails.showCommentInput = true">Add a comment</a>
       </div>
     </ion-item>
-    <ion-row *ngIf="baseSingleton.transactionDetails.showCommentInput || baseSingleton.transactionDetails.comment">
-      <ion-col col-1 class="icon-container">
-        <img src="assets/icon/comment.svg"/>
-      </ion-col>
-      <ion-col col-11 class="comment-input-col">
-        <ion-item>
-          <ion-label floating class="comment-label">Comment</ion-label>
-          <ion-input type="text" [(ngModel)]="comment"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+    <ion-item
+      class="comment-item"
+      *ngIf="baseSingleton.transactionDetails.showCommentInput || baseSingleton.transactionDetails.comment">
+      <div class="icon-container" item-start>
+        <img src="assets/icon/comment-gray.svg"/>
+      </div>
+      <ion-input type="text" [(ngModel)]="comment" placeholder="Comment"></ion-input>
+    </ion-item>
   </ion-list>
 </ion-content>
 

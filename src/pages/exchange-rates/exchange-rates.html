@@ -13,11 +13,20 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding>
   <ion-list class="top-block">
+    <p class="select-name">Select your local currency</p>
     <ion-item class="top-block-item">
-      <ion-label class="select-name">Select your local currency</ion-label>
-      <ion-select [(ngModel)]="currency" (ionChange)="loadRates()" color="primary">
+      <ion-input type="tel"
+                 (keydown)="amountEntered($event)"
+                 [(ngModel)]="amount"
+      ></ion-input>
+      <ion-select
+        [(ngModel)]="currency"
+        (ionChange)="loadRates()"
+        color="primary"
+        class="select-currency-container"
+      >
         <ion-option *ngFor="let currencyItem of currencies">{{currencyItem.currency}}</ion-option>
       </ion-select>
     </ion-item>
@@ -25,9 +34,10 @@
   <p class="rate-note">
         Please choose currency so we can show you a conversion to the local currency
   </p>
-  <ion-list no-lines>
+  <ion-list class="currencies-list">
     <ion-item *ngFor="let rate of rates" class="currency-item">
-      <ion-label><div class="currency-flag currency-flag-{{rate.currency.toLocaleLowerCase()}}"></div>
+      <div class="currency-flag currency-flag-{{rate.currency.toLocaleLowerCase()}}" item-start></div>
+      <ion-label>
         <span class="rate-currency">{{rate.currency}}</span> </ion-label>
       <ion-note item-end>
       {{rate.value}}

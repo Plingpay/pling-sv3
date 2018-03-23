@@ -1,5 +1,6 @@
 page-choose-payment-method {
   .method-card {
+    box-shadow: none;
     height: 170px;
     position: relative;
     border-radius: 5px;
@@ -60,5 +61,15 @@ page-choose-payment-method {
   .scroll-content {
     padding: 10px 10px 10px 10px;
     background-color: $light-gray;
+  }
+
+  .add-card {
+    border: 2px $blue solid;
+    .action-button > a{
+      color: $blue;
+    }
+    .card-image > img {
+      filter: none;
+    }
   }
 }

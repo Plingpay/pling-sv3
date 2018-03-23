@@ -88,6 +88,6 @@ $colors: (
 @import "noto-sans";
 
 $select-md-placeholder-color: rgb(255, 174, 0);
-$text-input-md-show-focus-highlight: false !default;
-$text-input-md-show-valid-highlight: $text-input-md-show-focus-highlight !default;
-$text-input-md-show-invalid-highlight: $text-input-md-show-focus-highlight !default;
+//$text-input-md-show-focus-highlight: false !default;
+$text-input-md-show-valid-highlight: false !default;
+$text-input-md-show-invalid-highlight: false !default;

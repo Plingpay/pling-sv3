@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, ViewController} from 'ionic-angular';
+import {Events, NavController, NavParams} from 'ionic-angular';
 import {CurrencyProvider} from "../../providers/currency";
 import {TransactionsProvider} from "../../providers/transactions";
 import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
@@ -34,7 +34,7 @@ export class AmountPage {
   constructor(public navCtrl: NavController,
               public currencyProvider: CurrencyProvider,
               public transactionsProvider: TransactionsProvider,
-              public viewCtrl: ViewController,
+              public events: Events,
               public baseSingleton: BaseSingleton,
               public navParams: NavParams) {
   }
@@ -66,7 +66,8 @@ export class AmountPage {
     this.baseSingleton.transactionDetails.currencyFrom = this.currencyFrom;
     this.baseSingleton.transactionDetails.comment = this.comment;
     if (this.isModal) {
-      this.viewCtrl.dismiss();
+      this.events.publish('transactions:edited');
+      this.navCtrl.pop();
       return
     }
     switch (this.baseSingleton.actionSource) {

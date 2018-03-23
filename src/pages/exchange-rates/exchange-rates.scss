@@ -22,25 +22,15 @@ page-exchange-rates {
   }
 
   .rate-note {
-    padding-left: 16px;
     color: $light-black !important;
   }
 
   .top-block {
-    margin-top: 30px;
+    margin-top: 10px;
   }
 
   .top-block-item {
     background-color: $light-gray !important;
-  }
-
-  .rate-currency {
-    margin-left: 40px;
-  }
-
-  .currency-flag {
-    position: absolute;
-    top: 14px;
   }
 
   ion-note {
@@ -48,7 +38,25 @@ page-exchange-rates {
     color: $black !important;
   }
 
-  .currency-item:nth-child(odd) {
-    background-color: $light-gray;
+  .currencies-list {
+    .item {
+      background-color: $light-gray;
+    }
+  }
+
+  .item {
+    padding-left: 0;
+  }
+
+  .item.item-block .item-inner {
+    padding-right: 0;
+  }
+
+  .text-input {
+    margin-left: 0;
+  }
+
+  .item [item-start] {
+    margin-right: 20px;
   }
 }

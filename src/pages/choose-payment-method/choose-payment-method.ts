@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController, NavParams, ViewController} from 'ionic-angular';
+import {AlertController, Events, NavController, NavParams, ViewController} from 'ionic-angular';
 import {AddCardPage} from "../add-card/add-card";
 import {TransactionsProvider} from "../../providers/transactions";
 import {ContactListPage} from "../contact-list/contact-list";
@@ -24,8 +24,7 @@ export class ChoosePaymentMethodPage {
   public static SOURCE_PROFILE = 1;
   public static SOURCE_PAYMENT_REQUEST = 2;
 
-  public creditCardNumber: string;
-  public creditCardId: number;
+  public creditCards: Array<any> = [];
 
   public bankAccountId: number;
   public swishId: number;
@@ -40,9 +39,13 @@ export class ChoosePaymentMethodPage {
               public baseService: BaseSingleton,
               public alertCtrl: AlertController,
               public viewCtrl: ViewController,
+              public events: Events,
               public navParams: NavParams) {
     this.source = this.navParams.get('source');
     this.paymentRequestTransaction = this.navParams.get('transaction');
+    events.subscribe('paymentMethods:cardAdded', (methodID) => {
+      this.selectPaymentMethod(methodID, true);
+    });
   }
 
   ionViewDidEnter() {
@@ -51,13 +54,13 @@ export class ChoosePaymentMethodPage {
   }
 
   loadMethods() {
+    this.creditCards = [];
     this.transactionsProvider.paymentMethods().then(data => {
       this.paymentMethods = data.results;
       this.paymentMethods.forEach(method => {
         switch (method.type) {
           case ChoosePaymentMethodPage.CREDIT_CARD_METHOD:
-            this.creditCardNumber = method.last_4;
-            this.creditCardId = method.id;
+            this.creditCards.push(method);
             break;
           case ChoosePaymentMethodPage.BANK_ACCOUNT_METHOD:
             this.bankAccountId = method.id;
@@ -70,9 +73,10 @@ export class ChoosePaymentMethodPage {
     }, err => {});
   }
 
-  private selectPaymentMethod(methodId) {
+  private selectPaymentMethod(methodId, fromEvent = false) {
     this.transactionsProvider.selectPaymentMethod(methodId).then(
       res => {
+        if (fromEvent) this.navCtrl.pop();
         switch (this.source) {
           case ChoosePaymentMethodPage.SOURCE_PROFILE:
             this.navCtrl.pop();
@@ -99,12 +103,8 @@ export class ChoosePaymentMethodPage {
     );
   }
 
-  selectCard() {
-    if (!this.creditCardNumber) {
-      this.navCtrl.push(AddCardPage);
-    } else {
-      this.selectPaymentMethod(this.creditCardId);
-    }
+  selectCard(method) {
+    this.selectPaymentMethod(method.id);
   }
 
   private showError(message) {
@@ -145,6 +145,10 @@ export class ChoosePaymentMethodPage {
 
   selectVips() {
     this.showError("Service not yet available. We are working on it.")
+  }
+
+  addCard() {
+    this.navCtrl.push(AddCardPage);
   }
 
 }

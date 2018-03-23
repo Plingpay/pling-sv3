@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ModalController, NavController, NavParams} from 'ionic-angular';
+import {Events, NavController, NavParams} from 'ionic-angular';
 import {TransactionsProvider} from "../../providers/transactions";
 import {BaseSingleton} from "../../services/base";
 import {TransactionSuccessPage} from "../transaction-success/transaction-success";
@@ -25,18 +25,11 @@ export class TransactionSubmitPage {
   constructor(public navCtrl: NavController,
               public transactionsProvider: TransactionsProvider,
               public baseService: BaseSingleton,
-              public modalCtrl: ModalController,
+              public events: Events,
               public navParams: NavParams) {
     this.transaction = this.navParams.get('transaction');
     this.fromRequest = this.navParams.get('fromRequest');
-  }
-
-  ionViewDidLoad() {
-  }
-
-  edit() {
-    let amountModal = this.modalCtrl.create(AmountPage, { isModal: true });
-    amountModal.onDidDismiss(data => {
+    events.subscribe('transactions:edited', () => {
       this.transactionsProvider.editTransaction(this.transaction.id, {
         amount_to: this.baseService.transactionDetails.amount,
         currency_to: this.baseService.transactionDetails.currency,
@@ -45,7 +38,13 @@ export class TransactionSubmitPage {
         this.transaction = transaction.transaction;
       }, err => {});
     });
-    amountModal.present();
+  }
+
+  ionViewDidLoad() {
+  }
+
+  edit() {
+    this.navCtrl.push(AmountPage, { isModal: true });
   }
 
   submit() {

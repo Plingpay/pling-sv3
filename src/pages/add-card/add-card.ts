@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {Events, NavController, NavParams} from 'ionic-angular';
 import {FormBuilder, Validators} from "@angular/forms";
 import {CurrencyProvider} from "../../providers/currency";
 import {TransactionsProvider} from "../../providers/transactions";
@@ -22,6 +22,7 @@ export class AddCardPage {
   constructor(public navCtrl: NavController,
               public formBuilder: FormBuilder,
               public currencyProvider: CurrencyProvider,
+              public events: Events,
               public transactionsProvider: TransactionsProvider,
               public navParams: NavParams) {
     this.cardForm = this.formBuilder.group({
@@ -44,7 +45,7 @@ export class AddCardPage {
       cvc: this.cardForm.controls['cvc'].value,
       currency: this.cardForm.controls['currency'].value,
     }).then(res => {
-      this.navCtrl.popToRoot();
+      this.events.publish('paymentMethods:cardAdded', res.payment_method_id);
     }, err => {});
   }
 

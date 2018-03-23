@@ -27,7 +27,7 @@
      <a href="#"></a>
    </div>
  </ion-card>
-  <ion-card class="method-card credit" (click)="selectCard()">
+  <ion-card class="method-card credit" *ngFor="let card of creditCards" (click)="selectCard(card)">
     <div class="method-name">
       Credit card
     </div>
@@ -38,8 +38,7 @@
       <img src="assets/imgs/credit.svg">
     </div>
     <div class="action-button">
-      <a href="#" *ngIf="!creditCardNumber">Add card</a>
-      <a href="#" *ngIf="creditCardNumber">**** **** **** {{creditCardNumber}}</a>
+      <a href="#">**** **** **** {{card.last_4}}</a>
     </div>
   </ion-card>
   <ion-card class="method-card bank" (click)="selectBankAccount()">
@@ -67,6 +66,18 @@
     </div>
     <div class="action-button">
       <a href="#">Select method</a>
+    </div>
+  </ion-card>
+  <ion-card class="method-card add-card"
+            (click)="addCard()">
+    <div class="method-name">
+
+    </div>
+    <div class="card-image">
+      <img src="assets/imgs/plus_logo.svg">
+    </div>
+    <div class="action-button">
+      <a href="#">Add credit card</a>
     </div>
   </ion-card>
 </ion-content>

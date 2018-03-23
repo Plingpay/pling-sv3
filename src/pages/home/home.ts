@@ -124,6 +124,7 @@ export class HomePage {
         this.baseSingleton.currentUserStatus = userStatus.status;
         this.baseSingleton.currentUserCountry = userStatus.country;
         this.baseSingleton.currentUserPaymentMethodSelected = userStatus.payment_method_selected;
+        this.baseSingleton.currentUserPhone = userStatus.phone_number;
         this.userStatus = userStatus.status;
         this.rejectReason = userStatus.reason;
         this.userID = userStatus.user_id;
