@@ -28,9 +28,6 @@
           spellcheck="false"
         ></ion-input>
       </ion-item>
-      <ion-item *ngIf="!verifyProfileForm.get('full_name').valid && verifyProfileForm.get('full_name').touched" no-lines>
-        <p class="error">Full name is required</p>
-      </ion-item>
       <ion-item>
         <ion-icon name="mail" item-start color="primary"></ion-icon>
         <ion-label floating>Email</ion-label>
@@ -40,11 +37,6 @@
                    autocapitalize="off"
                    spellcheck="false"
         ></ion-input>
-      </ion-item>
-      <ion-item
-        class="no-lines"
-        *ngIf="!verifyProfileForm.get('email').valid && verifyProfileForm.get('email').touched" no-lines>
-        <p class="error">Correct e-mail is required</p>
       </ion-item>
 
     </ion-list>

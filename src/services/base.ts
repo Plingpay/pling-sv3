@@ -11,6 +11,7 @@ export class BaseSingleton {
   public currentUserPaymentMethod: any;
   public currentUserStatus: string;
   public currentUserCountry: string;
+  public currentUserPaymentMethodSelected: boolean = false;
   public transactionDetails: any = {
     phoneNumber: '',
     amount: '',

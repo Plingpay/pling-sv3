@@ -6,7 +6,7 @@
 -->
 <ion-header [ngClass]="{ 'blur' : blurPage }">
 
-  <ion-navbar color="primary">
+  <ion-navbar color="primary" (click)="clickOnContent()">
     <ion-buttons start>
       <button ion-button icon-only (click)="profile()">
         <img src="assets/icon/user-white.svg"/>
@@ -22,7 +22,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content (click)="clickOnContent()">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -70,10 +70,10 @@
   <ion-scroll scrollX="true"
               [ngClass]="{ 'blur' : blurPage }"
               *ngIf="balance !== undefined && balance.length > 0 && userStatus === HomePage.STATUS_ACTIVE">
-    <ion-card class="currency-card" *ngFor="let balanceUnit of balance" >
+    <ion-card class="currency-card" *ngFor="let balanceUnit of balance" (click)="withdraw(balanceUnit.id)">
       <div class="header">Balance</div>
       <div class="balance">{{balanceUnit.balance}} {{balanceUnit.currency}} </div>
-      <div class="withdraw" (click)="withdraw(balanceUnit.id)">Withdraw money</div>
+      <div class="withdraw">Withdraw money</div>
       <div class="card-logo">
         <img src="assets/imgs/diamond.svg"/>
       </div>

@@ -28,6 +28,8 @@ import {BaseProvider} from "../../providers/baseProvider";
 })
 export class HomePage {
 
+  @ViewChild('fab') fabButton;
+
   public static readonly STATUS_ACTIVE = 'ACTIVE';
   public static readonly STATUS_HAVE_DOCS = "HAVE_DOCS";
   public static readonly STATUS_REJECT = "REJECTED";
@@ -83,6 +85,8 @@ export class HomePage {
 
   public requestsArray: Array<boolean> = [];
 
+  public fabClicked: boolean = false;
+
   private userID: number;
   @ViewChild(Content) content: Content;
 
@@ -119,6 +123,7 @@ export class HomePage {
         this.baseSingleton.currentUserPaymentMethod = userStatus.payment_method;
         this.baseSingleton.currentUserStatus = userStatus.status;
         this.baseSingleton.currentUserCountry = userStatus.country;
+        this.baseSingleton.currentUserPaymentMethodSelected = userStatus.payment_method_selected;
         this.userStatus = userStatus.status;
         this.rejectReason = userStatus.reason;
         this.userID = userStatus.user_id;
@@ -176,6 +181,7 @@ export class HomePage {
   }
 
   goToRates() {
+    if (this.blurPage) return;
     this.navCtrl.push(ExchangeRatesPage);
   }
 
@@ -186,7 +192,7 @@ export class HomePage {
     }
     this.baseSingleton.initiateTransactionDetails();
     this.baseSingleton.actionSource = HomePage.SOURCE_TRANSACTION;
-    if ('id' in this.baseSingleton.currentUserPaymentMethod) {
+    if (this.baseSingleton.currentUserPaymentMethodSelected) {
       this.navCtrl.push(ContactListPage);
     } else {
       this.navCtrl.push(ChoosePaymentMethodPage);
@@ -204,10 +210,12 @@ export class HomePage {
   }
 
   profile() {
+    if (this.blurPage) return;
     this.navCtrl.push(ProfilePage);
   }
 
   processTransaction(transaction) {
+    if (this.blurPage) return;
     if (transaction.source_type !== HomePage.SOURCE_REQUEST) return;
     if ('id' in this.baseSingleton.currentUserPaymentMethod) {
       this.baseSingleton.transactionDetails.amount = transaction.amount;
@@ -230,11 +238,21 @@ export class HomePage {
   }
 
   toggleBlur() {
+    this.fabClicked = true;
     this.blurPage = !this.blurPage;
   }
 
   withdraw(balanceID) {
+    if (this.blurPage) return;
     this.navCtrl.push(ChooseWithdrawalMethodPage, {balanceID: balanceID})
+  }
+
+  clickOnContent() {
+    if (this.blurPage && !this.fabClicked) {
+      this.blurPage = false;
+      this.fabButton.close();
+    }
+    this.fabClicked = false;
   }
 
 }

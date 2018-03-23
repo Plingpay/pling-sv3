@@ -116,7 +116,7 @@ export class RegisterCodePage {
       this.codeNum4 = key;
       let submitButton = this.elementRef.nativeElement.querySelector('#submitButton');
       setTimeout(() => {
-        this.renderer.invokeElementMethod(submitButton, 'focus', []);
+        this.renderer.invokeElementMethod(submitButton, 'click', []);
       }, 0);
     } else if ((event.key === 'Backspace') || (event.keyIdentifier === 'U+0008')) {
       this.selectThird();

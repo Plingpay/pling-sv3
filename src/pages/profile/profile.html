@@ -72,17 +72,17 @@
         <!--<ion-option *ngFor="let withdrawMethodItem of withdrawMethods" [value]="withdrawMethodItem.id">{{withdrawMethodItem.name}}</ion-option>-->
       <!--</ion-select>-->
     <!--</ion-item>-->
-    <ion-item>
-      <div class="item-icon" item-start><img src="assets/icon/currency-gray.svg"/></div>
-      <ion-label>Currency</ion-label>
-      <ion-select
-        [disabled]="!enablePaymentOptions"
-        [(ngModel)]="profile.currency"
-        (ionChange)="saveProfile()"
-        class="currency-selector" item-end>
-        <ion-option *ngFor="let currencyItem of currencies">{{currencyItem.currency}}</ion-option>
-      </ion-select>
-    </ion-item>
+    <!--<ion-item>-->
+      <!--<div class="item-icon" item-start><img src="assets/icon/currency-gray.svg"/></div>-->
+      <!--<ion-label>Currency</ion-label>-->
+      <!--<ion-select-->
+        <!--[disabled]="!enablePaymentOptions"-->
+        <!--[(ngModel)]="profile.currency"-->
+        <!--(ionChange)="saveProfile()"-->
+        <!--class="currency-selector" item-end>-->
+        <!--<ion-option *ngFor="let currencyItem of currencies">{{currencyItem.currency}}</ion-option>-->
+      <!--</ion-select>-->
+    <!--</ion-item>-->
   </ion-list>
   <ion-grid>
     <ion-row>

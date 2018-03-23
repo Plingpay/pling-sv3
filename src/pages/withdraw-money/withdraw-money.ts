@@ -35,7 +35,7 @@ export class WithdrawMoneyPage {
       method_id: this.method.id
     };
     this.method.method.fields.forEach(field => {
-      data[field.name] = field.value
+      data[field.name] = field.val
     });
     this.transactionsProvider.withdrawMoney(data).then(res => {
       let prompt = this.alertCtrl.create({

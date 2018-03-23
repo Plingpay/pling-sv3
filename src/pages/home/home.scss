@@ -187,4 +187,8 @@ page-home {
   .scroll-content {
     padding-bottom: 70px;
   }
+
+  .has-refresher > .scroll-content {
+    border-top: none;
+  }
 }
