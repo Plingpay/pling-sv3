@@ -12,7 +12,7 @@ export class CurrencyProvider extends BaseProvider {
     return this.makeRawRequest('post', 'currency', {currency: currency, amount: amount});
   }
 
-  defaultCurrencyByUser(userPhone) {
-    return this.makeRawRequest('post', 'users/currency', {phone_number: userPhone});
+  defaultCurrencyByUser(userPhone, source = '') {
+    return this.makeRawRequest('post', 'users/currency', {phone_number: userPhone}, source);
   }
 }

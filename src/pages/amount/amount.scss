@@ -1,6 +1,11 @@
 page-amount {
   .text-input[disabled]  {
     opacity: 1;
+    color: $black;
+  }
+
+  .text-input[disabled]::placeholder  {
+    color: $black;
   }
 
   .add-comment-link {
@@ -17,5 +22,18 @@ page-amount {
 
   .icon-container {
     width: 20px;
+  }
+
+  .list-md .item-input:last-child {
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+
+  .list-md .item-block .item-inner {
+    border-bottom: 1px solid #dedede !important;
+  }
+
+  .item-md.item-input.item-input-has-focus .item-inner, .item-md.item-input.input-has-focus .item-inner {
+    box-shadow: inset 0 -1px 0 0 #488aff !important;
   }
 }

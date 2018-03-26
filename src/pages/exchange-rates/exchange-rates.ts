@@ -31,7 +31,7 @@ export class ExchangeRatesPage {
   ionViewDidEnter() {
     this.currencyProvider.currencyList().then(list => {
       this.currencies = list.results;
-      this.currencyProvider.defaultCurrencyByUser(this.baseSingleton.currentUserPhone).then(data => {
+      this.currencyProvider.defaultCurrencyByUser(this.baseSingleton.currentUserPhone, 'LoadingEntry').then(data => {
         if (data.currency) {
           this.currency = data.currency
         }
