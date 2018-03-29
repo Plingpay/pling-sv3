@@ -20,4 +20,12 @@ export class PaymentRequestsProvider extends BaseProvider {
     return this.makeRawRequest('post', 'payment_requests/' + id + '/' + 'create_transaction');
   }
 
+  checkIfPaymentRequestTemplate(phone_number) {
+    return this.makeRawRequest('post', 'payment_requests/check_template', phone_number, 'hideError');
+  }
+
+  editPaymentRequest(id, data) {
+    return this.makeRawRequest('patch', 'payment_requests/' + id, data);
+  }
+
 }

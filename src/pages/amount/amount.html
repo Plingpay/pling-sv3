@@ -35,7 +35,9 @@
         <ion-option *ngFor="let currencyItem of currencies">{{currencyItem.currency}}</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf="!baseSingleton.transactionDetails.showCommentInput && !baseSingleton.transactionDetails.comment" class="comment-container">
+    <ion-item
+      id="no-lines"
+      *ngIf="!baseSingleton.transactionDetails.showCommentInput && !baseSingleton.transactionDetails.comment">
       <div *ngIf="!baseSingleton.transactionDetails.showCommentInput" class="add-comment-link">
         <a href="#"(click)="baseSingleton.transactionDetails.showCommentInput = true">Add a comment</a>
       </div>

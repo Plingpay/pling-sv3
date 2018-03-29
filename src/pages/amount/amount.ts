@@ -66,7 +66,13 @@ export class AmountPage {
     this.baseSingleton.transactionDetails.currencyFrom = this.currencyFrom;
     this.baseSingleton.transactionDetails.comment = this.comment;
     if (this.isModal) {
-      this.events.publish('transactions:edited');
+      switch (this.baseSingleton.actionSource) {
+        case HomePage.SOURCE_TRANSACTION:
+          this.events.publish('transactions:edited');
+          break;
+        case HomePage.SOURCE_REQUEST:
+          this.events.publish('paymentRequest:edited');
+      }
       this.navCtrl.pop();
       return
     }

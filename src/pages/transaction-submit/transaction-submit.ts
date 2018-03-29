@@ -20,7 +20,6 @@ export class TransactionSubmitPage {
   public saveAsTemplate: boolean;
   public transaction: any;
 
-  public fromRequest : boolean;
 
   constructor(public navCtrl: NavController,
               public transactionsProvider: TransactionsProvider,
@@ -28,7 +27,6 @@ export class TransactionSubmitPage {
               public events: Events,
               public navParams: NavParams) {
     this.transaction = this.navParams.get('transaction');
-    this.fromRequest = this.navParams.get('fromRequest');
     events.subscribe('transactions:edited', () => {
       this.transactionsProvider.editTransaction(this.transaction.id, {
         amount_to: this.baseService.transactionDetails.amount,

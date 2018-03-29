@@ -8,6 +8,9 @@ import {ContactConfirmPage} from "../contact-confirm/contact-confirm";
 import {BaseSingleton} from "../../services/base";
 import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
 import * as _ from 'lodash';
+import {HomePage} from "../home/home";
+import {PaymentRequestsProvider} from "../../providers/paymentRequests";
+import {RequestSubmitPage} from "../request-submit/request-submit";
 
 
 /**
@@ -52,6 +55,7 @@ export class ContactListPage {
               public viewCtrl: ViewController,
               public modalCtrl: ModalController,
               public transactionsProvider: TransactionsProvider,
+              public paymentRequestsProvider: PaymentRequestsProvider,
               public navParams: NavParams) {
     this.keyboard.onKeyboardShow().subscribe(()=>{this.showConfirmButton = true});
     this.keyboard.onKeyboardHide().subscribe(()=>{this.showConfirmButton = false});
@@ -100,15 +104,30 @@ export class ContactListPage {
   }
 
   finalStep() {
-    this.transactionsProvider.checkIfTransactionTemplate({phone_number: this.baseService.transactionDetails.phoneNumber})
-      .then(transaction => {
-        this.baseService.transactionDetails.amount = transaction.transaction.amount.amount;
-        this.baseService.transactionDetails.currency = transaction.transaction.amount.currency;
-        this.baseService.transactionDetails.comment = transaction.transaction.comment;
-        this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
-      }, err => {
-        this.navCtrl.push(AmountPage)
-      });
+    switch (this.baseService.actionSource) {
+      case HomePage.SOURCE_TRANSACTION:
+        this.transactionsProvider.checkIfTransactionTemplate({phone_number: this.baseService.transactionDetails.phoneNumber})
+          .then(transaction => {
+            this.baseService.transactionDetails.amount = transaction.transaction.amount.amount;
+            this.baseService.transactionDetails.currency = transaction.transaction.amount.currency;
+            this.baseService.transactionDetails.comment = transaction.transaction.comment;
+            this.navCtrl.push(TransactionSubmitPage, {transaction: transaction.transaction});
+          }, err => {
+            this.navCtrl.push(AmountPage)
+          });
+      break;
+      case HomePage.SOURCE_REQUEST:
+        this.paymentRequestsProvider.checkIfPaymentRequestTemplate({phone_number: this.baseService.transactionDetails.phoneNumber})
+          .then(paymentRequest => {
+            this.baseService.transactionDetails.amount = paymentRequest.payment_request.amount_to;
+            this.baseService.transactionDetails.currency = paymentRequest.payment_request.currency_to.currency;
+            this.baseService.transactionDetails.comment = paymentRequest.payment_request.comment;
+            this.navCtrl.push(RequestSubmitPage, {paymentRequest: paymentRequest.payment_request});
+          }, err => {
+            this.navCtrl.push(AmountPage)
+          });
+    }
+
   }
 
 }

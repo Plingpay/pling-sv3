@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Events, NavController, NavParams} from 'ionic-angular';
 import {TransactionSuccessPage} from "../transaction-success/transaction-success";
 import {BaseSingleton} from "../../services/base";
 import {PaymentRequestsProvider} from "../../providers/paymentRequests";
+import {AmountPage} from "../amount/amount";
 
 /**
  * Generated class for the RequestSubmitPage page.
@@ -17,18 +18,30 @@ import {PaymentRequestsProvider} from "../../providers/paymentRequests";
 })
 export class RequestSubmitPage {
   public saveAsTemplate: boolean;
+  public paymentRequest: any;
 
   constructor(public navCtrl: NavController,
               public baseService: BaseSingleton,
+              public events: Events,
               public paymentRequestsProvider: PaymentRequestsProvider,
               public navParams: NavParams) {
+    this.paymentRequest = this.navParams.get('paymentRequest');
+    events.subscribe('paymentRequest:edited', () => {
+      this.paymentRequestsProvider.editPaymentRequest(this.paymentRequest.id, {
+        amount: this.baseService.transactionDetails.amount,
+        currency: this.baseService.transactionDetails.currency,
+        comment: this.baseService.transactionDetails.comment
+      }).then(paymentRequest => {
+        this.paymentRequest = paymentRequest.payment_request;
+      }, err => {});
+    });
   }
 
   ionViewDidLoad() {
   }
 
   edit() {
-    this.navCtrl.popTo(this.baseService.contactListView);
+    this.navCtrl.push(AmountPage, { isModal: true });
   }
 
   submit() {

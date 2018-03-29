@@ -36,4 +36,8 @@ page-amount {
   .item-md.item-input.item-input-has-focus .item-inner, .item-md.item-input.input-has-focus .item-inner {
     box-shadow: inset 0 -1px 0 0 #488aff !important;
   }
+
+  #no-lines > .item-inner{
+      border-bottom: none !important;
+  }
 }
