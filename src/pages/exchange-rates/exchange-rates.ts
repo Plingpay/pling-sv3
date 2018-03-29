@@ -35,7 +35,9 @@ export class ExchangeRatesPage {
         if (data.currency) {
           this.currency = data.currency
         }
-      }, err => {});
+      }, err => {
+        this.currency = 'SEK'
+      });
     }, err => {});
   }
 
