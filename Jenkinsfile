@@ -31,7 +31,7 @@ node {
     sh commandBrowser
 
     stage "deploy Browser"
-    sh 'scp -i -r ' + pem + ' platforms/browser/build/www ubuntu@' + host + ':./' + folder + '/mobile_app'
+    sh 'scp -r -i ' + pem + ' platforms/browser/build/www ubuntu@' + host + ':./' + folder + '/mobile_app'
 
     stage "build Android"
     deleteDir()
