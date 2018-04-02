@@ -223,6 +223,7 @@ export class HomePage {
       this.baseSingleton.transactionDetails.currency = transaction.currency.currency;
       this.baseSingleton.transactionDetails.currencyFrom = transaction.currency_from.currency;
       this.baseSingleton.transactionDetails.phoneNumber = transaction.user.phone_number;
+      this.baseSingleton.transactionDetails.comment = transaction.comment;
       this.transactionsProvider.prepareTransaction({
         amount_to: this.baseSingleton.transactionDetails.amount,
         phone_number_to: this.baseSingleton.transactionDetails.phoneNumber,

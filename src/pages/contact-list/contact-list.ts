@@ -73,16 +73,20 @@ export class ContactListPage {
     this.transactionsProvider.lastContacts().then(data => {
       this.lastContactsList = data.results;
     }, () => {});
-    let loader = this.loadingCtrl.create({
-      content: "Reading contacts...",
-    });
-    if (this.contacts) loader.present();
-    this.contacts.find(['*']).then(contacts => {
-      this.contactsList = _.sortBy(contacts, [user => { return (user.displayName || user.name.formatted) }]);
-      loader.dismiss();
-    }, err => {
-      loader.dismiss();
-    });
+    if (!this.isWebPlatform()) {
+      let loader = this.loadingCtrl.create({
+        content: "Reading contacts...",
+      });
+      loader.present();
+      this.contacts.find(['*']).then(contacts => {
+        this.contactsList = _.sortBy(contacts, [user => {
+          return (user.displayName || user.name.formatted)
+        }]);
+        loader.dismiss();
+      }, err => {
+        loader.dismiss();
+      });
+    }
   }
 
   selectContact(contact) {
