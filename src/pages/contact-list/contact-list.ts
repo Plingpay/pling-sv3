@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {LoadingController, ModalController, NavController, NavParams, ViewController} from 'ionic-angular';
+import {LoadingController, ModalController, NavController, NavParams, Platform, ViewController} from 'ionic-angular';
 import {Contacts} from "@ionic-native/contacts";
 import {AmountPage} from "../amount/amount";
 import {Keyboard} from "@ionic-native/keyboard";
@@ -11,6 +11,7 @@ import * as _ from 'lodash';
 import {HomePage} from "../home/home";
 import {PaymentRequestsProvider} from "../../providers/paymentRequests";
 import {RequestSubmitPage} from "../request-submit/request-submit";
+import { Device } from '@ionic-native/device';
 
 
 /**
@@ -49,6 +50,8 @@ export class ContactListPage {
 
   constructor(public navCtrl: NavController,
               public contacts: Contacts,
+              private platform: Platform,
+              private device: Device,
               private keyboard: Keyboard,
               public loadingCtrl: LoadingController,
               public baseService: BaseSingleton,
@@ -59,6 +62,10 @@ export class ContactListPage {
               public navParams: NavParams) {
     this.keyboard.onKeyboardShow().subscribe(()=>{this.showConfirmButton = true});
     this.keyboard.onKeyboardHide().subscribe(()=>{this.showConfirmButton = false});
+  }
+
+  isWebPlatform() {
+    return (!this.platform.is('cordova') || this.device.platform === 'browser')
   }
 
   ionViewDidLoad() {
@@ -75,7 +82,6 @@ export class ContactListPage {
       loader.dismiss();
     }, err => {
       loader.dismiss();
-      //alert('Cannot read contacts list');
     });
   }
 

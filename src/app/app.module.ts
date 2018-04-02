@@ -45,6 +45,7 @@ import {ClipboardModule} from "ngx-clipboard";
 import {ChooseWithdrawalMethodPage} from "../pages/choose-withdrawal-method/choose-withdrawal-method";
 import {WithdrawMoneyPage} from "../pages/withdraw-money/withdraw-money";
 import {EnvironmentsModule} from "../config/env.module";
+import {Device} from "@ionic-native/device";
 
 @NgModule({
   declarations: [
@@ -128,6 +129,7 @@ import {EnvironmentsModule} from "../config/env.module";
     PaymentRequestsProvider,
     Contacts,
     Keyboard,
+    Device,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
