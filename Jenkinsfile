@@ -33,7 +33,7 @@ node {
     stage "deploy Browser"
     sh '''ssh -T -i "''' + pem + '''" ubuntu@''' + host + ''' << EOF
           cd ''' + folder + '''
-          rm -r mobile_app
+          rm -rf mobile_app
         '''
     sh 'scp -r -i ' + pem + ' platforms/browser/www ubuntu@' + host + ':./' + folder + '/mobile_app'
 
