@@ -1,3 +1,3 @@
 export const prodVars = {
-  API: 'https://plingpay.enkonix.com'
+  API: 'https://plingpay.eu'
 };

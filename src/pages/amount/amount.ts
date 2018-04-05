@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Events, NavController, NavParams} from 'ionic-angular';
+import {Events, NavController, NavParams, ViewController} from 'ionic-angular';
 import {CurrencyProvider} from "../../providers/currency";
 import {TransactionsProvider} from "../../providers/transactions";
 import {TransactionSubmitPage} from "../transaction-submit/transaction-submit";
@@ -36,6 +36,7 @@ export class AmountPage {
               public transactionsProvider: TransactionsProvider,
               public events: Events,
               public baseSingleton: BaseSingleton,
+              public viewCtrl: ViewController,
               public navParams: NavParams) {
   }
 
@@ -60,20 +61,17 @@ export class AmountPage {
     }, err => {});
   }
 
+  back() {
+    this.viewCtrl.dismiss({confirmed: false});
+  }
+
   confirm() {
     this.baseSingleton.transactionDetails.amount = this.amount;
     this.baseSingleton.transactionDetails.currency = this.currency;
     this.baseSingleton.transactionDetails.currencyFrom = this.currencyFrom;
     this.baseSingleton.transactionDetails.comment = this.comment;
     if (this.isModal) {
-      switch (this.baseSingleton.actionSource) {
-        case HomePage.SOURCE_TRANSACTION:
-          this.events.publish('transactions:edited');
-          break;
-        case HomePage.SOURCE_REQUEST:
-          this.events.publish('paymentRequest:edited');
-      }
-      this.navCtrl.pop();
+      this.viewCtrl.dismiss({confirmed: true});
       return
     }
     switch (this.baseSingleton.actionSource) {

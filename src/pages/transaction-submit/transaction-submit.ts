@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Events, NavController, NavParams} from 'ionic-angular';
+import {ModalController, NavController, NavParams} from 'ionic-angular';
 import {TransactionsProvider} from "../../providers/transactions";
 import {BaseSingleton} from "../../services/base";
 import {TransactionSuccessPage} from "../transaction-success/transaction-success";
@@ -25,26 +25,29 @@ export class TransactionSubmitPage {
   constructor(public navCtrl: NavController,
               public transactionsProvider: TransactionsProvider,
               public baseService: BaseSingleton,
-              public events: Events,
+              public modalCtrl: ModalController,
               public navParams: NavParams) {
     this.transaction = this.navParams.get('transaction');
     this.fromRequest = this.navParams.get('fromRequest');
-    events.subscribe('transactions:edited', () => {
-      this.transactionsProvider.editTransaction(this.transaction.id, {
-        amount_to: this.baseService.transactionDetails.amount,
-        currency_to: this.baseService.transactionDetails.currency,
-        comment: this.baseService.transactionDetails.comment
-      }).then(transaction => {
-        this.transaction = transaction.transaction;
-      }, err => {});
-    });
   }
 
   ionViewDidLoad() {
   }
 
   edit() {
-    this.navCtrl.push(AmountPage, { isModal: true });
+    let amountModal = this.modalCtrl.create(AmountPage, { isModal: true });
+    amountModal.present();
+    amountModal.onDidDismiss(data => {
+      if (data.confirmed) {
+        this.transactionsProvider.editTransaction(this.transaction.id, {
+          amount_to: this.baseService.transactionDetails.amount,
+          currency_to: this.baseService.transactionDetails.currency,
+          comment: this.baseService.transactionDetails.comment
+        }).then(transaction => {
+          this.transaction = transaction.transaction;
+        }, err => {});
+      }
+    });
   }
 
   submit() {
