@@ -45,10 +45,7 @@ platform :ios do
   lane :deploy do
     # snapshot
     gym
-    testflight(
-      skip_submission: true,
-      skip_waiting_for_build_processing: true
-    )
+    testflight
     # frameit
   end
 
