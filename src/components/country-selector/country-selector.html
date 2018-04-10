@@ -1,8 +1,10 @@
 <!-- Generated template for the CountrySelectorComponent component -->
 <ion-item id="phoneInput">
   <div id="phone-country" (click)="openCodesSelector()" item-start>
-    <img src="{{imagePath}}"/>
-    <span class="selected-code">{{selectedCode}}</span>
+    <div class="phone-country-inner">
+      <img src="{{imagePath}}" *ngIf="imagePath"/>
+      <span class="selected-code">{{selectedCode}}</span>
+    </div>
   </div>
   <ion-label floating>{{inputLabel}}</ion-label>
   <ion-input

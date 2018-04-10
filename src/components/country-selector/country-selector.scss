@@ -3,26 +3,23 @@ country-selector {
     display: none;
   }
   #phone-country {
-    border-bottom: 0.55px solid #c8c7cc;
-    position: absolute;
-    top: 28px;
+    min-height: 68px;
+    border-bottom: 0.55px solid #dedede;
     width: 70px;
-    padding-bottom: 2px;
-    img {
-      height: 25px;
-      padding-bottom: 6px;
-    }
-    .selected-code {
-      position: absolute;
-      bottom: 9px;
-      left: 35px;
-      color: $blue;
-    }
-  }
-
-  #phoneInput {
-    .item-inner {
-      margin-left: 80px !important;
+    display: flex;
+    margin-bottom: 0;
+    margin-top: 0;
+    .phone-country-inner {
+      align-self: flex-end;
+      margin-bottom: 8px;
+      img {
+        height: 20px;
+        width: 26.6px;
+      }
+      .selected-code {
+        margin-left: 5px;
+        color: $blue;
+      }
     }
   }
 }
