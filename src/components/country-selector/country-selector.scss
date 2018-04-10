@@ -5,10 +5,10 @@ country-selector {
   #phone-country {
     min-height: 68px;
     border-bottom: 0.55px solid #c8c7cc;
-    width: 70px;
     display: flex;
     margin-bottom: 0;
     margin-top: 0;
+    padding-right: 3px;
     .phone-country-inner {
       align-self: flex-end;
       margin-bottom: 8px;
