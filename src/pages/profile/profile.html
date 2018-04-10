@@ -18,8 +18,8 @@
     <div class="user-avatar">
       <img *ngIf="tmpImage || profile.photo"
            [src]="tmpImage?tmpImage:(userProvider.envVars.API + profile.photo)"
-           onError="this.src='assets/imgs/image-error.jpg';"/>
-      <input type="file" hidden accept="image/x-png,image/gif,image/jpeg" (change)="onPhotoChange(photo.files)" #photo>
+           onError="this.src='assets/imgs/image-error.svg';"/>
+      <input type="file" hidden accept="image/x-png,image/heif,image/jpeg" (change)="onPhotoChange(photo.files)" #photo>
       <span class="plus" *ngIf="!profile.photo">+</span>
       <span class="add-photo" *ngIf="!profile.photo">Add photo</span>
     </div>

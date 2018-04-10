@@ -1,5 +1,5 @@
 import {Component, ElementRef} from '@angular/core';
-import {LoadingController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {DocumentsProvider} from "../../providers/documents";
 import {DomSanitizer} from "@angular/platform-browser";
 
@@ -23,6 +23,7 @@ export class DocumentsPage {
               public loadingCtrl: LoadingController,
               private sanitizer: DomSanitizer,
               public elementRef: ElementRef,
+              public alertCtrl: AlertController,
               public navParams: NavParams) {
     this.baseURL = this.docsProvider.envVars.API;
   }
@@ -47,8 +48,23 @@ export class DocumentsPage {
       let reader = new FileReader();
       reader.readAsDataURL(document.image);
       reader.onload = () => {
-        document.tmpImage = this.sanitizer.bypassSecurityTrustUrl(reader.result);
         loading.dismiss();
+        if (reader.result.indexOf('data:image') === -1) {
+          let prompt = this.alertCtrl.create({
+            title: '<div class="alert-icon"><img src="assets/icon/alert.svg"/></div>',
+            message: 'Please select images only',
+            buttons: [
+              {
+                text: 'GOT IT',
+                handler: data => {
+                }
+              },
+            ]
+          });
+          prompt.present();
+          return;
+        }
+        document.tmpImage = this.sanitizer.bypassSecurityTrustUrl(reader.result);
         this.elementRef.nativeElement.querySelector('#photo_' + document.field_name).value = '';
       };
       reader.onerror = (error) => {

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.plingpay.application" version="1.6.77" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>PlingPay</name>
+<widget id="com.plingpay.develop" version="1.6.82" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>PlingPay Develop</name>
     <description>In our vision, anyone should be able to send money anywhere in any currency – fast, cheap and with a smile! From our team of dedicated Engineers and Economists with experience both from traditional banking and fintech comes a service which will change your every day life.</description>
     <author email="support@plingpay.com" href="http://plingpay.com/">Plingpay Team</author>
     <content src="index.html" />

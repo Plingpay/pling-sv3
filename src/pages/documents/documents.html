@@ -36,7 +36,7 @@
       <p class="remove-photo" [hidden]="!document.image"><a href="#" (click)="removePhoto(document)">Delete photo</a></p>
       <input type="file"
              hidden
-             accept="image/x-png,image/gif,image/jpeg"
+             accept="image/x-png,image/heif,image/jpeg"
              (change)="selectPhoto(document, elementRef.nativeElement.querySelector('#photo_' + document.field_name).files)"
              id="photo_{{document.field_name}}"
       >

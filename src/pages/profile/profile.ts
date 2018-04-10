@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {LoadingController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {LoginPage} from "../login/login";
 import {CurrencyProvider} from "../../providers/currency";
@@ -37,6 +37,7 @@ export class ProfilePage {
               public currencyProvider: CurrencyProvider,
               public baseSingleton: BaseSingleton,
               private sanitizer: DomSanitizer,
+              public alertCtrl: AlertController,
               public transactionsProvider: TransactionsProvider,
               public loadingCtrl: LoadingController,
               public navParams: NavParams) {
@@ -101,8 +102,23 @@ export class ProfilePage {
       let reader = new FileReader();
       reader.readAsDataURL(this.profile.photo);
       reader.onload = () => {
-        this.tmpImage = this.sanitizer.bypassSecurityTrustUrl(reader.result);
         loading.dismiss();
+        if (reader.result.indexOf('data:image') === -1) {
+          let prompt = this.alertCtrl.create({
+            title: '<div class="alert-icon"><img src="assets/icon/alert.svg"/></div>',
+            message: 'Please select images only',
+            buttons: [
+              {
+                text: 'GOT IT',
+                handler: data => {
+                }
+              },
+            ]
+          });
+          prompt.present();
+          return;
+        }
+        this.tmpImage = this.sanitizer.bypassSecurityTrustUrl(reader.result);
         this.saveProfile();
       };
       reader.onerror = (error) => {
