@@ -16,7 +16,7 @@
 <ion-content>
   <h3>Check the number</h3>
   <p class="text-muted">below or international format and correct them if needed</p>
-  <country-selector
+  <country-selector class="contact-selector"
     (onSelect)="userPhoneInput = $event.data"
     (onCountriesLoaded)="countriesData = $event.data"
     [inputLabel]="userName"

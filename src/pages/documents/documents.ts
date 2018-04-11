@@ -50,6 +50,7 @@ export class DocumentsPage {
       reader.onload = () => {
         loading.dismiss();
         if (reader.result.indexOf('data:image') === -1) {
+          document.image = false;
           let prompt = this.alertCtrl.create({
             title: '<div class="alert-icon"><img src="assets/icon/alert.svg"/></div>',
             message: 'Please select images only',

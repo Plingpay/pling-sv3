@@ -65,7 +65,7 @@ export class ContactListPage {
   }
 
   isWebPlatform() {
-    return (!this.platform.is('cordova') || this.device.platform === 'browser')
+    return (!this.platform.is('cordova') || this.device.platform === 'browser' || this.device.platform === 'iOS')
   }
 
   ionViewDidLoad() {
@@ -73,7 +73,7 @@ export class ContactListPage {
     this.transactionsProvider.lastContacts().then(data => {
       this.lastContactsList = data.results;
     }, () => {});
-    if (!this.isWebPlatform()) {
+    if (!this.isWebPlatform() || this.device.platform == 'iOS') {
       let loader = this.loadingCtrl.create({
         content: "Reading contacts...",
       });
@@ -91,7 +91,7 @@ export class ContactListPage {
 
   selectContact(contact) {
     this.phoneNumber = contact.phoneNumbers[0].value;
-    this.userName = contact.displayName;
+    this.userName = contact.displayName || contact.name.formatted;
     this.confirm();
   }
 

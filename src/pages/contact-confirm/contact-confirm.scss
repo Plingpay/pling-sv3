@@ -17,14 +17,11 @@ page-contact-confirm {
     color: $light-black !important;
   }
 
-  country-selector {
-    .item {
+  .contact-selector {
+    ion-item {
+      background-color: $light-gray;
       padding-right: 16px;
       margin-bottom: 5px;
-      background-color: $light-gray;
-    }
-    #phone-country {
-      padding-bottom: 1px;
     }
   }
 
