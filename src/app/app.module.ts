@@ -46,6 +46,7 @@ import {ChooseWithdrawalMethodPage} from "../pages/choose-withdrawal-method/choo
 import {WithdrawMoneyPage} from "../pages/withdraw-money/withdraw-money";
 import {EnvironmentsModule} from "../config/env.module";
 import {Device} from "@ionic-native/device";
+import {Ng2Webstorage} from "ngx-webstorage";
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import {Device} from "@ionic-native/device";
     HttpClientModule,
     ClipboardModule,
     EnvironmentsModule,
+    Ng2Webstorage,
     IonicModule.forRoot(MyApp, {
       mode: 'md'
     })

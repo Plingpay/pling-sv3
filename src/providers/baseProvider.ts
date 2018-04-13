@@ -3,6 +3,7 @@ import {Observable} from "rxjs/Rx";
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Events} from "ionic-angular";
 import {EnvVariables} from "../config/env.token";
+import {LocalStorage} from "ngx-webstorage";
 @Injectable()
 
 export class BaseProvider {
@@ -10,6 +11,8 @@ export class BaseProvider {
   public ENV = this.envVars;
 
   public static HIDE_LOADING = 'hideLoading';
+
+  @LocalStorage() public token: string = '';
 
   constructor(private events: Events,
               @Inject(EnvVariables) public envVars,
@@ -21,7 +24,8 @@ export class BaseProvider {
   private reqOptions() {
     return {
       headers: new HttpHeaders()
-        .set('Accept', 'application/json'),
+        .set('Accept', 'application/json')
+        .set('Authorization', 'Token ' + this.token ),
       withCredentials: true
     }
   }
