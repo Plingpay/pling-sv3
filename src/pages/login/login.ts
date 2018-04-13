@@ -6,7 +6,6 @@ import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditio
 import {ExchangeRatesPage} from "../exchange-rates/exchange-rates";
 import {RegisterCodePage} from "../register-code/register-code";
 import {ForgotPasswordPage} from "../forgot-password/forgot-password";
-import {LocalStorage} from "ngx-webstorage";
 
 /**
  * Generated class for the LoginPage page.
@@ -23,7 +22,6 @@ export class LoginPage {
 
   public phone_number: String = '';
   private password: String = '';
-  @LocalStorage() public token: string = '';
 
   @ViewChild('phoneInput') phoneInput;
 
@@ -39,7 +37,6 @@ export class LoginPage {
   submitForm() {
     this.user.userAuth({phone_number: this.phone_number, password: this.password})
       .then((data) => {
-          this.token = data.token;
           this.navCtrl.push(RegisterCodePage, {phone: this.phone_number, user: data.user_id, source: 'signin'})
         }, err => {});
   }

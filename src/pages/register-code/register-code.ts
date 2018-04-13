@@ -3,6 +3,8 @@ import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {UserProvider} from "../../providers/user";
 import {CreatePasswordPage} from "../create-password/create-password";
 import {HomePage} from "../home/home";
+import {LocalStorage} from "ngx-webstorage";
+
 
 /**
  * Generated class for the RegisterCodePage page.
@@ -25,6 +27,8 @@ export class RegisterCodePage {
   public codeNum2 = '';
   public codeNum3 = '';
   public codeNum4 = '';
+
+  @LocalStorage() public token: string = '';
 
   constructor(public navCtrl: NavController,
               private elementRef: ElementRef,
@@ -136,6 +140,7 @@ export class RegisterCodePage {
         action = this.user.registerSmsSignin("" + this.codeNum1 + this.codeNum2 + this.codeNum3 + this.codeNum4, this.registerUserID);
     }
     action.then((data) => {
+          this.token = data.token;
           switch (this.source) {
             case 'signup':
               this.navCtrl.push(CreatePasswordPage, {userID: this.registerUserID, source: 'signup'});
