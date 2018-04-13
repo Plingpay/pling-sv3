@@ -12,7 +12,7 @@ export class BaseProvider {
 
   public static HIDE_LOADING = 'hideLoading';
 
-  @LocalStorage() public token: string = '';
+  @LocalStorage() public token: string;
 
   constructor(private events: Events,
               @Inject(EnvVariables) public envVars,

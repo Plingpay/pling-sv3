@@ -8,6 +8,7 @@ import {ChoosePaymentMethodPage} from "../choose-payment-method/choose-payment-m
 import {DomSanitizer} from "@angular/platform-browser";
 import {BaseSingleton} from "../../services/base";
 import {HomePage} from "../home/home";
+import {LocalStorage} from "ngx-webstorage";
 
 /**
  * Generated class for the ProfilePage page.
@@ -29,6 +30,8 @@ export class ProfilePage {
   public paymentMethods: Array<any>;
   public methodString: string;
   public tmpImage: any = false;
+
+  @LocalStorage() public token: string;
 
   public enablePaymentOptions: boolean;
 
@@ -76,6 +79,7 @@ export class ProfilePage {
 
   logout() {
     this.userProvider.logout().then(res => {
+      this.token = '';
       this.navCtrl.setRoot(LoginPage);
       this.navCtrl.popToRoot();
     }, () => {});

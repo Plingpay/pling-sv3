@@ -28,7 +28,7 @@ export class RegisterCodePage {
   public codeNum3 = '';
   public codeNum4 = '';
 
-  @LocalStorage() public token: string = '';
+  @LocalStorage() public token: string;
 
   constructor(public navCtrl: NavController,
               private elementRef: ElementRef,
