@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.plingpay.develop" version="1.6.82" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>PlingPay Develop</name>
+<widget id="com.plingpay.application" version="1.6.92" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>PlingPay</name>
     <description>In our vision, anyone should be able to send money anywhere in any currency – fast, cheap and with a smile! From our team of dedicated Engineers and Economists with experience both from traditional banking and fintech comes a service which will change your every day life.</description>
     <author email="support@plingpay.com" href="http://plingpay.com/">Plingpay Team</author>
     <content src="index.html" />
@@ -87,10 +87,10 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
         <config-file parent="NSContactsUsageDescription" target="*-Info.plist">
-            <string>This app requires contacts access to function properly</string>
+            <string>Your contact list will be used to suggest you to send funds directly without entering any phone number manually.</string>
         </config-file>
         <config-file parent="NSCameraUsageDescription" target="*-Info.plist">
-            <string>This app requires camera access to function properly</string>
+            <string>Your camera will be used only for taking photo of your ID documents or yourself holding ID</string>
         </config-file>
         <config-file parent="NSLocationWhenInUseUsageDescription" target="*-Info.plist">
             <string>We need your location for setting actual country phone code</string>
