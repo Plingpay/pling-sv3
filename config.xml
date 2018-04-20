@@ -90,7 +90,7 @@
             <string>Your contact list will be used to suggest you to send funds directly without entering any phone number manually.</string>
         </config-file>
         <config-file parent="NSCameraUsageDescription" target="*-Info.plist">
-            <string>Your camera will be used only for taking photo of your ID documents or yourself holding ID</string>
+            <string>Your camera will be used for taking photo of your ID documents or yourself holding ID on the verification process, also you will be able to take a photo for your avatar in your profile.</string>
         </config-file>
         <config-file parent="NSLocationWhenInUseUsageDescription" target="*-Info.plist">
             <string>We need your location for setting actual country phone code</string>
