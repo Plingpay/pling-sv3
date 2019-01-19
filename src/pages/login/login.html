@@ -23,7 +23,7 @@
   <form id="login" (ngSubmit)="submitForm()" novalidate>
     <country-selector (onSelect)="phone_number = $event.data"></country-selector>
     <ion-item id="passwordInput">
-      <ion-label floating>Password</ion-label>
+      <ion-label floating>Lösenord</ion-label>
       <ion-input
         [(ngModel)]="password"
         type="password"
@@ -31,7 +31,7 @@
       ></ion-input>
     </ion-item>
     <ion-item class="hollow-item">
-      <span class="forgot-pass" (click)="goToForgotPassword()">Forgot password?</span>
+      <span class="forgot-pass" (click)="goToForgotPassword()">Glömt lösenord?</span>
     </ion-item>
 
   </form>
