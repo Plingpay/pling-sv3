@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="UI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Norway-/-Denmark-dialog" transform="translate(-153.000000, -187.000000)">
+            <g id="Group-3" transform="translate(40.000000, 184.000000)">
+                <g id="Group-2" transform="translate(113.000000, 3.000000)">
+                    <circle id="Oval-12" fill="#FFB91F" cx="27" cy="27" r="27"></circle>
+                    <text id="!" font-family="Lato-Bold, Lato" font-size="38" font-weight="bold" fill="#FFFFFF">
+                        <tspan x="20" y="39">!</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

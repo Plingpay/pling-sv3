@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="148px" height="146px" viewBox="0 0 148 146" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="20.1398272" width="54.5605307" height="15"></rect>
+        <rect id="path-2" x="0" y="20.1398272" width="54.5600014" height="15"></rect>
+    </defs>
+    <g id="UI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.100000001">
+        <g id="Choose-card" transform="translate(-196.000000, -479.000000)">
+            <g id="Group-3-Copy-2" transform="translate(16.000000, 459.000000)">
+                <g id="Fill-1-Copy-28">
+                    <g id="Group-2" transform="translate(188.000000, 28.000000)">
+                        <circle id="Oval-36" stroke="#4497FC" stroke-width="15" cx="73.5" cy="73.5" r="73.5"></circle>
+                        <g id="Group" transform="translate(46.000000, 47.000000)">
+                            <g id="Rectangle">
+                                <use fill="#4497FC" fill-rule="evenodd" xlink:href="#path-1"></use>
+                                <rect stroke="#4497FC" stroke-width="2.79999995" x="1.39999998" y="21.5398272" width="51.7605307" height="12.2"></rect>
+                            </g>
+                            <g id="Rectangle-Copy" transform="translate(27.280001, 27.639827) rotate(-270.000000) translate(-27.280001, -27.639827) ">
+                                <use fill="#4497FC" fill-rule="evenodd" xlink:href="#path-2"></use>
+                                <rect stroke="#4497FC" stroke-width="2.79999995" x="1.39999998" y="21.5398272" width="51.7600014" height="12.2"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
