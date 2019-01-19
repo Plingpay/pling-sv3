@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Add card</ion-title>
+    <ion-title>Lägg till kort</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -26,17 +26,17 @@
         ></ion-input>
       </ion-item>
       <ion-item *ngIf="!cardForm.get('number').valid && cardForm.get('number').touched" no-lines>
-        <p class="error">16 numbers required</p>
+        <p class="error">16 siffror krävs</p>
       </ion-item>
         <ion-row>
           <ion-col col-6>
             <ion-item>
               <img src="assets/icon/calendar-gray.svg" item-start/>
-              <ion-label stacked>Expiration date</ion-label>
+              <ion-label stacked>Utgångsdatum</ion-label>
               <ion-datetime formControlName="expDate" displayFormat="MM/YY" min="2018" max="2030"></ion-datetime>
             </ion-item>
             <ion-item *ngIf="!cardForm.get('expDate').valid && cardForm.get('expDate').touched" no-lines>
-              <p class="error">required</p>
+              <p class="error">krävs</p>
             </ion-item>
           </ion-col>
           <ion-col col-6>
@@ -51,7 +51,7 @@
           </ion-col>
         </ion-row>
       <ion-item>
-        <ion-label>Card currency</ion-label>
+        <ion-label>Kortvaluta</ion-label>
         <ion-select formControlName="currency" >
           <ion-option *ngFor="let currency of currencies">{{currency.currency}}</ion-option>
         </ion-select>
