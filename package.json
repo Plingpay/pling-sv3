@@ -47,13 +47,14 @@
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.18",
-    "cordova-ios": "~4.5.4"
-  },
-  "devDependencies": {
+    "cordova-ios": "~4.5.4",
     "@ionic/app-scripts": "3.1.6",
     "lato-font": "^3.0.0",
     "rollup-plugin-replace": "^2.0.0",
     "typescript": "2.4.2"
+  },
+  "devDependencies": {
+
   },
   "description": "An Ionic project",
   "cordova": {
