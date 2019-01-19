@@ -53,7 +53,8 @@
     "rollup-plugin-replace": "^2.0.0",
     "typescript": "2.4.2",
     "morgan": "^1.9.1",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "express": "latest"
   },
   "devDependencies": {},
   "description": "An Ionic project",
