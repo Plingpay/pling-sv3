@@ -29,7 +29,7 @@
   </div>
   <ion-list>
     <ion-list-header>
-      Personal info
+      Personlig information
     </ion-list-header>
     <ion-item *ngIf="profile.email">
       <div class="item-icon" item-start><img src="assets/icon/mail-gray.svg"/></div>{{profile?.email}}
@@ -40,7 +40,7 @@
   </ion-list>
   <ion-list>
     <ion-list-header>
-      Payment info
+      Betalnings information
     </ion-list-header>
     <ion-item>
       <div class="item-icon" item-start><img src="assets/icon/card-gray.svg"/></div>
@@ -62,19 +62,19 @@
     </ion-item>
     <!--<ion-item>-->
       <!--<div class="item-icon" item-start><img src="assets/icon/cash-gray.svg"/></div>-->
-      <!--<ion-label>Withdraw method</ion-label>-->
+      <!--<ion-label>Uttagsmetod</ion-label>-->
       <!--<ion-select-->
         <!--[disabled]="!enablePaymentOptions"-->
         <!--[(ngModel)]="profile.withdraw_type"-->
         <!--(ionChange)="saveProfile()"-->
         <!--class="method-selector"-->
-        <!--placeholder="Choose option" item-end>-->
+        <!--placeholder="Välj alternativ" item-end>-->
         <!--<ion-option *ngFor="let withdrawMethodItem of withdrawMethods" [value]="withdrawMethodItem.id">{{withdrawMethodItem.name}}</ion-option>-->
       <!--</ion-select>-->
     <!--</ion-item>-->
     <!--<ion-item>-->
       <!--<div class="item-icon" item-start><img src="assets/icon/currency-gray.svg"/></div>-->
-      <!--<ion-label>Currency</ion-label>-->
+      <!--<ion-label>Valuta</ion-label>-->
       <!--<ion-select-->
         <!--[disabled]="!enablePaymentOptions"-->
         <!--[(ngModel)]="profile.currency"-->
@@ -88,12 +88,12 @@
     <ion-row>
       <ion-col col-12>
         <button
-          (click)="logout()"
+          (click)="log out()"
           ion-button
           clear
           full
           class="logout-button"
-        >Log out</button>
+        >Logga ut</button>
       </ion-col>
     </ion-row>
   </ion-grid>
