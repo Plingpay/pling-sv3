@@ -7,15 +7,15 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Confirm phone number</ion-title>
+    <ion-title>Bekräfta telefonnummret</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <h3>Check the number</h3>
-  <p class="text-muted">below or international format and correct them if needed</p>
+  <h3>Kontrollera nummret</h3>
+  <p class="text-muted">nedan och internationellt format och ändra om nödvändigt</p>
   <country-selector class="contact-selector"
     (onSelect)="userPhoneInput = $event.data"
     (onCountriesLoaded)="countriesData = $event.data"
@@ -47,7 +47,7 @@
             class="orange footer-button"
             full
             (click)="confirm()"
-          >Confirm</button>
+          >Bekräfta</button>
         </ion-col>
       </ion-row>
     </ion-grid>
