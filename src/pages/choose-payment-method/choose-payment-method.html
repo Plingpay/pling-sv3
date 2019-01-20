@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Choose the payment method</ion-title>
+    <ion-title>Välj Betalsätt</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -29,10 +29,10 @@
  </ion-card>
   <ion-card class="method-card credit" *ngFor="let card of creditCards" (click)="selectCard(card)">
     <div class="method-name">
-      Credit card
+      Kreditkort
     </div>
     <div class="card-note">
-      Not recommended for the best rates
+      Ej rekommenderat för bästa kurs
     </div>
     <div class="card-image">
       <img src="assets/imgs/credit.svg">
@@ -43,7 +43,7 @@
   </ion-card>
   <ion-card class="method-card bank" (click)="selectBankAccount()">
     <div class="method-name">
-      Bank account
+      Bankkonto
     </div>
     <div class="card-image">
       <img src="assets/imgs/bank_icon.svg">
@@ -77,7 +77,7 @@
       <img src="assets/imgs/plus_logo.svg">
     </div>
     <div class="action-button">
-      <a href="#">Add credit card</a>
+      <a href="#">Lägg till ett kreditkort</a>
     </div>
   </ion-card>
 </ion-content>
