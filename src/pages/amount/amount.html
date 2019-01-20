@@ -34,8 +34,8 @@
       <div class="icon-container" item-start>
         <img src="assets/icon/currency-gray.svg"/>
       </div>
-      <!--<ion-label floating>Your currency</ion-label>-->
-      <ion-input disabled placeholder="Your currency" (click)="currency.open()"></ion-input>
+      <!--<ion-label floating>Din Valuta</ion-label>-->
+      <ion-input disabled placeholder="Din Valuta" (click)="currency.open()"></ion-input>
       <ion-select [(ngModel)]="currencyFrom" #currency item-end>
         <ion-option *ngFor="let currencyItem of currencies">{{currencyItem.currency}}</ion-option>
       </ion-select>
