@@ -22,15 +22,15 @@
     <img src="assets/icon/user-transfer.svg"/>
   </div>
   <div class="instructions">
-    To send <span class="receiver-name">{{transaction.user_to.full_name || transaction.user_to.phone_number}}</span>
-    {{transaction.amount.amount}} {{transaction.amount.currency}} transfer <span class="amount">{{transaction.total.total}} {{transaction.total.currency}}</span>
-    to the PlingPay account
+    För att skicka <span class="receiver-name">{{transaction.user_to.full_name || transaction.user_to.phone_number}}</span>
+    {{transaction.amount.amount}} {{transaction.amount.currency}} överför <span class="amount">{{transaction.total.total}} {{transaction.total.currency}}</span>
+    till Plingpay kontot
   </div>
   <ion-list>
     <ion-item *ngFor="let data of transaction.payment_data">
       <ion-label floating>{{data.name}}</ion-label>
       <ion-input type="text" value="{{data.value}}" disabled></ion-input>
-      <button class="copy" item-end ngxClipboard [cbContent]="data.value" (cbOnSuccess)="presentToast()">Copy</button>
+      <button class="copy" item-end ngxClipboard [cbContent]="data.value" (cbOnSuccess)="presentToast()">kopiera</button>
     </ion-item>
   </ion-list>
 </ion-content>
