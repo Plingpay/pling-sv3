@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Contact list</ion-title>
+    <ion-title>Kontakter</ion-title>
     <ion-buttons end [hidden]="!isWebPlatform()">
       <button ion-button (click)="confirm()">
         OK
@@ -23,7 +23,7 @@
     (onSelect)="phoneNumber = $event.data"
     class="phone-selector"></country-selector>
   <div class="recent-selector" *ngIf="lastContactsList.length">
-    <p class="recent-text">Recent contacts</p>
+    <p class="recent-text">Senaste kontakterna</p>
     <ng-container  *ngFor="let recentContact of lastContactsList">
       <div class="recent-contact" (click)="selectContactFromLast(recentContact)">
         <img [src]="recentContact.avatar?transactionsProvider.envVars.API + recentContact.avatar: 'assets/icon/empty_avatar.svg'"/>
@@ -58,7 +58,7 @@
             class="orange footer-button"
             full
             (click)="confirm()"
-          >Confirm</button>
+          >Bekräfta</button>
         </ion-col>
       </ion-row>
     </ion-grid>
