@@ -17,7 +17,7 @@ export class CountrySelectorComponent {
   @Output() onSelect = new EventEmitter();
   @Output() onCountriesLoaded = new EventEmitter();
   @Input('inputModel') inputModel: string = '';
-  @Input('inputLabel') inputLabel: string = 'Phone';
+  @Input('inputLabel') inputLabel: string = 'Telefon';
   @Input('inputFlag') imagePath: string;
   @Input('inputCode') selectedCode: string;
 
